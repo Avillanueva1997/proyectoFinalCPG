@@ -1,0 +1,44 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+:root {
+    --ion-color-cgreen: #2ad0a8;
+    --ion-color-cgreen-rgb: 42,208,168;
+    --ion-color-cgreen-contrast: white;
+    --ion-color-cgreen-contrast-rgb: 0,0,0;
+    --ion-color-cgreen-shade: #25b794;
+    --ion-color-cgreen-tint: #3fd5b1;
+  }
+  
+  .ion-color-cgreen {
+    --ion-color-base: var(--ion-color-cgreen);
+    --ion-color-base-rgb: var(--ion-color-cgreen-rgb);
+    --ion-color-contrast: var(--ion-color-cgreen-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-cgreen-contrast-rgb);
+    --ion-color-shade: var(--ion-color-cgreen-shade);
+    --ion-color-tint: var(--ion-color-cgreen-tint);
+  }

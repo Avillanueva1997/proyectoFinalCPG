@@ -1,0 +1,7 @@
+{
+  "name": "cpg",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
