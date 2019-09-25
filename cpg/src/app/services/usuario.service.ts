@@ -109,14 +109,14 @@ export class UsuarioService {
       'x-token': this.token
     });
 
-    return new Promise(resolve => {
+    return new Promise<boolean>(resolve => {
       this.http.post(`${URL}/user/update`, usuario, {headers}).
       subscribe( response => {
         if(response['ok']){
           this.guardarToken(response['token']);
           resolve(true);
         } else {
-          resolve(false);  
+          resolve(false);
         }
       });
     });

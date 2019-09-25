@@ -6,7 +6,7 @@
   
             <ion-row>
               <ion-col>
-                <img src="/assets/cgp-logo-10.svg">
+                <img class="logotype" src="/assets/cgp-logo-10.svg">
               </ion-col>
             </ion-row>
           
@@ -16,7 +16,7 @@
                   <ion-list>
                     
                     <ion-item>
-                      <ion-icon name="person" slot="start"></ion-icon>
+                      <ion-icon class="icologin" name="person" slot="start"></ion-icon>
                       <ion-input name="email"
                                   type="email"
                                   placeholder="Usuario"
@@ -25,7 +25,7 @@
                     </ion-item>
   
                     <ion-item>
-                      <ion-icon name="lock" slot="start"></ion-icon>
+                      <ion-icon class="icologin" name="lock" slot="start"></ion-icon>
                       <ion-input name="password"
                                   [(ngModel)]="loginUser.password" 
                                   type="password"
@@ -64,7 +64,7 @@
                           <ion-list>
                               
                               <ion-item>
-                              <ion-icon name="mail" slot="start"></ion-icon>
+                              <ion-icon class="icologin" name="mail" slot="start"></ion-icon>
                               <ion-input name="email" 
                                           type="email"
                                           placeholder="Correo Electrónico"
@@ -73,7 +73,7 @@
                               </ion-item>
   
                               <ion-item>
-                              <ion-icon name="person" slot="start"></ion-icon>
+                              <ion-icon class="icologin" name="person" slot="start"></ion-icon>
                               <ion-input name="nombre"
                                           type="text"
                                           placeholder="Nombre"
@@ -82,7 +82,7 @@
                               </ion-item>
   
                               <ion-item>
-                              <ion-icon name="lock" slot="start"></ion-icon>
+                              <ion-icon class="icologin" name="lock" slot="start"></ion-icon>
                               <ion-input name="password"
                                           type="password"
                                           placeholder="Contraseña"
@@ -129,7 +129,7 @@
                         expand="full"
                         size="small"
                         fill="outline"
-                        color="tertiary"
+                        color="cgreen"
                         (click)="mostrarLogin()">
               Ingresar
             </ion-button>
@@ -140,7 +140,7 @@
                       expand="full"
                       size="small"
                       fill="outline"
-                      color="tertiary"
+                      color="cgreen"
                       (click)="mostrarRegistro()">
             Registrarme
           </ion-button>
