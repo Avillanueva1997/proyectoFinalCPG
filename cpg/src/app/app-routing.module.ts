@@ -14,7 +14,9 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'main/tabs/tab1'
-  }
+  },
+  {path: 'event', loadChildren: './pages/tab4/tab4.module#Tab4PageModule' },
+  {path: 'general-data', loadChildren: './pages/general-data/general-data.module#GeneralDataPageModule' }
 ];
 @NgModule({
   imports: [

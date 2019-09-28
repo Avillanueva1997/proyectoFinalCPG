@@ -20,3 +20,9 @@ export interface Usuario {
   email?: string;
   password?: string;
 }
+
+export interface Componente {
+  icon: string;
+  name: string;
+  redirectTo: string;
+}

@@ -1,0 +1,79 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="event/"></ion-back-button></ion-buttons>
+    <ion-title text-capitalize>{{titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <form>
+        <ion-row>
+          <ion-col>
+            <ion-list>    
+              <ion-item>
+                  <ion-label position="floating">Descripción del evento</ion-label>
+                  <ion-textarea required></ion-textarea>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Lugar</ion-label>
+                  <ion-input></ion-input>
+              </ion-item> 
+
+              <ion-item>
+                  <ion-label position="floating">Organizador</ion-label>
+                  <ion-input></ion-input>
+              </ion-item> 
+
+              <ion-item>
+                  <ion-label position="floating">Cargo</ion-label>
+                  <ion-input></ion-input>
+              </ion-item> 
+
+              <ion-item>
+                  <ion-label position="floating">Correo electrónico de contacto</ion-label>
+                  <ion-input></ion-input>
+              </ion-item> 
+
+              <ion-item>
+                  <ion-label position="floating">Teléfono de contacto</ion-label>
+                  <ion-input></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Fecha de inicio</ion-label>
+                  <ion-datetime value="1990-02-19" placeholder="Select Date"></ion-datetime>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Fecha de fin</ion-label>
+                  <ion-datetime value="1990-02-19" placeholder="Select Date"></ion-datetime>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Horario de inicio</ion-label>
+                  <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Horario de fin</ion-label>
+                  <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
+              </ion-item>
+  
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row>
+          <ion-col text-center>
+            <ion-button type="submit"
+                        color="cgreen"
+                        shape="round"
+                        expand="block">
+            Guardar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      
+    </form>
+</ion-content>
+  
