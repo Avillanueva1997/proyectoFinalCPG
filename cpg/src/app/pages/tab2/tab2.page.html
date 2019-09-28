@@ -24,13 +24,13 @@
       <ion-textarea [(ngModel)]="post.mensaje"></ion-textarea>
     </ion-item>
 
-    <ion-list>
+    <!--<ion-list>
       <ion-item>
         <ion-label>Posición actual</ion-label>
         <ion-spinner name="lines-small" *ngIf="cargandoGeo"></ion-spinner>
         <ion-toggle slot="end" [(ngModel)]="post.position" (ionChange)="getGeo()"></ion-toggle>
       </ion-item>
-    </ion-list>
+    </ion-list>-->
 
 
   </ion-list>
@@ -46,7 +46,8 @@
     </ion-col>
     <ion-col size="6">
       <ion-button expand="full"
-                  shape="round">
+                  shape="round"
+                  (click)="libreria()">
         <ion-icon slot="start" name="images"></ion-icon>
         Galería
       </ion-button>
