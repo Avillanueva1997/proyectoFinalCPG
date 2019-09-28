@@ -3,6 +3,7 @@ import { Usuario } from 'src/app/interfaces/interfaces';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { NgForm } from '@angular/forms';
 import { UiServiceService } from '../../services/ui-service.service';
+import { PostsService } from '../../services/posts.service';
 
 @Component({
   selector: 'app-tab3',
@@ -13,7 +14,7 @@ export class Tab3Page implements OnInit {
 
   usuario: Usuario = {};
 
-  constructor(private userService: UsuarioService, private uiService: UiServiceService) {}
+  constructor(private userService: UsuarioService, private uiService: UiServiceService, private postService: PostsService) {}
 
   ngOnInit() {
     this.usuario = this.userService.getUsuario();
@@ -34,6 +35,8 @@ export class Tab3Page implements OnInit {
   }
 
   logout() {
+    this.postService.paginaPosts = 0;
+    this.userService.logout();
   }
 
 }

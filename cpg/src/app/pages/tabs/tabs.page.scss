@@ -1,1 +1,34 @@
+$cBlue: #438DED;
+$cGreen: #2ad0a8;
+$cBlack: #000;
+$cWhite: #fff;
 
+
+@font-face{
+    font-family: Segoe-UI;
+    src: url("/assets/fonts/segoe-ui-light-2.ttf");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+*{
+    font-family: Segoe-UI;
+}
+
+.tabfooter{
+    ion-tab-bar{
+        background: $cGreen;
+            --background: $cGreen;
+        ion-tab-button{
+            background: $cGreen;
+            --background: $cGreen;
+            ion-icon{
+                color: $cWhite;
+            }
+        }
+        .tab-selected{
+            background: $cBlue;
+            --background: $cBlue;
+        }
+    }
+}

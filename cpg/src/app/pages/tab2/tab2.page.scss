@@ -1,1 +1,47 @@
+$cBlue: #438DED;
+$cGreen: #2ad0a8;
+$cBlack: #000;
+$cWhite: #fff;
+$cGrey: #E5E5E5;
 
+
+@font-face{
+    font-family: Segoe-UI;
+    src: url("/assets/fonts/segoe-ui-light-2.ttf");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+*{
+    font-family: Segoe-UI;
+}
+
+ion-header{
+    ion-toolbar{
+        background: $cGrey;
+        --background: $cGrey;
+        ion-title{
+            color: $cGreen;
+        }
+        ion-buttons{
+            ion-button{
+                color: $cGreen!important;
+                --ion-color-base: $cGreen!important;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+ion-content{
+    ion-list{
+        ion-item{
+            ion-label{
+                font-family: Segoe-UI;
+            }
+            ion-textarea{
+                height: 25px;
+            }
+        }
+    }
+}

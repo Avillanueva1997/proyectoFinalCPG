@@ -1,4 +1,47 @@
+$cBlue: #438DED;
+$cGreen: #2ad0a8;
+$cBlack: #000;
+$cWhite: #fff;
+
+
+@font-face{
+    font-family: Segoe-UI;
+    src: url("/assets/fonts/segoe-ui-light-2.ttf");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+*{
+    font-family: Segoe-UI;
+}
+
+
 .welcome-card img {
   max-height: 35vh;
   overflow: hidden;
+}
+
+.headerevent{
+  --background:$cBlue!important;
+  ion-toolbar{
+    --background:$cBlue!important;
+  }
+  ion-buttons{
+    color: $cWhite;
+  }
+  ion-title{
+    color: $cWhite;
+    font-size: 14px;
+  }
+}
+
+.eventtool{
+  background:$cBlue!important;
+}
+
+.toolbar-background{
+  display: none!important;
+}
+.toolbar-container{
+  display: none!important;
 }
