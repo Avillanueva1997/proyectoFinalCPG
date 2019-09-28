@@ -1,5 +1,5 @@
 <div class="post">
-  <ion-item class="avatar" lines="none">
+  <!--<ion-item class="avatar" lines="none">
     <ion-avatar slot="start">
       <img src="/assets/avatars/{{post.usuario.avatar}}">
     </ion-avatar>
@@ -7,7 +7,7 @@
       <h3 class="h3title">{{post.usuario.nombre}}</h3>
       <h3 class="h3parrafe">{{post.usuario.email}}</h3>
     </ion-label>
-  </ion-item>
+  </ion-item>-->
 
   <ion-slides pager="true" *ngIf="post.imgs.length > 1">
     <ion-slide class="image-slide" *ngFor="let img of post.imgs" [style]=" (img | imagen: post.usuario._id) | domSanitizer"></ion-slide>
