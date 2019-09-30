@@ -1,0 +1,15 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="asistentes"></ion-back-button></ion-buttons>
+    <ion-title class="ion-text-capitalize">{{titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section>
+      <header class="ion-padding">Sube archivo en formato .xls</header>
+      <ion-button expand="full" shape="round" (click)="onUpload()">
+        <ion-icon slot="start" name="document"></ion-icon>Importar
+      </ion-button>
+    </section>
+</ion-content>

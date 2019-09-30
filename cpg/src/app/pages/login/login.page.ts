@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { IonSlides, NavController } from '@ionic/angular';
+import { IonSlides, NavController, ModalController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { UiServiceService } from 'src/app/services/ui-service.service';
 import { Usuario } from 'src/app/interfaces/interfaces';
+import { ModalInfoPage } from '../modal-info/modal-info.page';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,10 @@ export class LoginPage implements  AfterViewInit {
 
   token: string = null;
 
-  constructor(private userService: UsuarioService, private navCtrl: NavController, private uiService: UiServiceService) {
+  constructor(private userService: UsuarioService,
+              private navCtrl: NavController,
+              private uiService: UiServiceService,
+              private modalCtrl: ModalController) {
   }
 
   ngAfterViewInit() {
@@ -74,4 +78,19 @@ export class LoginPage implements  AfterViewInit {
   }
 
 
+  async onLostPassword() {
+    const modal = await this.modalCtrl.create({
+      component: ModalInfoPage,
+      componentProps: {
+        nombre: 'Fernando',
+        pais: 'Costa Rica'
+      }
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+
+    console.log('Retorno del modal', data );
+  }
 }

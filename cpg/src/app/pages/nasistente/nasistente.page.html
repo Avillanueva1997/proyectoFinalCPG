@@ -1,0 +1,80 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="asistentes"></ion-back-button></ion-buttons>
+    <ion-title class="ion-text-capitalize">{{titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <form>
+        <ion-row>
+          <ion-col>
+            <ion-list>    
+              <ion-item>
+                  <ion-label position="floating">Código</ion-label>
+                  <ion-input type="number"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Tipo de invitado</ion-label>
+                  <ion-select value="notifications" interface="action-sheet">
+                    <ion-select-option value="vipp">VIP</ion-select-option>
+                    <ion-select-option value="pote">Ponente</ion-select-option>
+                    <ion-select-option value="rear">Regular</ion-select-option>
+                  </ion-select>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Nombre</ion-label>
+                  <ion-input type="text"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">AP. Paterno</ion-label>
+                  <ion-input type="text"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">AP. Materno</ion-label>
+                  <ion-input type="text"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Empresa</ion-label>
+                  <ion-input type="text"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">DNI</ion-label>
+                  <ion-input type="number"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Celular</ion-label>
+                  <ion-input type="tel"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Correo Electrónico</ion-label>
+                  <ion-input type="email"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Comentarios</ion-label>
+                  <ion-textarea required></ion-textarea>
+              </ion-item>
+
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+              <ion-button type="submit"
+                          color="cgreen"
+                          shape="round"
+                          expand="block">
+              Guardar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+</ion-content>

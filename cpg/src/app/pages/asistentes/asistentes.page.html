@@ -1,0 +1,93 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="event"></ion-back-button></ion-buttons>
+    <ion-title class="ion-text-capitalize">{{titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <ion-button color="cgreen" [routerLink]="['/nasistente']">Nuevo asistente</ion-button>
+          <ion-button [routerLink]="['/masistentes']">Registrar masivo</ion-button>
+          <ion-button >Escanear</ion-button>
+      </ion-col>
+    </ion-row>    
+    <ion-row>
+      <ion-col>
+        <table>
+          <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>AP. Paterno</th>
+            <th>AP. Materno</th>
+            <th>Empresa</th>
+            <th>Correo</th>
+            <th>Perfil</th>
+            <th>Cancelado</th>
+            <th>Confirmó</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>James</td>
+            <td>Matman</td>
+            <td>Chief Sandwich Eater</td>
+            <td>Lettuce Green</td>
+            <td>Trek</td>
+            <td>Digby Green</td>
+            <td>January 13, 1979</td>
+            <td>Gotham City</td>
+            <td>3.1</td>
+          </tr>
+          <tr>
+            <td>The</td>
+            <td>Tick</td>
+            <td>Crimefighter Sorta</td>
+            <td>Blue</td>
+            <td>Wars</td>
+            <td>John Smith</td>
+            <td>July 19, 1968</td>
+            <td>Athens</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Jokey</td>
+            <td>Smurf</td>
+            <td>Giving Exploding Presents</td>
+            <td>White</td>
+            <td>Trek</td>
+            <td>Smurflane</td>
+            <td>March 12, 1945</td>
+            <td>New Smurf City</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td>Cindy</td>
+            <td>Beyler</td>
+            <td>Sales Representative</td>
+            <td>Red</td>
+            <td>Wars</td>
+            <td>Lori Quivey</td>
+            <td>July 5, 1956</td>
+            <td>Paris</td>
+            <td>3.4</td>
+          </tr>
+          <tr>
+            <td>Captain</td>
+            <td>Cool</td>
+            <td>Tree Crusher</td>
+            <td>Blue</td>
+            <td>Wars</td>
+            <td>Steve 42nd</td>
+            <td>December 13, 1982</td>
+            <td>Las Vegas</td>
+            <td>1.9</td>
+          </tr>
+          </tbody>
+        </table>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

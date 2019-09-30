@@ -3,6 +3,16 @@
       "icon": "information-circle-outline",
       "name": "Datos Generales",
       "redirectTo": "/general-data"
+    },
+    {
+        "icon": "body",
+        "name": "Asistentes",
+        "redirectTo": "/asistentes"
+    },
+    {
+        "icon": "business",
+        "name": "Salas",
+        "redirectTo": "/salas"
     }
   ]
   

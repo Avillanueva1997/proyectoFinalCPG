@@ -15,8 +15,12 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: 'main/tabs/tab1'
   },
-  {path: 'event', loadChildren: './pages/tab4/tab4.module#Tab4PageModule' },
-  {path: 'general-data', loadChildren: './pages/general-data/general-data.module#GeneralDataPageModule' }
+  { path: 'event', loadChildren: './pages/tab4/tab4.module#Tab4PageModule' },
+  { path: 'general-data', loadChildren: './pages/general-data/general-data.module#GeneralDataPageModule' },
+  { path: 'asistentes', loadChildren: './pages/asistentes/asistentes.module#AsistentesPageModule' },
+  { path: 'nasistente', loadChildren: './pages/nasistente/nasistente.module#NasistentePageModule' },
+  { path: 'salas', loadChildren: './pages/salas/salas.module#SalasPageModule' },
+  { path: 'masistentes', loadChildren: './pages/masistentes/masistentes.module#MasistentesPageModule' }
 ];
 @NgModule({
   imports: [

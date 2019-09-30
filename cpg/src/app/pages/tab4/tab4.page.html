@@ -1,45 +1,3 @@
-<!--<ion-header no-border>
-  <ion-toolbar>
-
-    <ion-buttons slot="start">
-
-      <ion-menu-button color="primary"
-                       menu="primerMenu">
-      </ion-menu-button>
-
-    </ion-buttons>
-
-
-    <ion-title color="primary">Evento</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-
-  <ion-list>
-
-      <ion-menu-toggle autoHide="false"  *ngFor="let c of componentes | async">
-          <ion-item [routerLink]="c.redirectTo">
-            <ion-icon slot="start" [name]="c.icon"></ion-icon>
-            <ion-label>{{ c.name }}</ion-label>
-          </ion-item>
-        </ion-menu-toggle>-->
-
-    <!--<ion-item *ngFor="let c of componentes | async"
-              (click)="redirect(c.redirectTo)" detail>
-        <ion-icon slot="start" 
-                  [name]="c.icon"
-                  color="primary">
-        </ion-icon>
-        <ion-label>{{ c.name }}</ion-label>
-    </ion-item>-->
-
-  <!--</ion-list>
-
-
-</ion-content>-->
-
 <ion-menu side="start">
     <ion-header>
       <ion-toolbar translucent>
@@ -53,11 +11,8 @@
           <ion-label>Home</ion-label>
         </ion-item>
         <ion-item *ngFor="let c of componentes | async"
-                  [routerLink]="c.redirectTo" detail>
-            <ion-icon slot="start" 
-                      [name]="c.icon"
-                      color="primary">
-            </ion-icon>
+                  [routerLink]="c.redirectTo">
+            <ion-icon slot="start" [name]="c.icon"></ion-icon>
             <ion-label>{{ c.name }}</ion-label>
         </ion-item>
       </ion-list>
@@ -65,7 +20,7 @@
   </ion-menu>
 
   <div class="ion-page" main>
-    <ion-header>
+    <ion-header  no-border>
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
@@ -73,7 +28,7 @@
         <ion-title>Evento</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content padding>
+    <ion-content class="ion-padding">
       <!--<ion-button expand="block" onclick="openMenu()">Open Menu</ion-button>-->
     </ion-content>
   </div>
