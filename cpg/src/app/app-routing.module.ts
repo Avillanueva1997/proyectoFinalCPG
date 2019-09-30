@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'asistentes', loadChildren: './pages/asistentes/asistentes.module#AsistentesPageModule' },
   { path: 'nasistente', loadChildren: './pages/nasistente/nasistente.module#NasistentePageModule' },
   { path: 'salas', loadChildren: './pages/salas/salas.module#SalasPageModule' },
-  { path: 'masistentes', loadChildren: './pages/masistentes/masistentes.module#MasistentesPageModule' }
+  { path: 'masistentes', loadChildren: './pages/masistentes/masistentes.module#MasistentesPageModule' },
+  { path: 'scancodigo', loadChildren: './pages/scancodigo/scancodigo.module#ScancodigoPageModule' }
 ];
 @NgModule({
   imports: [
