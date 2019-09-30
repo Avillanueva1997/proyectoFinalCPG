@@ -1,0 +1,49 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="salas"></ion-back-button></ion-buttons>
+    <ion-title class="ion-text-capitalize">{{titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <form>
+        <ion-row>
+          <ion-col>
+            <ion-list>    
+              <ion-item>
+                  <ion-label position="floating">Código</ion-label>
+                  <ion-input type="number"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Tipo</ion-label>
+                  <ion-select value="notifications" interface="action-sheet">
+                    <ion-select-option value="vipp">Puerta</ion-select-option>
+                    <ion-select-option value="pote">Sala</ion-select-option>
+                  </ion-select>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Aforo</ion-label>
+                  <ion-input type="number"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Aforo superado</ion-label>
+                  <ion-input type="number"></ion-input>
+              </ion-item>
+
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+              <ion-button type="submit"
+                          color="cgreen"
+                          shape="round"
+                          expand="block">
+              Guardar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+</ion-content>
