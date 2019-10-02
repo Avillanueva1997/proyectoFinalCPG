@@ -1,3 +1,4 @@
+import { Asistente } from '../../../../server/models/asistente.model';
 export interface RespuestaPosts {
   ok: boolean;
   pagina: number;
@@ -25,4 +26,50 @@ export interface Componente {
   icon: string;
   name: string;
   redirectTo: string;
+}
+
+export interface Event {
+  created: Date;
+  description: string;
+  place: string;
+  organizador: string;
+  cargo: string;
+  email: string;
+  telf: string;
+  fein: Date;
+  fefn: Date;
+  hrin: Date;
+  hrfn: Date;
+  lios: boolean;
+  caos: number;
+  moto: string;
+  coto: number;
+  caia: string;
+  post: Post;
+}
+
+export interface Asistente {
+  created: Date;
+  codigo: string;
+  tipoinvitado: string;
+  name: string;
+  appaterno: string;
+  apmaterno: string;
+  empresa: string;
+  dni: string;
+  celular: string;
+  email: string;
+  comentarios: string;
+  post: Post;
+}
+
+
+export interface Sala {
+    created: Date;
+    codigo: string;
+    name: string;
+    tipo: string;
+    aforo: number;
+    aforosuperado: number;
+    post: Post;
 }

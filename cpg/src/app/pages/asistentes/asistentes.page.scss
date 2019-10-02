@@ -68,9 +68,9 @@ only screen and (max-width: 760px),
     td:nth-of-type(3):before { content: "AP. Paterno:"; }
     td:nth-of-type(4):before { content: "AP. Materno:"; }
     td:nth-of-type(5):before { content: "Empresa:"; }
-    td:nth-of-type(6):before { content: "Cargo:"; }
-    td:nth-of-type(7):before { content: "Correo:"; }
-    td:nth-of-type(8):before { content: "Perfil:"; }
+    td:nth-of-type(6):before { content: "DNI:"; }
+    td:nth-of-type(7):before { content: "Celular:"; }
+    td:nth-of-type(8):before { content: "Correo:"; }
     td:nth-of-type(9):before { content: "Cancelado:"; }
     td:nth-of-type(10):before { content: "Confirmó:"; }
 }
@@ -83,11 +83,21 @@ and (max-device-width : 480px) {
         padding: 0;
         margin: 0;
         width: 320px; }
+
+        ion-toggle {
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
     }
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     body {
         width: 495px;
+    }
+
+    ion-toggle {
+        padding-top: 0px;
+        padding-bottom: 0px;
     }
 }

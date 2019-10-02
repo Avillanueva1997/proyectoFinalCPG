@@ -5,31 +5,36 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <form>
+    <form (ngSubmit)="nuevaSala(fSala)" #fSala="ngForm">
         <ion-row>
           <ion-col>
             <ion-list>    
               <ion-item>
                   <ion-label position="floating">Código</ion-label>
-                  <ion-input type="number"></ion-input>
+                  <ion-input type="number" name="codigo" [(ngModel)]="sala.codigo" required></ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label position="floating">Nombre</ion-label>
+                  <ion-input type="text" name="name" [(ngModel)]="sala.name" required></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">Tipo</ion-label>
-                  <ion-select value="notifications" interface="action-sheet">
-                    <ion-select-option value="vipp">Puerta</ion-select-option>
-                    <ion-select-option value="pote">Sala</ion-select-option>
+                  <ion-select value="notifications" interface="action-sheet" name="tipo" [(ngModel)]="sala.tipo" required>
+                    <ion-select-option value="Puerta">Puerta</ion-select-option>
+                    <ion-select-option value="Sala">Sala</ion-select-option>
                   </ion-select>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">Aforo</ion-label>
-                  <ion-input type="number"></ion-input>
+                  <ion-input type="number" name="aforo" [(ngModel)]="sala.aforo" required></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">Aforo superado</ion-label>
-                  <ion-input type="number"></ion-input>
+                  <ion-input type="number" name="aforosuperado" [(ngModel)]="sala.aforosuperado" required></ion-input>
               </ion-item>
 
             </ion-list>
@@ -40,7 +45,8 @@
               <ion-button type="submit"
                           color="cgreen"
                           shape="round"
-                          expand="block">
+                          expand="block"
+                          [disabled]="fSala.form.invalid">
               Guardar
             </ion-button>
           </ion-col>

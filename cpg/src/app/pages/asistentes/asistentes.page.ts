@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { AsistenteService } from '../../services/asistente.service';
+import { TouchSequence } from 'selenium-webdriver';
+import { Asistente } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-asistentes',
@@ -7,27 +11,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AsistentesPage implements OnInit {
 
-  ctrl: any;
   titulo = 'Asistentes';
+  post: any;
+  asistentes: Asistente[] = [];
 
-  constructor() {
-    this.ctrl = [
-      {
-        name: "AiA",
-        code: "AI101",
-        limit: 25000,
-        account: "Life Insurance"
-      },
-      {
-        name: "Cargills",
-        code: "CF001",
-        limit: 30000,
-        account: "Food City"
-      }
-    ];
+  constructor(private storage: Storage, private asistenteService: AsistenteService) {
   }
 
   ngOnInit() {
+    this.cargarPost();
+  }
+
+  async cargarPost() {
+    this.post = await this.storage.get('post');
+    this.cargarAsistentes(this.post);
+  }
+
+  cargarAsistentes(post, event?: any) {
+    this.asistenteService.getAsistentes(post).subscribe(
+      response => {
+        if(response['ok']){
+          this.asistentes = response['asistentes'];
+          if (event) {
+            event.target.complete();
+          }
+        }
+      }
+    );
+  }
+
+  recargar(event: any) {
+    this.cargarAsistentes(this.post, event);
   }
 
 }

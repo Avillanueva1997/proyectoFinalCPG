@@ -17,7 +17,8 @@ export default class FileSystem {
                 if(err){
                     reject(err);
                 } else {
-                    resolve();
+                    let pathComplete = path + '/' + nombreArchivo;
+                    resolve(pathComplete);
                 }
             });
             

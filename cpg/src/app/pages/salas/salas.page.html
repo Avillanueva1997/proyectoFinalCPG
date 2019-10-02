@@ -5,6 +5,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="recargar($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-grid>
         <ion-row>
           <ion-col>
@@ -24,40 +27,12 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>James</td>
-                <td>Matman</td>
-                <td>Chief Sandwich Eater</td>
-                <td>Lettuce Green</td>
-                <td>Trek</td>
-              </tr>
-              <tr>
-                <td>The</td>
-                <td>Tick</td>
-                <td>Crimefighter Sorta</td>
-                <td>Blue</td>
-                <td>Wars</td>
-              </tr>
-              <tr>
-                <td>Jokey</td>
-                <td>Smurf</td>
-                <td>Giving Exploding Presents</td>
-                <td>White</td>
-                <td>Trek</td>
-              </tr>
-              <tr>
-                <td>Cindy</td>
-                <td>Beyler</td>
-                <td>Sales Representative</td>
-                <td>Red</td>
-                <td>Wars</td>
-              </tr>
-              <tr>
-                <td>Captain</td>
-                <td>Cool</td>
-                <td>Tree Crusher</td>
-                <td>Blue</td>
-                <td>Wars</td>
+              <tr *ngFor="let sala of salas">
+                <td>{{sala.codigo}}</td>
+                <td>{{sala.name}}</td>
+                <td>{{sala.tipo}}</td>
+                <td>{{sala.aforo}}</td>
+                <td>{{sala.aforosuperado}}</td>
               </tr>
               </tbody>
             </table>

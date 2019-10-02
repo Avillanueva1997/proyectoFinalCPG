@@ -20,6 +20,9 @@ import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { Screenshot } from '@ionic-native/screenshot/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,6 +31,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    NgxQRCodeModule,
     IonicStorageModule.forRoot()
   ],
   providers: [
@@ -37,6 +41,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     Camera,
     FileTransfer,
     BarcodeScanner,
+    Screenshot,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

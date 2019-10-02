@@ -6,6 +6,9 @@ import fileUpload from 'express-fileupload';
 
 import userRoutes from './routes/usuario';
 import postRoutes from './routes/post';
+import eventRoutes from './routes/event';
+import asistenteRoutes from './routes/asistente';
+import salaRoutes from './routes/sala';
 
 
 const server = new Server();
@@ -29,6 +32,9 @@ server.app.use(fileUpload());
 //Rutas de mi app
 server.app.use('/user', userRoutes);
 server.app.use('/posts', postRoutes);
+server.app.use('/event', eventRoutes);
+server.app.use('/asistente', asistenteRoutes);
+server.app.use('/sala', salaRoutes);
 
 //Conectar BD
 mongoose.connect( 'mongodb://localhost:27017/cpg', 

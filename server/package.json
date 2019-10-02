@@ -16,7 +16,8 @@
     "express-fileupload": "^1.1.6-alpha.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.1",
-    "uniqid": "^5.0.3"
+    "uniqid": "^5.0.3",
+    "xlsx": "^0.15.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

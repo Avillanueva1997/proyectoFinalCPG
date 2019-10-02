@@ -17,7 +17,8 @@ class FileSystem {
                     reject(err);
                 }
                 else {
-                    resolve();
+                    let pathComplete = path + '/' + nombreArchivo;
+                    resolve(pathComplete);
                 }
             });
         });

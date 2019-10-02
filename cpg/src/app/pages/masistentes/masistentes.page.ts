@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { AsistenteService } from '../../services/asistente.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Storage } from '@ionic/storage';
+import { UiServiceService } from '../../services/ui-service.service';
+
+const URL = environment.url;
 
 @Component({
   selector: 'app-masistentes',
@@ -9,27 +16,30 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 export class MasistentesPage implements OnInit {
 
   titulo = 'Registrar Masivo';
+  post: any;
 
-  constructor(private camera: Camera) { }
+  constructor(private el: ElementRef,
+              private asistenteService: AsistenteService,
+              private storage: Storage,
+              private uiService: UiServiceService) { }
 
   ngOnInit() {
+    this.cargarPost();
   }
 
-  onUpload(){
-    const options: CameraOptions = {
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-    };
-    this.procesarFile(options);
+  async getFile() {
+    const inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#file');
+    const files = inputEl.files;
+    const response = await this.asistenteService.uploadFile(files, this.post);
+    if(response === false){
+      this.uiService.alertaInformativa('Error al importar el excel');
+    } else {
+      this.uiService.alertaInformativa('Se importaron ' + response + ' asistentes.');
+    }
   }
 
-  procesarFile(options: CameraOptions) {
-    this.camera.getPicture(options).then((imageData) => {
-      // const img = window.Ionic.WebView.convertFileSrc(imageData);
-      // this.postService.subirImagen(imageData);
-      // this.tempImages.push(img);
-     }, (err) => {
-      // Handle error
-     });
+  async cargarPost() {
+    this.post = await this.storage.get('post');
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from 'src/app/services/posts.service';
 import { Post } from '../../interfaces/interfaces';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-tab1',
@@ -13,13 +14,17 @@ export class Tab1Page implements OnInit {
 
   habilitado = true;
 
-  constructor(private postService: PostsService) {}
+  constructor(private postService: PostsService, private storage: Storage) {}
 
   ngOnInit() {
     this.siguientes();
     this.postService.nuevoPost.subscribe( post => {
       this.posts.unshift(post);
     });
+
+    if (this.storage.get('post')) {
+      this.storage.remove('post');
+    }
   }
 
   recargar(event: any) {
@@ -31,7 +36,6 @@ export class Tab1Page implements OnInit {
   siguientes(event?: any, pull: boolean = false) {
     this.postService.getPosts(pull).subscribe(
       response => {
-        console.log(response);
         this.posts.push(...response.posts);
         if ( event ) {
           event.target.complete();

@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: 'salas', loadChildren: './pages/salas/salas.module#SalasPageModule' },
   { path: 'masistentes', loadChildren: './pages/masistentes/masistentes.module#MasistentesPageModule' },
   { path: 'scancodigo', loadChildren: './pages/scancodigo/scancodigo.module#ScancodigoPageModule' },
-  { path: 'nsala', loadChildren: './pages/nsala/nsala.module#NsalaPageModule' }
+  { path: 'nsala', loadChildren: './pages/nsala/nsala.module#NsalaPageModule' },
+  { path: 'vasistente', loadChildren: './pages/vasistente/vasistente.module#VasistentePageModule' }
 ];
 @NgModule({
   imports: [

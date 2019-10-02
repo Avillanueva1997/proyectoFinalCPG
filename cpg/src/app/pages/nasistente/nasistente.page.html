@@ -5,18 +5,18 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <form>
+    <form (ngSubmit)="nuevoAsistente(fAsistente)" #fAsistente="ngForm">
         <ion-row>
           <ion-col>
             <ion-list>    
               <ion-item>
                   <ion-label position="floating">Código</ion-label>
-                  <ion-input type="number"></ion-input>
+                  <ion-input type="number" name="codigo" [(ngModel)]="asistente.codigo" required></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">Tipo de invitado</ion-label>
-                  <ion-select value="notifications" interface="action-sheet">
+                  <ion-select value="notifications" interface="action-sheet" name="codigo" [(ngModel)]="asistente.tipoinvitado" required>
                     <ion-select-option value="vipp">VIP</ion-select-option>
                     <ion-select-option value="pote">Ponente</ion-select-option>
                     <ion-select-option value="rear">Regular</ion-select-option>
@@ -25,42 +25,42 @@
 
               <ion-item>
                   <ion-label position="floating">Nombre</ion-label>
-                  <ion-input type="text"></ion-input>
+                  <ion-input type="text" name="name" [(ngModel)]="asistente.name" required></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">AP. Paterno</ion-label>
-                  <ion-input type="text"></ion-input>
+                  <ion-input type="text" name="appaterno" [(ngModel)]="asistente.appaterno" required></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">AP. Materno</ion-label>
-                  <ion-input type="text"></ion-input>
+                  <ion-input type="text" name="apmaterno" [(ngModel)]="asistente.apmaterno" required></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">Empresa</ion-label>
-                  <ion-input type="text"></ion-input>
+                  <ion-input type="text" name="empresa" [(ngModel)]="asistente.empresa" required></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">DNI</ion-label>
-                  <ion-input type="number"></ion-input>
+                  <ion-input type="number" name="dni" [(ngModel)]="asistente.dni" required></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">Celular</ion-label>
-                  <ion-input type="tel"></ion-input>
+                  <ion-input type="tel" name="celular" [(ngModel)]="asistente.celular" required></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">Correo Electrónico</ion-label>
-                  <ion-input type="email"></ion-input>
+                  <ion-input type="email" name="email" [(ngModel)]="asistente.email" required></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">Comentarios</ion-label>
-                  <ion-textarea required></ion-textarea>
+                  <ion-textarea name="comentarios" [(ngModel)]="asistente.comentarios"></ion-textarea>
               </ion-item>
 
             </ion-list>
@@ -71,7 +71,8 @@
               <ion-button type="submit"
                           color="cgreen"
                           shape="round"
-                          expand="block">
+                          expand="block"
+                          [disabled]="fAsistente.form.invalid">
               Guardar
             </ion-button>
           </ion-col>

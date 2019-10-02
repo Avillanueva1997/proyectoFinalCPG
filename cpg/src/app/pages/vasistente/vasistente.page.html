@@ -1,0 +1,21 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="asistentes"></ion-back-button></ion-buttons>
+    <ion-title class="ion-text-capitalize">{{titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="createdCode">
+  <ion-button (click)="takeScreenShoot()"><ion-icon slot="start" name="image"></ion-icon> Screenshot</ion-button>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title class="ion-text-center">{{asistente.name}} {{asistente.appaterno}} {{asistente.apmaterno}} </ion-card-title>
+          <ion-card-subtitle class="ion-text-center">{{asistente.dni}}</ion-card-subtitle>
+        </ion-card-header>       
+      
+        <ion-card-content>
+            <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
+        </ion-card-content>
+      </ion-card>
+
+</ion-content>
