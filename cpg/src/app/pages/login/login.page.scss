@@ -14,6 +14,14 @@ $cWhite: #fff;
     font-family: Segoe-UI;
 }
 
+
+@mixin shadowsborderes{
+    -webkit-box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+            -moz-box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+            box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+            --box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+}
+
 .mainSlide, .mainSlide ion-slide {
     width: 100vw;
     height: 100vh;
@@ -54,11 +62,49 @@ ion-item{
     border-bottom: 1px solid rgba($cBlack, .4);
 }
 ion-input{
-    text-transform: capitalize;
+    // text-transform: lowercase!important;
     color: $cGreen;
     
 }
+ion-content{
+    ion-button{
+        text-transform: capitalize;
+        border-radius: 50px!important;
+        --border-radius: 50px!important;
+        @include shadowsborderes;
+        background: $cGreen;
+        --background: $cGreen;
+        display: block;
+        width: 100%;
+        &:hover{
+            background: $cGreen;
+            --background: $cGreen;
+        }
+    }
+}
 
-ion-button{
-    text-transform: capitalize;
+ion-text{
+    font-family: Segoe-UI;
+    font-size: 14px;
+}
+
+ion-footer{
+    ion-button{
+        font-family: Segoe-UI!important;
+        font-size: 14px;
+    }
+}
+
+form{
+    width: 50%;
+    margin: 0 auto;
+}
+
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px){
+    form{
+        width: 100%!important;
+        margin: 0 auto;
+    }
 }

@@ -13,7 +13,7 @@ $cWhite: #fff;
   }
 
 *{
-    font-family: Segoe-UI;
+    font-family: Segoe-UI!important;
 }
 
 
@@ -30,4 +30,23 @@ $cWhite: #fff;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.post{
+    position: relative;
+    ion-slides{
+        position: relative;
+        z-index: 3;
+    }
+    .itmensaje{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba($cBlue, .9);
+        --background: rgba($cBlue, .9);
+        z-index: 5;
+        font-family: Segoe-UI!important;
+        color: $cWhite;
+    }
 }

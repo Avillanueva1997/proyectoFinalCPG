@@ -16,7 +16,7 @@
 
               <ion-item>
                   <ion-label position="floating">Tipo de invitado</ion-label>
-                  <ion-select value="notifications" interface="action-sheet" name="codigo" [(ngModel)]="asistente.tipoinvitado" required>
+                  <ion-select value="notifications" interface="action-sheet" name="codigo" [(ngModel)]="asistente.tipoinvitado" cancelText="Cancelar" required>
                     <ion-select-option value="vipp">VIP</ion-select-option>
                     <ion-select-option value="pote">Ponente</ion-select-option>
                     <ion-select-option value="rear">Regular</ion-select-option>
@@ -25,22 +25,22 @@
 
               <ion-item>
                   <ion-label position="floating">Nombre</ion-label>
-                  <ion-input type="text" name="name" [(ngModel)]="asistente.name" required></ion-input>
+                  <ion-input type="text" name="name" [(ngModel)]="asistente.name" required class="ion-text-capitalize"></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">AP. Paterno</ion-label>
-                  <ion-input type="text" name="appaterno" [(ngModel)]="asistente.appaterno" required></ion-input>
+                  <ion-input type="text" name="appaterno" [(ngModel)]="asistente.appaterno" required class="ion-text-capitalize"></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">AP. Materno</ion-label>
-                  <ion-input type="text" name="apmaterno" [(ngModel)]="asistente.apmaterno" required></ion-input>
+                  <ion-input type="text" name="apmaterno" [(ngModel)]="asistente.apmaterno" required class="ion-text-capitalize"></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">Empresa</ion-label>
-                  <ion-input type="text" name="empresa" [(ngModel)]="asistente.empresa" required></ion-input>
+                  <ion-input type="text" name="empresa" [(ngModel)]="asistente.empresa" required class="ion-text-capitalize"></ion-input>
               </ion-item>
 
               <ion-item>
@@ -60,7 +60,7 @@
 
               <ion-item>
                   <ion-label position="floating">Comentarios</ion-label>
-                  <ion-textarea name="comentarios" [(ngModel)]="asistente.comentarios"></ion-textarea>
+                  <ion-textarea name="comentarios" [(ngModel)]="asistente.comentarios" class="ion-text-capitalize"></ion-textarea>
               </ion-item>
 
             </ion-list>
@@ -69,8 +69,7 @@
         <ion-row>
           <ion-col class="ion-text-center">
               <ion-button type="submit"
-                          color="cgreen"
-                          shape="round"
+                          class="clgreen"
                           expand="block"
                           [disabled]="fAsistente.form.invalid">
               Guardar

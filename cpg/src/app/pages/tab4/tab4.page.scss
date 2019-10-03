@@ -1,0 +1,73 @@
+$cBlue: #438DED;
+$cGreen: #2ad0a8;
+$cBlack: #000;
+$cWhite: #fff;
+
+
+@font-face{
+    font-family: Segoe-UI;
+    src: url("/assets/fonts/segoe-ui-light-2.ttf");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+*{
+    font-family: Segoe-UI;
+}
+
+ion-menu{
+  ion-list{
+    ion-item{
+      ion-label{
+        font-family: Segoe-UI;
+        color: #757575;
+      }
+      &:hover{
+        background: $cGreen;
+      }
+    }
+  }
+}
+
+.ion-page{
+    background:$cBlue!important;
+    --background:$cBlue!important;
+  ion-toolbar{
+    background:$cBlue!important;
+    --background:$cBlue!important;
+  }
+  ion-buttons{
+    color: $cWhite;
+  }
+  ion-title{
+    color: $cWhite;
+    font-size: 18px;
+    padding: 0;
+  }
+}
+
+ion-menu{
+  ion-header{
+    background:$cGreen!important;
+    --background:$cGreen!important;
+    ion-toolbar{
+      background:$cGreen!important;
+      --background:$cGreen!important;
+    }
+    ion-buttons{
+      color: $cWhite;
+    }
+    ion-title{
+      color: $cWhite;
+      font-size: 18px;
+      // padding: 0;
+    }
+  }
+  ion-content{
+    ion-content{
+      ion-item{
+        color: $cBlue;
+      }
+    }
+  }
+}

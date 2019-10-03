@@ -1,0 +1,84 @@
+$cBlue: #438DED;
+$cGreen: #2ad0a8;
+$cBlack: #000;
+$cWhite: #fff;
+
+
+@font-face{
+    font-family: Segoe-UI;
+    src: url("/assets/fonts/segoe-ui-light-2.ttf");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+*{
+    font-family: Segoe-UI;
+}
+
+@mixin shadowsborderes{
+    -webkit-box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+            -moz-box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+            box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+            --box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+}
+
+.clgreen{
+  text-transform: capitalize;
+  border-radius: 50px!important;
+  --border-radius: 50px!important;
+  @include shadowsborderes;
+  background: $cGreen;
+  --background: $cGreen;
+  &:hover{
+      background: $cGreen;
+      --background: $cGreen;
+  }
+}
+
+ion-header{
+    background:$cBlue!important;
+    --background:$cBlue!important;
+    ion-toolbar{
+        background:$cBlue!important;
+        --background:$cBlue!important;
+    }
+    ion-buttons{
+      color: $cWhite;
+    }
+    ion-title{
+      color: $cWhite;
+      font-size: 18px;
+    padding: 0;
+    }
+}
+
+form{
+  ion-item{
+    width: 50%;
+    display: inline-block;
+    ion-label{
+      font-family: Segoe-UI;
+    }
+    ion-input{
+      font-family: Segoe-UI;
+    }
+    ion-select-option{
+      font-family: Segoe-UI;
+    }
+  }
+}
+
+.action-sheet-button.sc-ion-action-sheet-md{
+  font-family: Segoe-UI!important;
+}
+
+
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px){
+  form{
+      ion-item{
+        width: 100%!important;
+    }
+  }
+}

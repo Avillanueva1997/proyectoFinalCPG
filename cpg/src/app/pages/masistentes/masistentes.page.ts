@@ -15,7 +15,7 @@ const URL = environment.url;
 })
 export class MasistentesPage implements OnInit {
 
-  titulo = 'Registrar Masivo';
+  titulo = 'Carga masiva';
   post: any;
 
   constructor(private el: ElementRef,

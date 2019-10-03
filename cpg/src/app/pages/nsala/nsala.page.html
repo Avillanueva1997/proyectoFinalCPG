@@ -16,12 +16,12 @@
 
               <ion-item>
                   <ion-label position="floating">Nombre</ion-label>
-                  <ion-input type="text" name="name" [(ngModel)]="sala.name" required></ion-input>
+                  <ion-input type="text" name="name" [(ngModel)]="sala.name" required class="ion-text-capitalize" ></ion-input>
               </ion-item>
 
               <ion-item>
                   <ion-label position="floating">Tipo</ion-label>
-                  <ion-select value="notifications" interface="action-sheet" name="tipo" [(ngModel)]="sala.tipo" required>
+                  <ion-select value="notifications" interface="action-sheet" name="tipo" [(ngModel)]="sala.tipo" cancelText="Cancelar" required>
                     <ion-select-option value="Puerta">Puerta</ion-select-option>
                     <ion-select-option value="Sala">Sala</ion-select-option>
                   </ion-select>
@@ -43,8 +43,7 @@
         <ion-row>
           <ion-col class="ion-text-center">
               <ion-button type="submit"
-                          color="cgreen"
-                          shape="round"
+                          class="clgreen"
                           expand="block"
                           [disabled]="fSala.form.invalid">
               Guardar

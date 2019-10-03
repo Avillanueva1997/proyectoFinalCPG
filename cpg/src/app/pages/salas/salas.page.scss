@@ -1,13 +1,67 @@
+$cBlue: #438DED;
+$cGreen: #2ad0a8;
+$cBlack: #000;
+$cWhite: #fff;
+
+
+@font-face{
+    font-family: Segoe-UI;
+    src: url("/assets/fonts/segoe-ui-light-2.ttf");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+*{
+    font-family: Segoe-UI;
+}
+
+@mixin shadowsborderes{
+    -webkit-box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+    -moz-box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+    box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+    --box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+}
+
+ion-header{
+    background:$cBlue!important;
+    --background:$cBlue!important;
+    ion-toolbar{
+        background:$cBlue!important;
+        --background:$cBlue!important;
+    }
+    ion-buttons{
+      color: $cWhite;
+    }
+    ion-title{
+      color: $cWhite;
+      font-size: 18px;
+      padding: 0!important;
+    }
+}
+
+.clgreen{
+    text-transform: capitalize;
+    border-radius: 50px!important;
+    --border-radius: 50px!important;
+    @include shadowsborderes;
+    background: $cGreen;
+    --background: $cGreen;
+    &:hover{
+        background: $cGreen;
+        --background: $cGreen;
+    }
+}
+
 table { 
     width: 100%; 
     border-collapse: collapse; 
 }
 /* Zebra striping */
 tr:nth-of-type(odd) { 
-    background: #eee; 
+    background: #fff; 
 }
 th { 
-    background: #333; 
+    background: $cGreen; 
     color: white; 
     font-weight: bold; 
 }
@@ -62,12 +116,12 @@ only screen and (max-width: 760px),
     /*
     Label the data
     */
-    td:nth-of-type(1) { font-weight:bold;font-size:150%;margin-top:5px; }
-    td:nth-of-type(1):before { content: "Código:"; }
-    td:nth-of-type(2):before { content: "Nombre:"; }
-    td:nth-of-type(3):before { content: "Tipo:"; }
-    td:nth-of-type(4):before { content: "Aforo:"; }
-    td:nth-of-type(5):before { content: "Aforo superado:"; }
+    td:nth-of-type(1) { background: $cGreen; color: $cWhite!important; --color: #fff!important; }
+    td:nth-of-type(1):before { content: "Código:"; color: $cWhite; --color: #ffffff;  }
+    td:nth-of-type(2):before { content: "Nombre:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(3):before { content: "Tipo:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(4):before { content: "Aforo:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(5):before { content: "Aforo superado:"; color: $cGreen; --color: #2ad0a8; }
 }
 
 /* Smartphones (portrait and landscape) ----------- */
