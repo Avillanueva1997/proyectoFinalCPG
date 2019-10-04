@@ -27,12 +27,54 @@ asistenteRoutes.post('/', [ verificaToken], (req:any, res: Response) => {
     });
 });
 
+asistenteRoutes.post('/updateasistencia', [ verificaToken], (req:any, res: Response) => {
+
+    //console.log(req);
+    const body = req.body;
+    const date = new Date();
+
+    Asistente.updateOne({codigo:body.codigo}, {$set:{asistio:body.state, fasistencia:date}}, function(err, resBD) {
+        if (err) throw err;
+
+        res.json({
+            ok: true,
+            resBD
+        });
+
+      });
+});
+
 
 asistenteRoutes.get('/', async (req: any, res: Response) => {
 
     const postId = req.query.postid;
 
     const asistentes = await Asistente.find({'post': ObjectID(postId)})
+    .sort({ _id: -1})
+    .populate('post')
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    });
+
+});
+
+asistenteRoutes.get('/search/:postid/:value', async (req: any, res: Response) => {
+
+    const postId = req.params.postid;
+    const value = req.params.value;
+
+    var query = {};
+    if (value !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            post: ObjectID(postId)
+        };
+    }
+
+    const asistentes = await Asistente.find(query)
     .sort({ _id: -1})
     .populate('post')
     .exec();

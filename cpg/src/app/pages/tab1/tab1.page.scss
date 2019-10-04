@@ -22,17 +22,38 @@ $cWhite: #fff;
 }
 
 .headerevent{
-  --background:$cBlue!important;
+  // --background:$cWhite!important;
   ion-toolbar{
-    --background:$cBlue!important;
+    background: url('/assets/bg-cpg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    --background: url('/assets/bg-cpg.jpg');
+    border: 0!important;
   }
   ion-buttons{
     color: $cWhite;
+    img{
+      margin-left: 25px;
+    }
   }
   ion-title{
-    color: $cWhite;
+    color: #fff;
     font-size: 18px;
-    // padding: 0;
+    background: #2ad0a8;
+    --background: $cGreen;
+    width: 100%;
+    margin-top: -28px;
+    height: 81px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-top: 35px;
+    text-transform: capitalize;
+    font-weight: 400;
+    margin-left: 15%;
+    letter-spacing: 2px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
   }
 }
 

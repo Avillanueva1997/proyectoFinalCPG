@@ -21,6 +21,10 @@ export class AsistenteService {
       'x-token': this.userService.token
     });
 
+    console.log( this.userService.token);
+
+    console.log(headers);
+
     return new Promise(resolve => {
       this.http.post(`${URL}/asistente`, asistente, {headers}).subscribe(
         response => {
@@ -37,6 +41,10 @@ export class AsistenteService {
 
   getAsistentes(postid: string) {
     return this.http.get(`${URL}/asistente/?postid=${postid}`);
+  }
+
+  getAsistentesBySearch(postid: string, value: string) {
+    return this.http.get(`${URL}/asistente/search/${postid}/${value}`);
   }
 
   evaluateCodeQr(postid: string, dni: string){
@@ -62,6 +70,24 @@ export class AsistenteService {
           });
       });
     }
+  }
+
+  updateAsistente(params: any) {
+    const headers = new HttpHeaders({
+      'x-token': this.userService.token
+    });
+
+    return new Promise(resolve => {
+      this.http.post(`${URL}/asistente/updateasistencia`, params, {headers}).subscribe(
+        response => {
+          if(response['ok']) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }
+      );
+    });
   }
 
 }

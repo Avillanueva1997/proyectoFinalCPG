@@ -58,3 +58,15 @@ ion-content{
 .top-20{
     margin-top: 20px;
 }
+
+
+form{
+    width: 50%;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px){
+    form{
+        width: 100%;
+    }
+}

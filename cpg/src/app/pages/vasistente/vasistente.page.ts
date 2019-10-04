@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Screenshot } from '@ionic-native/screenshot/ngx';
 import { UiServiceService } from '../../services/ui-service.service';
+import { Platform } from '@ionic/angular';
+import { File } from '@ionic-native/file';
+import { FileOpener } from '@ionic-native/file-opener';
+
+import pdfMake from 'pdfmake/build/pdfMake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs =  pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-vasistente',
@@ -11,23 +18,33 @@ import { UiServiceService } from '../../services/ui-service.service';
 export class VasistentePage implements OnInit {
 
   asistente: any;
-  titulo = 'Visualizar Asistente';
+  titulo = 'Datos del Asistente';
   codigo: any;
 
   qrData = null;
-  createdCode = null;
+  showCard = false;
 
-  constructor(private storage: Storage, private screenshot: Screenshot, private uiService: UiServiceService) { }
+  pdfObj = null;
+
+  constructor(private storage: Storage,
+              private screenshot: Screenshot,
+              private uiService: UiServiceService,
+              private plt: Platform,
+              //private file: File,
+              //private fileOpener: FileOpener
+              ) {
+              }
 
   ngOnInit() {
-    this.cargarAsistente();
+    this.encodedText();
   }
 
-  async cargarAsistente() {
+  async encodedText() {
     this.asistente = await this.storage.get('asistente');
-    const dni = this.asistente.dni;
-    this.codigo = this.asistente.codigo;
-    this.createdCode = dni.toString();
+    this.showCard = true;
+    const codigo = this.asistente.codigo;
+    this.qrData = codigo;
+    // console.log(this.qrData);
   }
 
   takeScreenShoot() {
@@ -39,6 +56,58 @@ export class VasistentePage implements OnInit {
         }
       }
     );
+  }
+
+
+  createPdf() {
+    const docDefinition = {
+      content: [
+        { text: 'Nombre', style: 'header' },
+        { text: this.asistente.name, alignment: 'right' },
+
+        { text: 'Empresa', style: 'subheader' },
+        { text: this.asistente.empresa },
+
+        { text: 'Cargo', style: 'subheader' },
+        this.asistente.cargo,
+
+        { text: this.asistente.pais, style: 'story', margin: [0, 20, 0, 20] },
+
+        {
+          ul: [
+            'Bacon',
+            'Rips',
+            'BBQ',
+          ]
+        }
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+        },
+        subheader: {
+          fontSize: 14,
+          bold: true,
+          margin: [0, 15, 0, 0]
+        },
+        story: {
+          italic: true,
+          alignment: 'center',
+          width: '50%',
+        }
+      }
+
+    };
+
+    this.pdfObj = pdfMake.createPdf(docDefinition);
+  }
+
+  downloadPdf() {
+    if ( this.plt.is('cordova')) {
+    } else {
+      this.pdfObj.download();
+    }
   }
 
 }

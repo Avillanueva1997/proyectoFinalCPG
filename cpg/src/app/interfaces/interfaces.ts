@@ -51,16 +51,23 @@ export interface Event {
 export interface Asistente {
   created: Date;
   codigo: string;
-  tipoinvitado: string;
+  fuente: string;
   name: string;
   appaterno: string;
   apmaterno: string;
   empresa: string;
-  dni: string;
-  celular: string;
+  cargo: string;
   email: string;
-  comentarios: string;
+  telefono: string;
+  ciudad: string;
+  pais: string;
+  leadsource: string;
+  leadsourced: string;
+  productinterest: string;
+  leadowner: string;
   post: Post;
+  asistio: boolean;
+  fasistio: Date;
 }
 
 

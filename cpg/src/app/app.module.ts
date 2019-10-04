@@ -22,6 +22,10 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { Screenshot } from '@ionic-native/screenshot/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +36,8 @@ import { Screenshot } from '@ionic-native/screenshot/ngx';
     AppRoutingModule,
     HttpClientModule,
     NgxQRCodeModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,
@@ -42,7 +47,9 @@ import { Screenshot } from '@ionic-native/screenshot/ngx';
     FileTransfer,
     BarcodeScanner,
     Screenshot,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    File,
+    FileOpener
   ],
   bootstrap: [AppComponent]
 })

@@ -9,67 +9,67 @@
         <ion-row>
           <ion-col>
             <ion-list>    
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Descripción del evento</ion-label>
                   <ion-textarea required name="description" [(ngModel)]="event.description" class="ion-text-capitalize" ></ion-textarea>
               </ion-item>
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Lugar</ion-label>
                   <ion-input type="text" name="place" [(ngModel)]="event.place" required class="ion-text-capitalize"></ion-input>
               </ion-item> 
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Organizador</ion-label>
                   <ion-input type="text" name="organizador" [(ngModel)]="event.organizador" required class="ion-text-capitalize" class="ion-text-capitalize"></ion-input>
               </ion-item> 
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Cargo</ion-label>
                   <ion-input type="text" name="cargo" [(ngModel)]="event.cargo" required class="ion-text-capitalize"></ion-input>
               </ion-item> 
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Correo electrónico de contacto</ion-label>
                   <ion-input type="email" name="email" [(ngModel)]="event.email" required class="ion-text-capitalize"></ion-input>
               </ion-item> 
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Teléfono de contacto</ion-label>
                   <ion-input type="tel" name="telf" [(ngModel)]="event.telf" required></ion-input>
               </ion-item>
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Fecha de inicio</ion-label>
                   <ion-datetime name="fein" [(ngModel)]="event.fein" required placeholder="Selecciona fecha" doneText="Guardar" cancelText="Cancelar"></ion-datetime>
               </ion-item>
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Fecha de fin</ion-label>
                   <ion-datetime name="fefn" [(ngModel)]="event.fefn" placeholder="Selecciona fecha" required doneText="Guardar" cancelText="Cancelar"></ion-datetime>
               </ion-item>
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Horario de inicio</ion-label>
                   <ion-datetime name="hrin" [(ngModel)]="event.hrin" display-format="h:mm A" picker-format="h:mm A" required doneText="Guardar" cancelText="Cancelar"></ion-datetime>
               </ion-item>
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Horario de fin</ion-label>
                   <ion-datetime name="hrfn" [(ngModel)]="event.hrfn" display-format="h:mm A" picker-format="h:mm A" required doneText="Guardar" cancelText="Cancelar"></ion-datetime>
               </ion-item>
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label>Límite de inscritos</ion-label>
                   <ion-toggle name="lios" [(ngModel)]="event.lios" color="cgreen"></ion-toggle>
               </ion-item>
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Cantidad de inscritos</ion-label>
                   <ion-input name="caos" [(ngModel)]="event.caos" type="number" required></ion-input>
               </ion-item>
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Moneda del evento</ion-label>
                   <ion-select value="notifications" interface="action-sheet" name="moto" [(ngModel)]="event.moto" cancelText="Cancelar" required>
                     <ion-select-option value="geal">S/</ion-select-option>
@@ -77,12 +77,12 @@
                   </ion-select>
               </ion-item>
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                 <ion-label position="floating">Costo del evento</ion-label>
                 <ion-input type="number" name="coto" [(ngModel)]="event.coto" required></ion-input>
             </ion-item>
 
-              <ion-item>
+              <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Categoría</ion-label>
                   <ion-select value="notifications" interface="action-sheet" name="caia" [(ngModel)]="event.caia" required cancelText="Cancelar">
                     <ion-select-option value="geal">General</ion-select-option>

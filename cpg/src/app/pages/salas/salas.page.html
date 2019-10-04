@@ -12,18 +12,19 @@
         <ion-row>
           <ion-col>
               <ion-button class="clgreen" [routerLink]="['/nsala']">Crear sala</ion-button>
+              <ion-button class="clblue" [routerLink]="['/scancodigo']"><ion-icon name="qr-scanner"></ion-icon></ion-button>
           </ion-col>
         </ion-row>    
         <ion-row>
           <ion-col>
             <table>
               <thead>
-              <tr>
-                <th>Código</th>
+              <tr class="radiustr">
+                <th class="radiusthleft">Código</th>
                 <th>Nombre</th>
                 <th>Tipo</th>
                 <th>Aforo</th>
-                <th>Aforo superado</th>
+                <th class="radiusthright">Aforo superado</th>
               </tr>
               </thead>
               <tbody>

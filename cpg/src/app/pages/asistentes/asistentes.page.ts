@@ -44,4 +44,30 @@ export class AsistentesPage implements OnInit {
     this.cargarAsistentes(this.post, event);
   }
 
+  onSearch(event) {
+    const value = event.detail.value;
+    if (value !== '') {
+      this.asistenteService.getAsistentesBySearch(this.post, value).subscribe(
+        response => {
+          if(response['ok']){
+            this.asistentes = response['asistentes'];
+          }
+        }
+      );
+    } else {
+      this.cargarAsistentes(this.post);
+    }
+  }
+
+  onToggleChange(event: any, codigoBD){
+
+    const state = event.detail.checked;
+    const codigo = codigoBD;
+    const params = {
+      codigo,
+      state
+    };
+    this.asistenteService.updateAsistente(params);
+  }
+
 }

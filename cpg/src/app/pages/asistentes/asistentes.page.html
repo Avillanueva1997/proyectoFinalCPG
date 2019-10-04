@@ -18,38 +18,50 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-searchbar placeholder="Buscar" color="cgreen"></ion-searchbar>
+        <ion-searchbar placeholder="Buscar" color="cgreen" (ionChange)="onSearch($event)" class="clgreen wid50"></ion-searchbar>
       </ion-col>
     </ion-row>  
     <ion-row>
-      <ion-col>
+      <ion-col size="12">
         <table>
           <thead>
-          <tr>
-            <th>Código</th>
+          <tr class="radiustr">
+            <th class="radiusthleft">Código</th>
+            <th>Fuente</th>
             <th>Nombre</th>
             <th>AP. Paterno</th>
             <th>AP. Materno</th>
             <th>Empresa</th>
-            <th>DNI</th>
-            <th>Celular</th>
-            <th>Correo</th>
-            <th>Cancelado</th>
-            <th>Confirmó</th>
+            <th>Cargo</th>
+            <th>Email</th>
+            <th>Télefono</th>
+            <th>Ciudad</th>
+            <th>País</th>
+            <th>Lead Source</th>
+            <th>Lead Source Details</th>
+            <th>Product Interest</th>
+            <th>Lead Owner</th>
+            <th class="radiusthright">Asistencia</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let asistente of asistentes">
             <td>{{asistente.codigo}}</td>
+            <td>{{asistente.fuente}}</td>
             <td>{{asistente.name}}</td>
             <td>{{asistente.appaterno}}</td>
             <td>{{asistente.apmaterno}}</td>
             <td>{{asistente.empresa}}</td>
-            <td>{{asistente.dni}}</td>
-            <td>{{asistente.celular}}</td>
+            <td>{{asistente.cargo}}</td>
             <td>{{asistente.email}}</td>
-            <td><ion-toggle color="cgreen"></ion-toggle></td>
-            <td><ion-toggle color="cgreen"></ion-toggle></td>
+            <td>{{asistente.telefono}}</td>
+            <td>{{asistente.ciudad}}</td>
+            <td>{{asistente.pais}}</td>
+            <td>{{asistente.leadsource}}</td>
+            <td>{{asistente.leadsourced}}</td>
+            <td>{{asistente.productinterest}}</td>
+            <td>{{asistente.leadowner}}</td>
+            <td><ion-toggle color="cgreen" name="asisitio" [(ngModel)]="asistente.asistio" (ionChange)="onToggleChange($event, asistente.codigo)"></ion-toggle></td>
           </tr>
           </tbody>
         </table>

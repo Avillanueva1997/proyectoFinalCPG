@@ -5,11 +5,17 @@ $cWhite: #fff;
 
 
 @font-face{
-    font-family: Segoe-UI;
-    src: url("/assets/fonts/segoe-ui-light-2.ttf");
-    font-weight: 400;
-    font-style: normal;
-  }
+  font-family: Segoe-UI;
+  src: url("/assets/fonts/segoe-ui-light-2.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face{
+  font-family: Segoe-UI;
+  src: url("/assets/fonts/segoe-ui-bold.ttf");
+  font-weight: 700;
+  font-style: bold;
+}
 
 *{
     font-family: Segoe-UI!important;
@@ -23,20 +29,30 @@ $cWhite: #fff;
 }
 
 ion-header{
-    background:$cBlue!important;
-    --background:$cBlue!important;
+    background: transparent;
+    --background: transparent;
   ion-toolbar{
-    background:$cBlue!important;
-    --background:$cBlue!important;
+    background: transparent;
+    --background: transparent;
   }
-  ion-title{
-    color: $cWhite;
-    font-size: 14px;
+  img{
+    margin-top: 70px!important;
+    margin: 0 auto;
+    padding: 20px;
+    display: block;
   }
 }
 
 ion-content{
+  --background: transparent;
     form{
+      width: 60%;
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: -40px;
         ion-label{
             font-family: Segoe-UI;
         }
@@ -55,4 +71,12 @@ ion-content{
             width: 100%;
         }
     }
+}
+
+@media screen and(max-width: 768px){
+  ion-content{
+      form{
+        width: 100%;
+      }
+  }
 }

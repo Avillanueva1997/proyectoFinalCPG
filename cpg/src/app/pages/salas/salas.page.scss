@@ -52,6 +52,13 @@ ion-header{
     }
 }
 
+.radiusthleft {
+    border-top-left-radius: 10px;
+}
+.radiusthright {
+    border-top-right-radius: 10px;
+}
+
 table { 
     width: 100%; 
     border-collapse: collapse; 
@@ -61,14 +68,16 @@ tr:nth-of-type(odd) {
     background: #fff; 
 }
 th { 
-    background: $cGreen; 
+    background: $cBlue; 
     color: white; 
-    font-weight: bold; 
+    font-weight: 400;
 }
 td, th { 
-    padding: 6px; 
-    border: 1px solid #ccc; 
-    text-align: left; 
+    padding: 8px; 
+    border: 0; 
+    text-align: left;
+    font-family: Segoe-UI;
+    font-size: 14px;
 }
 
 
@@ -112,7 +121,6 @@ only screen and (max-width: 760px),
         padding-right: 10px;
         white-space: nowrap;
     }
-
     /*
     Label the data
     */

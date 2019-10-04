@@ -71,6 +71,17 @@ ion-content{
     }
 }
 
+// ion-item {
+//   --highlight-color-valid: $cWhite;
+//   --highlight-color-invalid: $cWhite;
+//   --highlight-color-focused: var(--ion-color-light);
+// }
+
+.remove_inner_bottom{
+  --inner-border-width: 0; // this removes the inner border width
+  --border-width: 0;
+}
+
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px){

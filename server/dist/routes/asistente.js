@@ -31,9 +31,41 @@ asistenteRoutes.post('/', [autentication_1.verificaToken], (req, res) => {
         res.json(err);
     });
 });
+asistenteRoutes.post('/updateasistencia', [autentication_1.verificaToken], (req, res) => {
+    //console.log(req);
+    const body = req.body;
+    const date = new Date();
+    asistente_model_1.Asistente.updateOne({ codigo: body.codigo }, { $set: { asistio: body.state, fasistencia: date } }, function (err, resBD) {
+        if (err)
+            throw err;
+        res.json({
+            ok: true,
+            resBD
+        });
+    });
+});
 asistenteRoutes.get('/', (req, res) => __awaiter(this, void 0, void 0, function* () {
     const postId = req.query.postid;
     const asistentes = yield asistente_model_1.Asistente.find({ 'post': ObjectID(postId) })
+        .sort({ _id: -1 })
+        .populate('post')
+        .exec();
+    res.json({
+        ok: true,
+        asistentes
+    });
+}));
+asistenteRoutes.get('/search/:postid/:value', (req, res) => __awaiter(this, void 0, void 0, function* () {
+    const postId = req.params.postid;
+    const value = req.params.value;
+    var query = {};
+    if (value !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            post: ObjectID(postId)
+        };
+    }
+    const asistentes = yield asistente_model_1.Asistente.find(query)
         .sort({ _id: -1 })
         .populate('post')
         .exec();

@@ -42,3 +42,45 @@
     --ion-color-shade: var(--ion-color-cgreen-shade);
     --ion-color-tint: var(--ion-color-cgreen-tint);
   }
+
+  .modal-wrapper.sc-ion-modal-md{
+    border-radius: 10px;
+    background: url("/assets/bg-cpg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.searchbar-input.sc-ion-searchbar-md {
+  padding-left: 35px!important;
+  box-shadow: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: Segoe-UI;
+  padding: 0;
+}
+
+.searchbar-cancel-button.sc-ion-searchbar-md, .searchbar-search-icon.sc-ion-searchbar-md {
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  color: #fff;
+}
+
+
+.item-inner{
+  border: 0!important;
+  --border: 0!important;
+  --boder-color: none!important;
+  --inner-border-width: 0 0 0 0!important;
+}
+
+.item-inner{
+  border-style: unset !important;
+  }
+
+  .remove_inner_bottom{
+    --inner-border-width: 0; // this removes the inner border width
+    --border-width: 0;
+  }

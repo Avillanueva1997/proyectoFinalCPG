@@ -10,9 +10,9 @@ const asistenteSchema = new Schema({
         unique: true,
         required: [true, 'El código es obligatorio']
     },
-    tipoinvitado: {
+    fuente: {
         type: String,
-        required: [true, 'El tipo de invitado es obligatorio']
+        required: [true, 'La fuente es obligatoria']
     },
     name: {
         type: String,
@@ -30,24 +30,52 @@ const asistenteSchema = new Schema({
         type: String,
         required: [true, 'La empresa es obligatorio']
     },
-    dni: {
+    cargo: {
         type: String,
-        required: [true, 'El DNI es obligatorio']
-    },
-    celular: {
-        type: String,
-        required: [true, 'El celular es obligatorio']
+        required: [true, 'El cargo es obligatorio']
     },
     email: {
         type: String,
         required: [true, 'El correo es obligatorio']
     },
-    comentarios: {
-        type: String
+    telefono: {
+        type: String,
+        required: [true, 'El télefono es obligatorio']
+    },
+    ciudad: {
+        type: String,
+        required: [true, 'La ciudad es obligatorio']
+    },
+    pais: {
+        type: String,
+        required: [true, 'El país es obligatorio']
+    },
+    leadsource: {
+        type: String,
+        required: [true, 'El lead source es obligatorio']
+    },
+    leadsourced: {
+        type: String,
+        required: [true, 'El lead source details es obligatorio']
+    },
+    productinterest: {
+        type: String,
+        required: [true, 'El product interest es obligatorio']
+    },
+    leadowner: {
+        type: String,
+        required: [true, 'El lead owner es obligatorio']
     },
     post: {
         type: Schema.Types.ObjectId,
         required: [true, 'Debe existir una referencia a un post']
+    },
+    asistio: {
+        type: Boolean,
+        default: false
+    },
+    fasistencia: {
+        type: Date
     }
 });
 
@@ -55,22 +83,30 @@ const asistenteSchema = new Schema({
 
 asistenteSchema.pre<IAsistente>('save', function(next){
     this.created = new Date();
+    this.fasistencia = new Date();
     next();
 });
 
 interface IAsistente extends Document {
     created: Date;
     codigo: String;
-    tipoinvitado: String;
+    fuente: String;
     name: String;
     appaterno: String;
     apmaterno: String;
     empresa: String;
-    dni: String;
-    celular: String;
+    cargo: String;
     email: String;
-    comentarios: String;
+    telefono: String;
+    ciudad: String;
+    pais: String;
+    leadsource: String;
+    leadsourced: String;
+    productinterest: String;
+    leadowner: String;
     post: String;
+    asistio: Boolean;
+    fasistencia: Date;
 }
 
 
