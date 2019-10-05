@@ -13,6 +13,26 @@
         "icon": "business",
         "name": "Salas",
         "redirectTo": "/salas"
+    },
+    {
+        "icon": "gift",
+        "name": "Invitados",
+        "redirectTo": "/salas"
+    },
+    {
+        "icon": "person-add",
+        "name": "Nuevos registros",
+        "redirectTo": "/salas"
+    },
+    {
+        "icon": "contacts",
+        "name": "Asistentes Invitados",
+        "redirectTo": "/salas"
+    },
+    {
+        "icon": "tv",
+        "name": "Asistentes en Evento",
+        "redirectTo": "/salas"
     }
   ]
   

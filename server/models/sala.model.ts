@@ -19,15 +19,14 @@ const salaSchema = new Schema({
         required: [true, 'El tipo es obligatorio']
     },
     aforo: {
-        type: Number,
-        required: [true, 'El aforo es obligatorio']
+        type: Number
     },
     aforosuperado: {
-        type: Number,
-        required: [true, 'El aforo superado es obligatorio']
+        type: Number
     },
     post: {
         type: Schema.Types.ObjectId,
+        ref: 'Post',
         required: [true, 'Debe existir una referencia a un post']
     }
 });

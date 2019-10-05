@@ -60,8 +60,9 @@ export class NasistentePage implements OnInit {
 
     if (valido) {
       this.uiService.presentToast('Asistente creado!');
-      this.storage.set('asistente', this.asistente);
-      this.navCtrl.navigateRoot('/vasistente', {animated: true});
+      // this.storage.set('asistente', this.asistente);
+      // this.navCtrl.navigateRoot('/vasistente', {animated: true});
+      this.navCtrl.navigateRoot('/asistentes', {animated: true});
     } else {
       this.uiService.alertaInformativa('Código ya existe en la BD!');
     }

@@ -27,6 +27,8 @@ export class NsalaPage implements OnInit {
   }
 
   async nuevaSala(fSala: NgForm) {
+    const name = this.sala.name;
+    this.sala.name = this.capitalize(name);
     this.sala.post = this.post;
     if (fSala.invalid) {
       return;
@@ -43,6 +45,10 @@ export class NsalaPage implements OnInit {
 
   async cargarPost() {
     this.post = await this.storage.get('post');
+  }
+
+  capitalize(value: string) {
+    return value.replace(/(?:^|\s)\S/g, l => l.toUpperCase());
   }
 
 }

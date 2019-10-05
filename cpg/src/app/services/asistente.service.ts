@@ -21,10 +21,6 @@ export class AsistenteService {
       'x-token': this.userService.token
     });
 
-    console.log( this.userService.token);
-
-    console.log(headers);
-
     return new Promise(resolve => {
       this.http.post(`${URL}/asistente`, asistente, {headers}).subscribe(
         response => {
@@ -79,6 +75,24 @@ export class AsistenteService {
 
     return new Promise(resolve => {
       this.http.post(`${URL}/asistente/updateasistencia`, params, {headers}).subscribe(
+        response => {
+          if(response['ok']) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }
+      );
+    });
+  }
+
+  updateAsistenteComplete(asistente: any) {
+    const headers = new HttpHeaders({
+      'x-token': this.userService.token
+    });
+
+    return new Promise(resolve => {
+      this.http.post(`${URL}/asistente/update`, asistente, {headers}).subscribe(
         response => {
           if(response['ok']) {
             resolve(true);

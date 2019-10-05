@@ -44,6 +44,49 @@ asistenteRoutes.post('/updateasistencia', [ verificaToken], (req:any, res: Respo
       });
 });
 
+asistenteRoutes.post('/update', [verificaToken], (req:any, res: Response) => {
+
+    const body = req.body;
+    
+    let fuente = (body.fuente) ? body.fuente : '';
+    let name = (body.name) ? body.name : '';
+    let appaterno = (body.appaterno) ? body.appaterno : '';
+    let apmaterno = (body.apmaterno) ? body.apmaterno : '';
+    let empresa = (body.empresa) ? body.empresa : '';
+    let cargo = (body.cargo) ? body.cargo : '';
+    let tipoinvitado = (body.tipoinvitado) ? body.tipoinvitado : '';
+    let telefono = (body.telefono) ? body.telefono : '';
+    let email = (body.email) ? body.email : '';
+    let ciudad = (body.ciudad) ? body.ciudad : '';
+    let pais = (body.pais) ? body.pais : '';
+    let leadsource = (body.leadsource) ? body.leadsource : '';
+    let leadsourced = (body.leadsourced) ? body.leadsourced : '';
+    let productinterest = (body.productinterest) ? body.productinterest : '';
+    let leadowner = (body.leadowner) ? body.leadowner : '';
+
+    const newvalues = { $set: {fuente, name, appaterno, apmaterno, empresa, cargo, tipoinvitado, telefono, email, ciudad, pais, leadsource, leadsourced, productinterest, leadowner} };
+
+    Asistente.updateOne({codigo:body.codigo}, newvalues, function(err, resBD) {
+        if (err) throw err;
+
+        res.json({
+            ok: true,
+            resBD
+        });
+    });
+
+    /*const date = new Date();
+
+    Asistente.updateOne({codigo:body.codigo}, {$set:{asistio:body.state, fasistencia:date}}, function(err, resBD) {
+        if (err) throw err;
+
+        res.json({
+            ok: true,
+            resBD
+        });
+
+      });*/
+});
 
 asistenteRoutes.get('/', async (req: any, res: Response) => {
 
@@ -143,13 +186,22 @@ asistenteRoutes.post('/upload/:postid', [ verificaToken ],  async (req: any, res
     const wb = xlsx.readFile(path);
 
     const sheets = wb.SheetNames;
+    const date = new Date();
 
     for (let index = 0; index < sheets.length; index++) {
         var ws = wb.Sheets[sheets[index]];
         var data = xlsx.utils.sheet_to_json(ws);
         data.map(function(record: any){
+            const code = record.codigo;
+            const cel = record.telefono || '';
+            record.codigo = code.toString();
+            record.telefono = cel.toString();
             record.post = postId;
-            Asistente.create(record);
+            record.created = date;
+            record.fasistio = date;
+            Asistente.insertMany(record, function(err:any, res:any) {
+                if(err) throw err;
+            });
             cant++;
         });
     }

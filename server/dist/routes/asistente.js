@@ -44,6 +44,44 @@ asistenteRoutes.post('/updateasistencia', [autentication_1.verificaToken], (req,
         });
     });
 });
+asistenteRoutes.post('/update', [autentication_1.verificaToken], (req, res) => {
+    const body = req.body;
+    let fuente = (body.fuente) ? body.fuente : '';
+    let name = (body.name) ? body.name : '';
+    let appaterno = (body.appaterno) ? body.appaterno : '';
+    let apmaterno = (body.apmaterno) ? body.apmaterno : '';
+    let empresa = (body.empresa) ? body.empresa : '';
+    let cargo = (body.cargo) ? body.cargo : '';
+    let tipoinvitado = (body.tipoinvitado) ? body.tipoinvitado : '';
+    let telefono = (body.telefono) ? body.telefono : '';
+    let email = (body.email) ? body.email : '';
+    let ciudad = (body.ciudad) ? body.ciudad : '';
+    let pais = (body.pais) ? body.pais : '';
+    let leadsource = (body.leadsource) ? body.leadsource : '';
+    let leadsourced = (body.leadsourced) ? body.leadsourced : '';
+    let productinterest = (body.productinterest) ? body.productinterest : '';
+    let leadowner = (body.leadowner) ? body.leadowner : '';
+    const newvalues = { $set: { fuente, name, appaterno, apmaterno, empresa, cargo, tipoinvitado, telefono, email, ciudad, pais, leadsource, leadsourced, productinterest, leadowner } };
+    asistente_model_1.Asistente.updateOne({ codigo: body.codigo }, newvalues, function (err, resBD) {
+        if (err)
+            throw err;
+        res.json({
+            ok: true,
+            resBD
+        });
+    });
+    /*const date = new Date();
+
+    Asistente.updateOne({codigo:body.codigo}, {$set:{asistio:body.state, fasistencia:date}}, function(err, resBD) {
+        if (err) throw err;
+
+        res.json({
+            ok: true,
+            resBD
+        });
+
+      });*/
+});
 asistenteRoutes.get('/', (req, res) => __awaiter(this, void 0, void 0, function* () {
     const postId = req.query.postid;
     const asistentes = yield asistente_model_1.Asistente.find({ 'post': ObjectID(postId) })
@@ -120,12 +158,22 @@ asistenteRoutes.post('/upload/:postid', [autentication_1.verificaToken], (req, r
     const path = yield fileSystem.guardarImagenTemporal(file, req.usuario._id);
     const wb = xlsx.readFile(path);
     const sheets = wb.SheetNames;
+    const date = new Date();
     for (let index = 0; index < sheets.length; index++) {
         var ws = wb.Sheets[sheets[index]];
         var data = xlsx.utils.sheet_to_json(ws);
         data.map(function (record) {
+            const code = record.codigo;
+            const cel = record.telefono || '';
+            record.codigo = code.toString();
+            record.telefono = cel.toString();
             record.post = postId;
-            asistente_model_1.Asistente.create(record);
+            record.created = date;
+            record.fasistio = date;
+            asistente_model_1.Asistente.insertMany(record, function (err, res) {
+                if (err)
+                    throw err;
+            });
             cant++;
         });
     }

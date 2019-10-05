@@ -3,6 +3,8 @@ import { Storage } from '@ionic/storage';
 import { SalaService } from '../../services/sala.service';
 import { Sala } from 'src/app/interfaces/interfaces';
 import { TouchSequence } from 'selenium-webdriver';
+import { ModalEditSalaPage } from '../modal-edit-sala/modal-edit-sala.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-salas',
@@ -17,7 +19,7 @@ export class SalasPage implements OnInit {
 
   salas: Sala[] = [];
 
-  constructor(private storage: Storage, private salaService: SalaService) { }
+  constructor(private storage: Storage, private salaService: SalaService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.cargarPost();
@@ -43,6 +45,31 @@ export class SalasPage implements OnInit {
 
   recargar(event: any) {
     this.cargarSalas(this.post, event);
+  }
+
+  async onEdit(sala: any) {
+    const modal = await this.modalCtrl.create({
+      component: ModalEditSalaPage,
+      componentProps: {
+        sala
+      }
+    });
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+    console.log('Retorno del modal', data );
+    this.recargar(sala.post);
+  }
+
+  onDelete(sala: any) {
+    const codigo = sala.codigo;
+    this.salaService.deleteSala(codigo).subscribe(
+      response => {
+        if(response['ok']){
+          this.salas = response['salas'];
+          this.recargar(sala.post);
+        }
+      }
+    );
   }
 
 }

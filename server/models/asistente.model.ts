@@ -11,8 +11,7 @@ const asistenteSchema = new Schema({
         required: [true, 'El código es obligatorio']
     },
     fuente: {
-        type: String,
-        required: [true, 'La fuente es obligatoria']
+        type: String
     },
     name: {
         type: String,
@@ -23,51 +22,45 @@ const asistenteSchema = new Schema({
         required: [true, 'El apellido paterno es obligatorio']
     },
     apmaterno: {
-        type: String,
-        required: [true, 'El apellido materno es obligatorio']
+        type: String
     },
     empresa: {
-        type: String,
-        required: [true, 'La empresa es obligatorio']
+        type: String
     },
     cargo: {
+        type: String
+    },
+    tipoinvitado: {
         type: String,
-        required: [true, 'El cargo es obligatorio']
+        required: [true, 'El tipo de invitado es obligatorio']
     },
     email: {
-        type: String,
-        required: [true, 'El correo es obligatorio']
+        type: String
     },
     telefono: {
-        type: String,
-        required: [true, 'El télefono es obligatorio']
+        type: String
     },
     ciudad: {
-        type: String,
-        required: [true, 'La ciudad es obligatorio']
+        type: String
     },
     pais: {
-        type: String,
-        required: [true, 'El país es obligatorio']
+        type: String
     },
     leadsource: {
-        type: String,
-        required: [true, 'El lead source es obligatorio']
+        type: String
     },
     leadsourced: {
-        type: String,
-        required: [true, 'El lead source details es obligatorio']
+        type: String
     },
     productinterest: {
-        type: String,
-        required: [true, 'El product interest es obligatorio']
+        type: String
     },
     leadowner: {
-        type: String,
-        required: [true, 'El lead owner es obligatorio']
+        type: String
     },
     post: {
         type: Schema.Types.ObjectId,
+        ref: 'Post',
         required: [true, 'Debe existir una referencia a un post']
     },
     asistio: {
@@ -96,6 +89,7 @@ interface IAsistente extends Document {
     apmaterno: String;
     empresa: String;
     cargo: String;
+    tipoinvitado: String;
     email: String;
     telefono: String;
     ciudad: String;

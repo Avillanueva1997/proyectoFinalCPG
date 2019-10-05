@@ -47,4 +47,47 @@ salaRoutes.get('/', async (req: any, res: Response) => {
 
 });
 
+salaRoutes.post('/update', [verificaToken], (req:any, res: Response) => {
+
+    const body = req.body;
+    
+    let name = (body.name) ? body.name : '';
+    let tipo = body.tipo;
+    let aforo = (body.aforo) ? body.aforo : 0;
+    let aforosuperado = (body.aforosuperado) ? body.aforosuperado : 0;
+
+    const newvalues = { $set: {name, tipo, aforo, aforosuperado } };
+
+    Sala.updateOne({codigo:body.codigo}, newvalues, function(err, resBD) {
+        if (err) throw err;
+
+        res.json({
+            ok: true,
+            resBD
+        });
+    });
+});
+
+salaRoutes.get('/delete/:codigo', async (req: any, res: Response) => {
+
+    const codigo = req.params.codigo;
+
+    Sala.deleteOne( {'codigo': codigo}).exec(function(err, sala){
+        if( err ) throw err;
+        if(!sala){
+            return res.json({
+                ok: false,
+                mensaje: 'No existe una sala con ese código'
+            });
+        }
+
+        res.json({
+            ok: true,
+            sala
+        });
+
+    });
+});
+
+
 export default salaRoutes;

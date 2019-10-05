@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { SalasPage } from './salas.page';
+import { ModalEditSalaPageModule } from '../modal-edit-sala/modal-edit-sala.module';
+import { ModalEditSalaPage } from '../modal-edit-sala/modal-edit-sala.page';
 
 const routes: Routes = [
   {
@@ -15,10 +17,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [
+    ModalEditSalaPage
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    ModalEditSalaPageModule,
     RouterModule.forChild(routes)
   ],
   declarations: [SalasPage]

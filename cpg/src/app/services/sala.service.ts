@@ -39,4 +39,26 @@ export class SalaService {
     return this.http.get(`${URL}/sala/?postid=${postid}`);
   }
 
+  updateSalaComplete(sala: any) {
+    const headers = new HttpHeaders({
+      'x-token': this.userService.token
+    });
+
+    return new Promise(resolve => {
+      this.http.post(`${URL}/sala/update`, sala, {headers}).subscribe(
+        response => {
+          if(response['ok']) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }
+      );
+    });
+  }
+
+  deleteSala(codigo: any) {
+    return this.http.get(`${URL}/sala/delete/${codigo}`);
+  }
+
 }

@@ -3,6 +3,8 @@ import { Storage } from '@ionic/storage';
 import { AsistenteService } from '../../services/asistente.service';
 import { TouchSequence } from 'selenium-webdriver';
 import { Asistente } from '../../interfaces/interfaces';
+import { ModalController } from '@ionic/angular';
+import { ModalEditAsistentePage } from '../modal-edit-asistente/modal-edit-asistente.page';
 
 @Component({
   selector: 'app-asistentes',
@@ -15,7 +17,7 @@ export class AsistentesPage implements OnInit {
   post: any;
   asistentes: Asistente[] = [];
 
-  constructor(private storage: Storage, private asistenteService: AsistenteService) {
+  constructor(private storage: Storage, private asistenteService: AsistenteService, private modalCtrl: ModalController) {
   }
 
   ngOnInit() {
@@ -68,6 +70,18 @@ export class AsistentesPage implements OnInit {
       state
     };
     this.asistenteService.updateAsistente(params);
+  }
+
+  async onEdit(asistente: any) {
+      const modal = await this.modalCtrl.create({
+        component: ModalEditAsistentePage,
+        componentProps: {
+          asistente
+        }
+      });
+      await modal.present();
+      const { data } = await modal.onDidDismiss();
+      console.log('Retorno del modal', data );
   }
 
 }

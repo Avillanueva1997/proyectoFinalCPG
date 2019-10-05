@@ -57,6 +57,7 @@ export interface Asistente {
   apmaterno: string;
   empresa: string;
   cargo: string;
+  tipoinvitado: string;
   email: string;
   telefono: string;
   ciudad: string;

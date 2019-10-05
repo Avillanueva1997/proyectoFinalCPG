@@ -16,7 +16,7 @@
 
               <ion-item class="remove_inner_bottom">
                 <ion-label position="floating">Fuente</ion-label>
-                <ion-input type="text" name="fuente" [(ngModel)]="asistente.fuente" required class="ion-text-capitalize"></ion-input>
+                <ion-input type="text" name="fuente" [(ngModel)]="asistente.fuente" class="ion-text-capitalize"></ion-input>
             </ion-item>
 
               <!--<ion-item>
@@ -50,47 +50,63 @@
 
               <ion-item class="remove_inner_bottom">
                   <ion-label position="floating">Cargo</ion-label>
-                  <ion-input type="text" name="cargo" [(ngModel)]="asistente.cargo" required class="ion-text-capitalize"></ion-input>
+                  <ion-input type="text" name="cargo" [(ngModel)]="asistente.cargo" class="ion-text-capitalize"></ion-input>
+              </ion-item>
+
+              <ion-item class="remove_inner_bottom">
+                  <ion-label position="floating">Tipo de Invitado</ion-label>
+                  <ion-select value="notifications" interface="action-sheet" name="tipoinvitado" [(ngModel)]="asistente.tipoinvitado" cancelText="Cancelar" required>
+                    <ion-select-option value="Titular">Titular</ion-select-option>
+                    <ion-select-option value="Prensa">Prensa</ion-select-option>
+                    <ion-select-option value="Staff">Staff</ion-select-option>
+                    <ion-select-option value="Nuevo">Nuevo</ion-select-option>
+                    <ion-select-option value="VIP">VIP</ion-select-option>
+                  </ion-select>
               </ion-item>
 
               <ion-item class="remove_inner_bottom">
                 <ion-label position="floating">Email</ion-label>
-                <ion-input type="email" name="email" [(ngModel)]="asistente.email" required></ion-input>
+                <ion-input type="email" name="email" [(ngModel)]="asistente.email"></ion-input>
             </ion-item>
 
             <ion-item class="remove_inner_bottom">
                 <ion-label position="floating">Télefono</ion-label>
-                <ion-input type="tel" name="telefono" [(ngModel)]="asistente.telefono" required></ion-input>
+                <ion-input type="tel" name="telefono" [(ngModel)]="asistente.telefono"></ion-input>
             </ion-item>
 
             <ion-item class="remove_inner_bottom">
                 <ion-label position="floating">Ciudad</ion-label>
-                <ion-input type="text" name="ciudad" [(ngModel)]="asistente.ciudad" required class="ion-text-capitalize"></ion-input>
+                <ion-input type="text" name="ciudad" [(ngModel)]="asistente.ciudad" class="ion-text-capitalize"></ion-input>
             </ion-item>
 
             <ion-item class="remove_inner_bottom">
                 <ion-label position="floating">País</ion-label>
-                <ion-input type="text" name="pais" [(ngModel)]="asistente.pais" required class="ion-text-capitalize"></ion-input>
+                <ion-input type="text" name="pais" [(ngModel)]="asistente.pais" class="ion-text-capitalize"></ion-input>
             </ion-item>
 
             <ion-item class="remove_inner_bottom">
                 <ion-label position="floating">Lead Source</ion-label>
-                <ion-input type="text" name="leadsource" [(ngModel)]="asistente.leadsource" required class="ion-text-capitalize"></ion-input>
+                <ion-input type="text" name="leadsource" [(ngModel)]="asistente.leadsource" class="ion-text-capitalize"></ion-input>
             </ion-item>
 
             <ion-item class="remove_inner_bottom">
                 <ion-label position="floating">Lead Source Details</ion-label>
-                <ion-input type="text" name="leadsourced" [(ngModel)]="asistente.leadsourced" required class="ion-text-capitalize"></ion-input>
+                <ion-input type="text" name="leadsourced" [(ngModel)]="asistente.leadsourced" class="ion-text-capitalize"></ion-input>
             </ion-item>
 
             <ion-item class="remove_inner_bottom">
                 <ion-label position="floating">Product Interest</ion-label>
-                <ion-input type="text" name="productinterest" [(ngModel)]="asistente.productinterest" required class="ion-text-capitalize"></ion-input>
+                <ion-input type="text" name="productinterest" [(ngModel)]="asistente.productinterest" class="ion-text-capitalize"></ion-input>
             </ion-item>
 
             <ion-item class="remove_inner_bottom">
                 <ion-label position="floating">Lead Owner</ion-label>
-                <ion-input type="text" name="leadowner" [(ngModel)]="asistente.leadowner" required class="ion-text-capitalize"></ion-input>
+                <ion-input type="text" name="leadowner" [(ngModel)]="asistente.leadowner" class="ion-text-capitalize"></ion-input>
+            </ion-item>
+
+            <ion-item class="remove_inner_bottom">
+                <ion-label>Dar Asistencia</ion-label>
+                <ion-toggle color="cgreen" name="asisitio" [(ngModel)]="asistente.asistio"></ion-toggle>
             </ion-item>
 
               <!--<ion-item>
@@ -111,12 +127,20 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col class="ion-text-center">
+          <ion-col class="ion-text-center" size="6">
               <ion-button type="submit"
                           class="clgreen"
                           expand="block"
                           [disabled]="fAsistente.form.invalid">
               Guardar
+            </ion-button>
+          </ion-col>
+          <ion-col class="ion-text-center" size="6">
+              <ion-button type="submit"
+                          class="clgreen"
+                          expand="block"
+                          [disabled]="fAsistente.form.invalid">
+              Imprimir
             </ion-button>
           </ion-col>
         </ion-row>
