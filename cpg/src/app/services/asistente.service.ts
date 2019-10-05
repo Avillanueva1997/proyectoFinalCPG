@@ -43,8 +43,8 @@ export class AsistenteService {
     return this.http.get(`${URL}/asistente/search/${postid}/${value}`);
   }
 
-  evaluateCodeQr(postid: string, dni: string){
-    return this.http.get(`${URL}/asistente/evaluate/${postid}/${dni}`);
+  evaluateCodeQr(postid: string, codigo: string){
+    return this.http.get(`${URL}/asistente/evaluate/${postid}/${codigo}`);
   }
 
   uploadFile(files: any, postid: string) {
@@ -102,6 +102,10 @@ export class AsistenteService {
         }
       );
     });
+  }
+
+  getIndicadores(postid: string){
+    return this.http.get(`${URL}/asistente/indicadores/?postid=${postid}`);
   }
 
 }

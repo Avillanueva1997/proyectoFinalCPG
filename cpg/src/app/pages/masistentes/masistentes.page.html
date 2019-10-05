@@ -8,8 +8,10 @@
 <ion-content>
   <ion-row>
     <ion-col>
-        <ion-item class="remove_inner_bottom">
-          <label class="item item-input"><input type="file" id="file" name="uploadfile">
+        <ion-item class="remove_inner_bottom inputupload">
+          <label class="item item-input">
+            <input type="file" class="inputfile " id="file" name="uploadfile">
+            <ion-icon name="link"></ion-icon>
           </label>
         </ion-item>
     </ion-col>  
@@ -17,8 +19,9 @@
 
   <ion-row>
     <ion-col>
-        <ion-item class="remove_inner_bottom">
-          <ion-button  (click)="getFile()">Procesar</ion-button>
+        <ion-item class="clblue remove_inner_bottom">
+          <ion-icon name="cloud-upload"></ion-icon>
+          <ion-button  (click)="getFile()">Cargar Base de Datos</ion-button>
         </ion-item>
     </ion-col>  
   </ion-row>

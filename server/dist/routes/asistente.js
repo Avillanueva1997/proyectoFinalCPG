@@ -98,9 +98,14 @@ asistenteRoutes.get('/search/:postid/:value', (req, res) => __awaiter(this, void
     const value = req.params.value;
     var query = {};
     if (value !== undefined) {
-        query = {
-            name: new RegExp(value, 'i'),
-            post: ObjectID(postId)
+        query = { $or: [
+                { "name": new RegExp(value, 'i') },
+                { "appaterno": new RegExp(value, 'i') },
+                { "apmaterno": new RegExp(value, 'i') },
+                { "empresa": new RegExp(value, 'i') },
+                { "tipoinvitado": new RegExp(value, 'i') }
+            ],
+            "post": ObjectID(postId)
         };
     }
     const asistentes = yield asistente_model_1.Asistente.find(query)
@@ -112,11 +117,11 @@ asistenteRoutes.get('/search/:postid/:value', (req, res) => __awaiter(this, void
         asistentes
     });
 }));
-asistenteRoutes.get('/evaluate/:postid/:dni', (req, res) => __awaiter(this, void 0, void 0, function* () {
+asistenteRoutes.get('/evaluate/:postid/:codigo', (req, res) => __awaiter(this, void 0, void 0, function* () {
     const postId = req.params.postid;
-    const dni = req.params.dni;
+    const codigo = req.params.codigo;
     asistente_model_1.Asistente
-        .findOne({ 'post': ObjectID(postId), 'dni': dni })
+        .findOne({ 'post': ObjectID(postId), 'codigo': codigo })
         .exec(function (err, asistente) {
         if (err)
             throw err;

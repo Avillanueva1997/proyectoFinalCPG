@@ -23,7 +23,10 @@ const routes: Routes = [
   { path: 'masistentes', loadChildren: './pages/masistentes/masistentes.module#MasistentesPageModule' },
   { path: 'scancodigo', loadChildren: './pages/scancodigo/scancodigo.module#ScancodigoPageModule' },
   { path: 'nsala', loadChildren: './pages/nsala/nsala.module#NsalaPageModule' },
-  { path: 'vasistente', loadChildren: './pages/vasistente/vasistente.module#VasistentePageModule' }
+  { path: 'vasistente', loadChildren: './pages/vasistente/vasistente.module#VasistentePageModule' },
+  { path: 'vsala', loadChildren: './pages/vsala/vsala.module#VsalaPageModule' },
+  { path: 'scansala', loadChildren: './pages/scansala/scansala.module#ScansalaPageModule' },
+  { path: 'indicadores', loadChildren: './pages/indicadores/indicadores.module#IndicadoresPageModule' }
 ];
 @NgModule({
   imports: [

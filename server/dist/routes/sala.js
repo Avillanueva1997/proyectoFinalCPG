@@ -58,7 +58,6 @@ salaRoutes.post('/update', [autentication_1.verificaToken], (req, res) => {
     });
 });
 salaRoutes.get('/delete/:codigo', (req, res) => __awaiter(this, void 0, void 0, function* () {
-    console.log(req);
     const codigo = req.params.codigo;
     sala_model_1.Sala.deleteOne({ 'codigo': codigo }).exec(function (err, sala) {
         if (err)

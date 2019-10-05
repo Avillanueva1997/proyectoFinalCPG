@@ -1,0 +1,204 @@
+$cBlue: #438DED;
+$cGreen: #2ad0a8;
+$cBlack: #000;
+$cWhite: #fff;
+
+
+@font-face{
+    font-family: Segoe-UI;
+    src: url("/assets/fonts/segoe-ui-light-2.ttf");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+*{
+    font-family: Segoe-UI;
+}
+
+.wid50{
+    width: 325px;
+}
+
+
+@mixin shadowsborderes{
+    -webkit-box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+    -moz-box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+    box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+    --box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+}
+
+ion-header{
+    background:$cBlue!important;
+    --background:$cBlue!important;
+    ion-toolbar{
+        background:$cBlue!important;
+        --background:$cBlue!important;
+    }
+    ion-buttons{
+      color: $cWhite;
+    }
+    ion-title{
+      color: $cWhite;
+      font-size: 18px;
+        padding: 0;
+    }
+}
+
+
+
+.clgreen{
+    text-transform: capitalize;
+    border-radius: 50px!important;
+    --border-radius: 50px!important;
+    @include shadowsborderes;
+    background: $cGreen;
+    --background: $cGreen;
+    &:hover{
+        background: $cGreen;
+        --background: $cGreen;
+    }
+}
+
+.clblue{
+    text-transform: capitalize;
+    border-radius: 50px!important;
+    --border-radius: 50px!important;
+    @include shadowsborderes;
+    background: $cBlue;
+    --background: $cBlue;
+    -webkit-box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
+    -moz-box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
+    box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
+    --box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
+    &:hover{
+        background: $cBlue;
+        --background: $cBlue;
+    }
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse;
+}
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+    background: #fff; 
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+th { 
+    background: $cBlue; 
+    color: $cWhite!important; 
+    font-weight: 400;
+    
+}
+td, th { 
+    padding: 8px; 
+    border: 0; 
+    text-align: left;
+    font-family: Segoe-UI;
+    font-size: 14px;
+}
+
+.radiusthleft {
+    border-top-left-radius: 10px;
+}
+.radiusthright {
+    border-top-right-radius: 10px;
+}
+
+.titlegreen{
+    color: $cGreen!important; 
+    --color: #2ad0a8!important; 
+}
+
+/*
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    tbody{
+        border-radius: 50px!important;
+        --border-radius: 50px!important;
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr { border: 1px solid #ccc; }
+
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        // border-bottom: 1px solid #eee;
+        position: relative;
+        color: #616A78;
+        --color: #616A78;
+    }
+
+    td:before {
+        /* Now like a table header */
+        position: relative;
+        /* Top/left values mimic padding */
+        top: 0px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+
+    /*
+    Label the data
+    */
+    td:nth-of-type(1) { background: $cBlue; color: $cWhite!important; --color: #fff!important; }
+    td:nth-of-type(1):before { content: "Nombre:"; color: $cWhite; --color: #ffffff;  }
+    td:nth-of-type(2):before { content: "AP. Paterno:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(3):before { content: "AP. Materno:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(4):before { content: "Empresa:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(5):before { content: "Tipo de Invitado:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(6):before { content: "Nombre de Sala:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(7):before { content: "Fecha de Ingreso:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(8):before { content: "Hora de Ingreso:"; color: $cGreen; --color: #2ad0a8; }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    body {
+        padding: 0;
+        margin: 0;
+        width: 320px; }
+
+        ion-toggle {
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+    }
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    body {
+        width: 495px;
+    }
+
+    ion-toggle {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+}

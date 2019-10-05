@@ -52,6 +52,39 @@ ion-header{
     }
 }
 
+.inputupload {
+  .item-input{
+    border: 1px solid rgba($cBlack,0.15);
+    --border: 1px solid rgba($cBlack,0.15);
+    width: 100%;
+    padding: 7px;
+    border-radius: 10px;
+    position: relative;
+    .inputfile {
+      // width: 0.1px;
+      // height: 0.1px;
+      // opacity: 0;
+      // overflow: hidden;
+      // position: absolute;
+      // z-index: -1;
+      color: rgba($cBlack,0.75);
+      }
+    ion-icon{
+      background: $cBlue;
+      --background: $cBlue;
+      color: rgba(255,255,255,.75);
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      padding: 9px;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+  }
+}
+
 .clblue{
   text-transform: capitalize;
   border-radius: 50px!important;
@@ -63,10 +96,20 @@ ion-header{
   -moz-box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
   box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
   --box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
-  width: 125px;
-    height: 30px;
-    text-transform: uppercase;
+  width: 300px;
+  // height: 30px;
+  text-transform: uppercase;
+  margin: 0 auto;
+  color: rgba(255,255,255,.75);
+  ion-button{
+    box-shadow: none!important;
+    --box-shadow: none!important;
+    background: $cBlue;
+  --background: $cBlue;
+  }
+  ion-icon{
     color: rgba(255,255,255,.75);
+  }
   &:hover{
       background: $cBlue;
       --background: $cBlue;

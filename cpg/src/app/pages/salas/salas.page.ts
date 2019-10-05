@@ -4,14 +4,14 @@ import { SalaService } from '../../services/sala.service';
 import { Sala } from 'src/app/interfaces/interfaces';
 import { TouchSequence } from 'selenium-webdriver';
 import { ModalEditSalaPage } from '../modal-edit-sala/modal-edit-sala.page';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-salas',
   templateUrl: './salas.page.html',
   styleUrls: ['./salas.page.scss'],
 })
-export class SalasPage implements OnInit {
+export class SalasPage {
 
   post: any;
 
@@ -19,9 +19,12 @@ export class SalasPage implements OnInit {
 
   salas: Sala[] = [];
 
-  constructor(private storage: Storage, private salaService: SalaService, private modalCtrl: ModalController) { }
+  constructor(private storage: Storage,
+              private salaService: SalaService,
+              private modalCtrl: ModalController,
+              private navCtrl: NavController) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.cargarPost();
   }
 
@@ -72,4 +75,7 @@ export class SalasPage implements OnInit {
     );
   }
 
+  onWatch(sala: any) {
+    this.navCtrl.navigateRoot('/vsala', {animated: true});
+  }
 }

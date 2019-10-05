@@ -1,0 +1,13 @@
+<ion-header no-border>
+    <ion-toolbar>
+      <ion-buttons slot="start"><ion-back-button defaultHref="asistentes"></ion-back-button></ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-slides [options]="slideOptions">
+      <ion-slide>
+        <ion-button expand="full" fill="outline" (click)="scan()" size="large">Scanear Código</ion-button>
+      </ion-slide>
+    </ion-slides>
+  </ion-content>
+  

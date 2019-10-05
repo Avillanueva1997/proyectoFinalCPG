@@ -5,6 +5,7 @@ import { TouchSequence } from 'selenium-webdriver';
 import { Asistente } from '../../interfaces/interfaces';
 import { ModalController } from '@ionic/angular';
 import { ModalEditAsistentePage } from '../modal-edit-asistente/modal-edit-asistente.page';
+import { ModalVisualizarAsistentePage } from '../modal-visualizar-asistente/modal-visualizar-asistente.page';
 
 @Component({
   selector: 'app-asistentes',
@@ -83,5 +84,17 @@ export class AsistentesPage implements OnInit {
       const { data } = await modal.onDidDismiss();
       console.log('Retorno del modal', data );
   }
+
+  async onWatch(asistente: any) {
+    const modal = await this.modalCtrl.create({
+      component: ModalVisualizarAsistentePage,
+      componentProps: {
+        asistente
+      }
+    });
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+    console.log('Retorno del modal', data );
+}
 
 }

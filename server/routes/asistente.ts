@@ -111,10 +111,15 @@ asistenteRoutes.get('/search/:postid/:value', async (req: any, res: Response) =>
 
     var query = {};
     if (value !== undefined) {
-        query = {
-            name: new RegExp(value, 'i'),
-            post: ObjectID(postId)
-        };
+        query = { $or : [ 
+                            {"name": new RegExp(value, 'i')},
+                            {"appaterno": new RegExp(value, 'i')},
+                            {"apmaterno": new RegExp(value, 'i')},
+                            {"empresa": new RegExp(value, 'i')},
+                            {"tipoinvitado": new RegExp(value, 'i')}
+                        ],
+                    "post": ObjectID(postId)
+                };
     }
 
     const asistentes = await Asistente.find(query)
@@ -129,13 +134,13 @@ asistenteRoutes.get('/search/:postid/:value', async (req: any, res: Response) =>
 
 });
 
-asistenteRoutes.get('/evaluate/:postid/:dni', async (req: any, res: Response) => {
+asistenteRoutes.get('/evaluate/:postid/:codigo', async (req: any, res: Response) => {
 
     const postId = req.params.postid;
-    const dni = req.params.dni;
+    const codigo = req.params.codigo;
 
     Asistente
-    .findOne({'post': ObjectID(postId), 'dni': dni})
+    .findOne({'post': ObjectID(postId), 'codigo': codigo})
     .exec(function(err, asistente){
         if( err ) throw err;
         if(!asistente){
@@ -199,6 +204,7 @@ asistenteRoutes.post('/upload/:postid', [ verificaToken ],  async (req: any, res
             record.post = postId;
             record.created = date;
             record.fasistio = date;
+            record.tipocarga = '02';
             Asistente.insertMany(record, function(err:any, res:any) {
                 if(err) throw err;
             });

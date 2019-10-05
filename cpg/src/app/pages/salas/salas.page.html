@@ -12,7 +12,7 @@
         <ion-row>
           <ion-col>
               <ion-button class="clgreen" [routerLink]="['/nsala']">Crear sala</ion-button>
-              <ion-button class="clblue" [routerLink]="['/scancodigo']"><ion-icon name="qr-scanner"></ion-icon></ion-button>
+              <!--<ion-button class="clblue" [routerLink]="['/scancodigo']"><ion-icon name="qr-scanner"></ion-icon></ion-button>-->
           </ion-col>
         </ion-row>    
         <ion-row>
@@ -25,6 +25,7 @@
                 <th>Tipo</th>
                 <th>Aforo</th>
                 <th>Aforo Superado</th>
+                <th>Visualizar</th>
                 <th>Editar</th>
                 <th class="radiusthright">Eliminar</th>
               </tr>
@@ -36,6 +37,7 @@
                 <td>{{sala.tipo}}</td>
                 <td>{{sala.aforo}}</td>
                 <td>{{sala.aforosuperado}}</td>
+                <td><ion-button (click)="onWatch(sala)"><ion-icon slot="icon-only" name="eye"></ion-icon></ion-button></td>
                 <td><ion-button (click)="onEdit(sala)"><ion-icon slot="icon-only" name="create"></ion-icon></ion-button></td>
                 <td><ion-button (click)="onDelete(sala)"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-button></td>
               </tr>

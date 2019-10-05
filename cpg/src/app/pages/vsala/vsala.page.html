@@ -1,44 +1,36 @@
 <ion-header no-border>
   <ion-toolbar>
-    <ion-buttons slot="start"><ion-back-button defaultHref="event"></ion-back-button></ion-buttons>
-    <ion-title class="ion-text-capitalize">{{titulo}}</ion-title>
+    <ion-buttons slot="start"><ion-back-button defaultHref="salas"></ion-back-button></ion-buttons>
+    <ion-title>
+        {{title}}
+    </ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-    <ion-refresher slot="fixed" (ionRefresh)="recargar($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
   <ion-grid>
     <ion-row>
       <ion-col>
-          <ion-button class="clgreen" [routerLink]="['/nasistente']">Nuevo asistente</ion-button>
-          <ion-button class="clblue" [routerLink]="['/masistentes']">Registrar masivo</ion-button>
-          <ion-button class="clblue" [routerLink]="['/scancodigo']"><ion-icon name="qr-scanner" slot="icon-only"></ion-icon></ion-button>
+        <ion-button class="clblue" [routerLink]="['/scansala']"><ion-icon name="qr-scanner"></ion-icon></ion-button>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-searchbar placeholder="Buscar" color="cgreen" (ionChange)="onSearch($event)" class="clgreen wid50"></ion-searchbar>
-      </ion-col>
-    </ion-row>  
     <ion-row>
       <ion-col size="12">
         <table>
           <thead>
           <tr class="radiustr">
-            <th class="radiusthleft">Código</th>
-            <th>Nombre</th>
+            <th class="radiusthleft">Nombre</th>
             <th>AP. Paterno</th>
             <th>AP. Materno</th>
             <th>Empresa</th>
             <th>Tipo de Invitado</th>
-            <th>Asistencia</th>
-            <th>Editar</th>
-            <th class="radiusthright">Ver</th>
+            <th>Nombre de sala</th>
+            <th>Fecha de Ingreso</th>
+            <th class="radiusthright">Hora de Ingreso</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let asistente of asistentes">
+          <!--<tr *ngFor="let asistente of asistentes">
             <td>{{asistente.codigo}}</td>
             <td>{{asistente.name}}</td>
             <td>{{asistente.appaterno}}</td>
@@ -48,10 +40,12 @@
             <td><ion-toggle color="cgreen" name="asisitio" [(ngModel)]="asistente.asistio" (ionChange)="onToggleChange($event, asistente.codigo)"></ion-toggle></td>
             <td><ion-button (click)="onEdit(asistente)"><ion-icon slot="icon-only" name="create"></ion-icon></ion-button></td>
             <td><ion-button (click)="onWatch(asistente)"><ion-icon slot="icon-only" name="eye"></ion-icon></ion-button></td>
-          </tr>
+          </tr>-->
           </tbody>
         </table>
       </ion-col>
     </ion-row>
   </ion-grid>
+
 </ion-content>
+    
