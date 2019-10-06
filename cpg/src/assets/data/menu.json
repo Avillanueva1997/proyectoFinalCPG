@@ -18,6 +18,10 @@
         "icon": "tv",
         "name": "Indicadores",
         "redirectTo": "/indicadores"
+    },
+    {
+        "icon": "download",
+        "name": "Exportar"
     }
   ]
   

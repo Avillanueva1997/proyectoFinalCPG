@@ -15,6 +15,7 @@ const express_1 = require("express");
 const autentication_1 = require("../middlewares/autentication");
 const file_system_1 = __importDefault(require("../classes/file-system"));
 const sala_model_1 = require("../models/sala.model");
+const salaasistente_model_1 = require("../models/salaasistente.model");
 const salaRoutes = express_1.Router();
 const fileSystem = new file_system_1.default();
 var ObjectID = require('mongodb').ObjectID;
@@ -72,6 +73,37 @@ salaRoutes.get('/delete/:codigo', (req, res) => __awaiter(this, void 0, void 0, 
             ok: true,
             sala
         });
+    });
+}));
+salaRoutes.post('/savesa', [autentication_1.verificaToken], (req, res) => {
+    const sala = req.body.sala;
+    const asistente = req.body.asistente;
+    const post = req.body.post;
+    const body = {
+        'sala': ObjectID(sala),
+        'asistente': ObjectID(asistente),
+        'post': ObjectID(post)
+    };
+    salaasistente_model_1.SalaAsistente.create(body).then((salaDB) => __awaiter(this, void 0, void 0, function* () {
+        yield salaDB.populate('sala asistente post').execPopulate();
+        res.json({
+            ok: true,
+            sala: salaDB
+        });
+    })).catch(err => {
+        res.json(err);
+    });
+});
+salaRoutes.get('/tablesa/:post/:sala', (req, res) => __awaiter(this, void 0, void 0, function* () {
+    const post = req.params.post;
+    const sala = req.params.sala;
+    const asistentes = yield salaasistente_model_1.SalaAsistente.find({ 'post': ObjectID(post), 'sala': ObjectID(sala) })
+        .sort({ _id: -1 })
+        .populate('post sala asistente')
+        .exec();
+    res.json({
+        ok: true,
+        asistentes
     });
 }));
 exports.default = salaRoutes;

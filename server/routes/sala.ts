@@ -6,6 +6,7 @@ import FileSystem from '../classes/file-system';
 import { Event } from '../models/event.model';
 import { Asistente } from '../models/asistente.model';
 import { Sala } from '../models/sala.model';
+import { SalaAsistente } from '../models/salaasistente.model';
 
 const salaRoutes = Router();
 const fileSystem = new FileSystem();
@@ -87,6 +88,49 @@ salaRoutes.get('/delete/:codigo', async (req: any, res: Response) => {
         });
 
     });
+});
+
+salaRoutes.post('/savesa', [verificaToken], (req:any, res: Response) => {
+
+    const sala = req.body.sala;
+    const asistente = req.body.asistente;
+    const post = req.body.post;
+
+    const body = {
+        'sala': ObjectID(sala),
+        'asistente': ObjectID(asistente),
+        'post': ObjectID(post)
+    };
+
+    SalaAsistente.create(body).then( async salaDB => {
+
+        await salaDB.populate('sala asistente post').execPopulate();
+
+        res.json({
+            ok: true,
+            sala: salaDB
+        });    
+
+    }).catch( err => {
+        res.json(err)
+    });
+});
+
+salaRoutes.get('/tablesa/:post/:sala', async (req: any, res: Response) => {
+
+    const post = req.params.post;
+    const sala = req.params.sala;
+
+    const asistentes = await SalaAsistente.find({'post': ObjectID(post), 'sala': ObjectID(sala) })
+    .sort({ _id: -1})
+    .populate('post sala asistente')
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    });
+
 });
 
 

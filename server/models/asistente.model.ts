@@ -80,7 +80,6 @@ const asistenteSchema = new Schema({
 
 asistenteSchema.pre<IAsistente>('save', function(next){
     this.created = new Date();
-    this.fasistencia = new Date();
     next();
 });
 

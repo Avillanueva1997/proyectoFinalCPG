@@ -24,23 +24,20 @@
             <th>AP. Materno</th>
             <th>Empresa</th>
             <th>Tipo de Invitado</th>
-            <th>Nombre de sala</th>
             <th>Fecha de Ingreso</th>
             <th class="radiusthright">Hora de Ingreso</th>
           </tr>
           </thead>
           <tbody>
-          <!--<tr *ngFor="let asistente of asistentes">
-            <td>{{asistente.codigo}}</td>
-            <td>{{asistente.name}}</td>
-            <td>{{asistente.appaterno}}</td>
-            <td>{{asistente.apmaterno}}</td>
-            <td>{{asistente.empresa}}</td>
-            <td>{{asistente.tipoinvitado}}</td>
-            <td><ion-toggle color="cgreen" name="asisitio" [(ngModel)]="asistente.asistio" (ionChange)="onToggleChange($event, asistente.codigo)"></ion-toggle></td>
-            <td><ion-button (click)="onEdit(asistente)"><ion-icon slot="icon-only" name="create"></ion-icon></ion-button></td>
-            <td><ion-button (click)="onWatch(asistente)"><ion-icon slot="icon-only" name="eye"></ion-icon></ion-button></td>
-          </tr>-->
+          <tr *ngFor="let data of dataGlobal">
+            <td>{{data.name}}</td>
+            <td>{{data.appaterno}}</td>
+            <td>{{data.apmaterno}}</td>
+            <td>{{data.empresa}}</td>
+            <td>{{data.tipoinvitado}}</td>
+            <td><ion-datetime name="created" [(ngModel)]="data.created" disabled="true"></ion-datetime></td>
+            <td><ion-datetime name="created" [(ngModel)]="data.created" display-format="h:mm A"  picker-format="h:mm A" disabled="true"></ion-datetime></td>
+          </tr>
           </tbody>
         </table>
       </ion-col>

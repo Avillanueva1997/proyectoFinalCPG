@@ -77,5 +77,6 @@ export class SalasPage {
 
   onWatch(sala: any) {
     this.navCtrl.navigateRoot('/vsala', {animated: true});
+    this.storage.set('sala', sala._id);
   }
 }

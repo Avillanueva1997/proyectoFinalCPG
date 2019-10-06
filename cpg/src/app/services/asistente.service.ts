@@ -104,8 +104,19 @@ export class AsistenteService {
     });
   }
 
-  getIndicadores(postid: string){
-    return this.http.get(`${URL}/asistente/indicadores/?postid=${postid}`);
+  getIndicadoresOne(postid: string){
+    return this.http.get(`${URL}/asistente/indicadorOne/${postid}`);
   }
 
+  getIndicadoresTwo(postid: string){
+    return this.http.get(`${URL}/asistente/indicadorTwo/${postid}`);
+  }
+
+  getIndicadoresThree(postid: string){
+    return this.http.get(`${URL}/asistente/indicadorThree/${postid}`);
+  }
+
+  getCodigo(){
+    return this.http.get(`${URL}/asistente/codigo`);
+  }
 }

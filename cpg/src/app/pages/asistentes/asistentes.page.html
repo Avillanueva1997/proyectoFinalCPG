@@ -45,7 +45,8 @@
             <td>{{asistente.apmaterno}}</td>
             <td>{{asistente.empresa}}</td>
             <td>{{asistente.tipoinvitado}}</td>
-            <td><ion-toggle color="cgreen" name="asisitio" [(ngModel)]="asistente.asistio" (ionChange)="onToggleChange($event, asistente.codigo)"></ion-toggle></td>
+            <td *ngIf="asistente.asistio"><ion-toggle color="cgreen" name="asisitio" [(ngModel)]="asistente.asistio" disabled="true"></ion-toggle></td>
+            <td *ngIf="!asistente.asistio"><ion-toggle color="cgreen" name="asisitio" [(ngModel)]="asistente.asistio" (ionChange)="onToggleChange($event, asistente.codigo)"></ion-toggle></td>
             <td><ion-button (click)="onEdit(asistente)"><ion-icon slot="icon-only" name="create"></ion-icon></ion-button></td>
             <td><ion-button (click)="onWatch(asistente)"><ion-icon slot="icon-only" name="eye"></ion-icon></ion-button></td>
           </tr>

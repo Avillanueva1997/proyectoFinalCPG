@@ -19,7 +19,7 @@ export class ScansalaPage implements OnInit {
 
   codeQr: string;
   post: any;
-  sala: any = {};
+  sala: any;
   asistente: any = {};
 
   constructor(private barCodeScanner: BarcodeScanner,
@@ -31,6 +31,7 @@ export class ScansalaPage implements OnInit {
   ngOnInit() {
     this.scan();
     this.cargarPost();
+    this.cargarSala();
   }
 
   scan() {
@@ -49,16 +50,26 @@ export class ScansalaPage implements OnInit {
     this.post = await this.storage.get('post');
   }
 
-  verificarCode() {
+  async cargarSala() {
+    this.sala = await this.storage.get('sala');
+  }
+
+   verificarCode() {
     this.asistenteService.evaluateCodeQr(this.post, this.codeQr).subscribe(
-      response => {
+      async response => {
         if(response['ok']){
           this.asistente = response['asistente'];
-          const message = this.asistente.name 
+          const value =  await this.salaService.createSalaAsistente(this.sala, this.asistente._id, this.post);
+
+          if (value) {
+            const message = this.asistente.name
                           + ' ' + this.asistente.appaterno
-                          + ' ' + this.asistente.apmaterno
-                          + ' se encuentra registrado!';
-          this.uiService.alertaInformativa(message);
+                          + ' se registro a esta sala!';
+            this.uiService.alertaInformativa(message);
+          } else {
+            const message = 'Este asistente ya se encuentra registrado a esta sala!';
+            this.uiService.alertaInformativa(message);
+          }
         } else {
           const message = response['mensaje'];
           this.uiService.alertaInformativa(message);
@@ -66,6 +77,4 @@ export class ScansalaPage implements OnInit {
       }
     );
   }
-
-
 }

@@ -22,9 +22,11 @@ export class Tab1Page implements OnInit {
       this.posts.unshift(post);
     });
 
-    if (this.storage.get('post')) {
+    console.log(this.posts);
+
+    /*if (this.storage.get('post')) {
       this.storage.remove('post');
-    }
+    }*/
   }
 
   recargar(event: any) {

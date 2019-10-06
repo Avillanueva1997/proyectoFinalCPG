@@ -12,7 +12,7 @@ import { ModalVisualizarAsistentePage } from '../modal-visualizar-asistente/moda
   templateUrl: './asistentes.page.html',
   styleUrls: ['./asistentes.page.scss'],
 })
-export class AsistentesPage implements OnInit {
+export class AsistentesPage{
 
   titulo = 'Asistentes';
   post: any;
@@ -21,7 +21,7 @@ export class AsistentesPage implements OnInit {
   constructor(private storage: Storage, private asistenteService: AsistenteService, private modalCtrl: ModalController) {
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.cargarPost();
   }
 
@@ -62,15 +62,17 @@ export class AsistentesPage implements OnInit {
     }
   }
 
-  onToggleChange(event: any, codigoBD){
-
+  async onToggleChange(event: any, codigoBD){
     const state = event.detail.checked;
     const codigo = codigoBD;
     const params = {
       codigo,
       state
     };
-    this.asistenteService.updateAsistente(params);
+    const value = await this.asistenteService.updateAsistente(params);
+    if (value) {
+      this.cargarAsistentes(this.post);
+    }
   }
 
   async onEdit(asistente: any) {

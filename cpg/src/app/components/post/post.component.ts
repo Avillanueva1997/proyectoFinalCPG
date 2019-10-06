@@ -19,6 +19,8 @@ export class PostComponent implements OnInit {
 
   clickEvent(post: any) {
     this.navCtrl.navigateRoot('/event', {animated: true});
+    console.log('post');
+    console.log(post);
     this.storage.set('post', post._id);
   }
 

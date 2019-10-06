@@ -137,6 +137,100 @@ asistenteRoutes.get('/evaluate/:postid/:codigo', (req, res) => __awaiter(this, v
         });
     });
 }));
+asistenteRoutes.get('/indicadorOne/:postid', (req, res) => __awaiter(this, void 0, void 0, function* () {
+    const postId = req.params.postid;
+    var cargaindividual = 0;
+    asistente_model_1.Asistente
+        .find({ 'post': ObjectID(postId), 'tipocarga': '01' })
+        .countDocuments()
+        .exec(function (err, result) {
+        if (err)
+            throw err;
+        if (!result) {
+            return res.json({
+                ok: false,
+                mensaje: 'No hay registros'
+            });
+        }
+        cargaindividual = result;
+        res.json({
+            ok: true,
+            cargaindividual
+        });
+    });
+}));
+asistenteRoutes.get('/indicadorTwo/:postid', (req, res) => __awaiter(this, void 0, void 0, function* () {
+    const postId = req.params.postid;
+    var cargamasiva = 0;
+    asistente_model_1.Asistente
+        .find({ 'post': ObjectID(postId), 'tipocarga': '02' })
+        .countDocuments()
+        .exec(function (err, result) {
+        if (err)
+            throw err;
+        if (!result) {
+            return res.json({
+                ok: false,
+                mensaje: 'No hay registros'
+            });
+        }
+        cargamasiva = result;
+        res.json({
+            ok: true,
+            cargamasiva
+        });
+    });
+}));
+asistenteRoutes.get('/indicadorThree/:postid', (req, res) => __awaiter(this, void 0, void 0, function* () {
+    const postId = req.params.postid;
+    var invitadoson = 0;
+    asistente_model_1.Asistente
+        .find({ 'post': ObjectID(postId), 'tipocarga': '02', asistio: true })
+        .countDocuments()
+        .exec(function (err, result) {
+        if (err)
+            throw err;
+        if (!result) {
+            return res.json({
+                ok: false,
+                mensaje: 'No hay registros'
+            });
+        }
+        invitadoson = result;
+        res.json({
+            ok: true,
+            invitadoson
+        });
+    });
+}));
+asistenteRoutes.get('/codigo', (req, res) => __awaiter(this, void 0, void 0, function* () {
+    var codigoC = 'CPG001';
+    asistente_model_1.Asistente
+        .find({ codigo: /^CPG/ })
+        .sort({ codigo: -1 })
+        .limit(1)
+        .exec(function (err, result) {
+        if (err)
+            throw err;
+        if (result.length === 0) {
+            return res.json({
+                ok: false,
+                code: codigoC,
+                mensaje: 'No hay registros'
+            });
+        }
+        let lastCode = result[0].codigo;
+        lastCode = lastCode.substring(3);
+        lastCode = Number(lastCode) + 1;
+        lastCode = lastCode.toString();
+        lastCode = lastCode.padStart(3, '0');
+        lastCode = 'CPG' + lastCode;
+        res.json({
+            ok: true,
+            code: lastCode
+        });
+    });
+}));
 //Servicio para subir archivos
 asistenteRoutes.post('/upload/:postid', [autentication_1.verificaToken], (req, res) => __awaiter(this, void 0, void 0, function* () {
     const postId = req.params.postid;
@@ -175,6 +269,8 @@ asistenteRoutes.post('/upload/:postid', [autentication_1.verificaToken], (req, r
             record.post = postId;
             record.created = date;
             record.fasistio = date;
+            record.tipocarga = '02';
+            record.tipoinvitado = 'Nuevo';
             asistente_model_1.Asistente.insertMany(record, function (err, res) {
                 if (err)
                     throw err;

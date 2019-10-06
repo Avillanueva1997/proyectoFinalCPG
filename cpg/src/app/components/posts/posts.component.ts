@@ -13,6 +13,7 @@ export class PostsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('posts');
     console.log(this.posts);
   }
 

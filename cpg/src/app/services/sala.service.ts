@@ -61,4 +61,33 @@ export class SalaService {
     return this.http.get(`${URL}/sala/delete/${codigo}`);
   }
 
+  createSalaAsistente(sala: string, asistente: string, post: string) {
+
+    const parametros = {
+      sala,
+      asistente,
+      post
+    };
+
+    const headers = new HttpHeaders({
+      'x-token': this.userService.token
+    });
+
+    return new Promise(resolve => {
+      this.http.post(`${URL}/sala/savesa`, parametros, {headers}).subscribe(
+        response => {
+          if(response['ok']) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }
+      );
+    });
+  }
+
+  getSalaAsistentes(post: string, sala: string) {
+    return this.http.get(`${URL}/sala/tablesa/${post}/${sala}`);
+  }
+
 }

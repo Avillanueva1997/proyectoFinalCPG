@@ -69,12 +69,15 @@ const asistenteSchema = new mongoose_1.Schema({
     },
     fasistencia: {
         type: Date
+    },
+    tipocarga: {
+        type: String,
+        default: '01'
     }
 });
 //Esto es como un trigger que se dispara antes de guardarlo en la BD
 asistenteSchema.pre('save', function (next) {
     this.created = new Date();
-    this.fasistencia = new Date();
     next();
 });
 exports.Asistente = mongoose_1.model('Asistente', asistenteSchema);

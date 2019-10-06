@@ -19,6 +19,7 @@ export class ModalEditSalaPage implements OnInit {
               private uiService: UiServiceService) { }
 
   ngOnInit() {
+    console.log(this.sala);
   }
 
   salirConArgumentos() {

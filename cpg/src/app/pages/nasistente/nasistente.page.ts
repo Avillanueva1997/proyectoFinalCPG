@@ -25,6 +25,7 @@ export class NasistentePage implements OnInit {
 
   ngOnInit() {
     this.cargarPost();
+    this.getCodigo();
   }
 
   async nuevoAsistente(fAsistente: NgForm) {
@@ -74,6 +75,14 @@ export class NasistentePage implements OnInit {
 
   capitalize(value: string) {
     return value.replace(/(?:^|\s)\S/g, l => l.toUpperCase());
+  }
+
+  getCodigo() {
+    this.asistenteService.getCodigo().subscribe(
+      response => {
+        this.asistente.codigo = response['code'];
+      }
+    );
   }
 
 }

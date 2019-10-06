@@ -167,21 +167,14 @@ only screen and (max-width: 760px),
     */
     td:nth-of-type(1) { background: $cBlue; color: $cWhite!important; --color: #fff!important; }
     td:nth-of-type(1):before { content: "Código:"; color: $cWhite; --color: #ffffff;  }
-    td:nth-of-type(2):before { content: "Fuente:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(3):before { content: "Nombre:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(4):before { content: "AP. Paterno:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(5):before { content: "AP. Materno:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(6):before { content: "Empresa:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(7):before { content: "Cargo:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(8):before { content: "Email:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(9):before { content: "Télefono:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(10):before { content: "Ciudad:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(11):before { content: "País:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(12):before { content: "Lead Source:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(13):before { content: "Lead Source Details:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(14):before { content: "Product Interest:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(15):before { content: "Lead Owner:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(16):before { content: "Asistencia:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(2):before { content: "Nombre:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(3):before { content: "AP. Paterno:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(4):before { content: "AP. Materno:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(5):before { content: "Empresa:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(6):before { content: "Tipo de Invitado:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(7):before { content: "Asistencia:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(8):before { content: "Editar:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(9):before { content: "Ver:"; color: $cGreen; --color: #2ad0a8; }
 }
 
 /* Smartphones (portrait and landscape) ----------- */

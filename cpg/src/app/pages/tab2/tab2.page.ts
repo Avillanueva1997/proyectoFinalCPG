@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Post } from '../../interfaces/interfaces';
 import { PostsService } from '../../services/posts.service';
 import { Router } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Platform } from '@ionic/angular';
+import { UiServiceService } from '../../services/ui-service.service';
 
 declare var window: any;
 
@@ -12,9 +14,11 @@ declare var window: any;
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
 
   tempImages: string[] = [];
+
+  cellphone: boolean;
 
   post = {
     mensaje: '',
@@ -27,7 +31,19 @@ export class Tab2Page {
   constructor(private postService: PostsService,
               private router: Router,
               private geolocation: Geolocation,
-              private camera: Camera) {}
+              private camera: Camera,
+              private platform: Platform,
+              private uiService: UiServiceService,
+              private el: ElementRef) {}
+
+
+  ngOnInit() {
+    if (this.platform.is('mobile')) {
+      this.cellphone = true;
+    } else {
+      this.cellphone = false;
+    }
+  }
 
   async crearPost() {
     const creado = await this.postService.createPost( this.post);
@@ -94,4 +110,17 @@ export class Tab2Page {
       // Handle error
      });
   }
+
+  async getFile() {
+    const inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#file');
+    const files = inputEl.files;
+    /*const response = await this.asistenteService.uploadFile(files, this.post);
+    if(response === false){
+      this.uiService.alertaInformativa('Error al importar el excel');
+    } else {
+      this.uiService.alertaInformativa('Se importaron ' + response + ' asistentes.');
+    }*/
+  }
+
 }
+
