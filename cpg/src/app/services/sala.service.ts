@@ -90,4 +90,8 @@ export class SalaService {
     return this.http.get(`${URL}/sala/tablesa/${post}/${sala}`);
   }
 
+  getIndicadoresFour(postid: string){
+    return this.http.get(`${URL}/sala/indicadorFour/${postid}`);
+  }
+
 }

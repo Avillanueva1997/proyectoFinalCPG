@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AsistenteService } from '../../services/asistente.service';
 import { Storage } from '@ionic/storage';
 import { UiServiceService } from '../../services/ui-service.service';
+import { SalaService } from '../../services/sala.service';
 
 @Component({
   selector: 'app-indicadores',
@@ -17,10 +18,11 @@ export class IndicadoresPage implements OnInit {
   cantMasivo = 0;
   cantInvitadosOn = 0;
   sum = 0;
+  cantAsistentesSalas = 0;
 
   constructor(private asistenteService: AsistenteService,
               private storage: Storage,
-              private uiService: UiServiceService) { }
+              private salaService: SalaService) { }
 
   ngOnInit() {
     this.cargarPost();
@@ -67,6 +69,18 @@ export class IndicadoresPage implements OnInit {
           this.cantInvitadosOn = 0;
         }
         this.sum = Number(this.cantInvitadosOn) + Number(this.cantIndividual);
+      }
+    );
+  }
+
+  getIndicadoresFour() {
+    this.salaService.getIndicadoresFour(this.post).subscribe(
+      response => {
+        if (response['ok']){
+          this.cantAsistentesSalas = response['asistentesonsalas'];
+        } else {
+          this.cantAsistentesSalas = 0;
+        }
       }
     );
   }

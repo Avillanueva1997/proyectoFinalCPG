@@ -1,4 +1,3 @@
-import { Asistente } from '../../../../server/models/asistente.model';
 export interface RespuestaPosts {
   ok: boolean;
   pagina: number;

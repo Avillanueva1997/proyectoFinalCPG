@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NgForm } from '@angular/forms';
 import { SalaService } from '../../services/sala.service';
-import { Sala } from '../../../../../server/models/sala.model';
 import { UiServiceService } from '../../services/ui-service.service';
 import { NavController } from '@ionic/angular';
 
