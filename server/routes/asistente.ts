@@ -13,6 +13,11 @@ asistenteRoutes.post('/', [ verificaToken], (req:any, res: Response) => {
 
     const body = req.body;
 
+    if(body.asistio === true){
+        const fasistencia = new Date();
+        body.fasistencia = fasistencia;
+    }
+
     Asistente.create(body).then( async asistenteDB => {
 
         await asistenteDB.populate('post').execPopulate();

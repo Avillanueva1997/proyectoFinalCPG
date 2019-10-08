@@ -21,6 +21,10 @@ const fileSystem = new file_system_1.default();
 var ObjectID = require('mongodb').ObjectID;
 asistenteRoutes.post('/', [autentication_1.verificaToken], (req, res) => {
     const body = req.body;
+    if (body.asistio === true) {
+        const fasistencia = new Date();
+        body.fasistencia = fasistencia;
+    }
     asistente_model_1.Asistente.create(body).then((asistenteDB) => __awaiter(this, void 0, void 0, function* () {
         yield asistenteDB.populate('post').execPopulate();
         res.json({
