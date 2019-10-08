@@ -35,10 +35,12 @@ export class ModalVisualizarAsistentePage implements OnInit {
       pageSize: {width: 359.05511811, height: 245.66929134},
       pageOrientation: 'landscape',
       content: [
-        { text: this.asistente.name, style: 'subheader'},
-        { text: this.asistente.appaterno, style: 'subheader'},
-        { text: this.asistente.empresa, style: 'subheader'},
- 
+        { text: this.asistente.name, style: 'subheader', alignment: 'center',
+        absolutePosition: {x: -50, y: 40}},
+        { text: this.asistente.appaterno, style: 'subheader', alignment: 'center',
+        absolutePosition: {x: -50, y: 100}},
+        { text: this.asistente.empresa, style: 'subheader', alignment: 'center',
+        absolutePosition: {x: -50, y: 160}},
         /*{ text: 'From', style: 'subheader' },*/
         /*{ text: 'Prueba' },
         { text: 'To', style: 'subheader' },
@@ -46,15 +48,14 @@ export class ModalVisualizarAsistentePage implements OnInit {
 
         // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
  
-        { qr: this.asistente.codigo, fit: 100,
-          absolutePosition: {x: 240, y: 50}
+        { qr: this.asistente.codigo, fit: 120,
+          absolutePosition: {x: 230, y: 30}
         }
       ],
       styles: {
         subheader: {
-          fontSize: 14,
-          bold: true,
-          margin: [0, 15, 0, 0]
+          fontSize: 25,
+          bold: true
         }
       }
     }

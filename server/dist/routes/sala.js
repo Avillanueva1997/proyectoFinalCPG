@@ -106,4 +106,26 @@ salaRoutes.get('/tablesa/:post/:sala', (req, res) => __awaiter(this, void 0, voi
         asistentes
     });
 }));
+salaRoutes.get('/indicadorFour/:postid', (req, res) => __awaiter(this, void 0, void 0, function* () {
+    const postId = req.params.postid;
+    var asistentesonsalas = 0;
+    salaasistente_model_1.SalaAsistente
+        .find({ 'post': ObjectID(postId) })
+        .countDocuments()
+        .exec(function (err, result) {
+        if (err)
+            throw err;
+        if (!result) {
+            return res.json({
+                ok: false,
+                mensaje: 'No hay registros'
+            });
+        }
+        asistentesonsalas = result;
+        res.json({
+            ok: true,
+            asistentesonsalas
+        });
+    });
+}));
 exports.default = salaRoutes;

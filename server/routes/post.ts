@@ -3,9 +3,12 @@ import { verificaToken } from '../middlewares/autentication';
 import { Post } from '../models/post.model';
 import { FileUpload } from '../interfaces/file-upload';
 import FileSystem from '../classes/file-system';
+import { SalaAsistente } from '../models/salaasistente.model';
 
 const postRoutes = Router();
 const fileSystem = new FileSystem();
+
+var ObjectID = require('mongodb').ObjectID;
 
 postRoutes.post('/', [ verificaToken], (req:any, res: Response) => {
 
@@ -94,6 +97,22 @@ postRoutes.get('/imagen/:userid/:img', (req: any, res: Response) => {
 
     res.sendFile(pathFoto);
 
+});
+
+postRoutes.get('/export/:postid', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    postId =  ObjectID(postId);
+
+    const dataEvento = await SalaAsistente.find({'post': ObjectID(postId)})
+    .sort({ _id: -1})
+    .populate('sala asistente post')
+    .exec();
+
+    res.json({
+        ok: true,
+        dataEvento
+    });
 });
 
 

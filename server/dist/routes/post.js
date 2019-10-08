@@ -15,8 +15,10 @@ const express_1 = require("express");
 const autentication_1 = require("../middlewares/autentication");
 const post_model_1 = require("../models/post.model");
 const file_system_1 = __importDefault(require("../classes/file-system"));
+const salaasistente_model_1 = require("../models/salaasistente.model");
 const postRoutes = express_1.Router();
 const fileSystem = new file_system_1.default();
+var ObjectID = require('mongodb').ObjectID;
 postRoutes.post('/', [autentication_1.verificaToken], (req, res) => {
     const body = req.body;
     body.usuario = req.usuario._id;
@@ -81,4 +83,16 @@ postRoutes.get('/imagen/:userid/:img', (req, res) => {
     const pathFoto = fileSystem.getFotoUrl(userId, img);
     res.sendFile(pathFoto);
 });
+postRoutes.get('/export/:postid', (req, res) => __awaiter(this, void 0, void 0, function* () {
+    var postId = req.params.postid;
+    postId = ObjectID(postId);
+    const dataEvento = yield salaasistente_model_1.SalaAsistente.find({ 'post': ObjectID(postId) })
+        .sort({ _id: -1 })
+        .populate('sala asistente post')
+        .exec();
+    res.json({
+        ok: true,
+        dataEvento
+    });
+}));
 exports.default = postRoutes;

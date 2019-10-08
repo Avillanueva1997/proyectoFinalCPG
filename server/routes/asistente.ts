@@ -94,7 +94,6 @@ asistenteRoutes.get('/', async (req: any, res: Response) => {
 
     const asistentes = await Asistente.find({'post': ObjectID(postId)})
     .sort({ _id: -1})
-    .populate('post')
     .exec();
 
     res.json({
@@ -104,14 +103,22 @@ asistenteRoutes.get('/', async (req: any, res: Response) => {
 
 });
 
-asistenteRoutes.get('/search/:postid/:value', async (req: any, res: Response) => {
+// one
 
-    const postId = req.params.postid;
+asistenteRoutes.get('/search01/:postid/:value', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
     const value = req.params.value;
+    postId =  ObjectID(postId);
 
     var query = {};
     if (value !== undefined) {
-        query = { $or : [ 
+        let reg01 = ".*" + value +".*";
+        query = {
+            name: { $regex : reg01, $options: 'i' },
+            post: ObjectID(postId)
+        };
+        /*query = { $or : [ 
                             {"name": new RegExp(value, 'i')},
                             {"appaterno": new RegExp(value, 'i')},
                             {"apmaterno": new RegExp(value, 'i')},
@@ -119,20 +126,913 @@ asistenteRoutes.get('/search/:postid/:value', async (req: any, res: Response) =>
                             {"tipoinvitado": new RegExp(value, 'i')}
                         ],
                     "post": ObjectID(postId)
-                };
+                };*/
+
+                /*query = [{
+                    $addFields:{
+                        name:{
+                                $concat:
+                                [
+                                    "$name",
+                                    " ",
+                                    "$appaterno",
+                                    " ",
+                                    "$apmaterno",
+                                    " ",
+                                    "$empresa",
+                                    " ",
+                                    "$tipoinvitado"
+                                ]
+                            }
+                        },
+                    "post": ObjectID(postId)
+                    }];*/
+                    
     }
 
     const asistentes = await Asistente.find(query)
     .sort({ _id: -1})
-    .populate('post')
     .exec();
 
     res.json({
         ok: true,
         asistentes
-    });
+    }); 
 
+    
+
+/*{$expr:{$eq:["value", {$concat:["$name",
+' ',
+"$appaterno",
+' ',
+"$apmaterno",
+' ',
+"$empresa",
+' ',
+"$tipoinvitado"]}]}}*/
+
+    /*const asistentes = await Asistente.aggregate([
+        { "$addFields": 
+            { "complete": 
+                { "$concat": 
+                    ["$name",
+                    " ",
+                    "$appaterno",
+                    " ",
+                    "$apmaterno",
+                    " ",
+                    "$empresa",
+                    " ",
+                    "$tipoinvitado"
+                    ]
+                } 
+            }},
+            { "$match": { $and: [{post: postId, complete: new RegExp(value, 'i')}]}}])
+            .sort({ _id: -1}).exec();
+            res.json({
+                ok: true,
+                asistentes
+            });*/
 });
+
+asistenteRoutes.get('/search17/:postid/:value', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined) {
+        let reg01 = ".*" + value +".*";
+        query = {
+            appaterno: { $regex : reg01, $options: 'i' },
+            post: ObjectID(postId)
+        };
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search18/:postid/:value', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined) {
+        let reg01 = ".*" + value +".*";
+        query = {
+            apmaterno: { $regex : reg01, $options: 'i' },
+            post: ObjectID(postId)
+        };
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search19/:postid/:value', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined) {
+        let reg01 = ".*" + value +".*";
+        query = {
+            empresa: { $regex : reg01, $options: 'i' },
+            post: ObjectID(postId)
+        };
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search20/:postid/:value', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined) {
+        let reg01 = ".*" + value +".*";
+        query = {
+            tipoinvitado: { $regex : reg01, $options: 'i' },
+            post: ObjectID(postId)
+        };
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+
+// Two
+
+asistenteRoutes.get('/search02/:postid/:value/:valuetwo', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined) {
+        const reg01 = ".*" + value +".*";
+        const reg02 = ".*" + valueTwo +".*";
+        query = {
+            $and: [
+                { name: { $regex : reg01, $options: 'i'} }, 
+                { appaterno: { $regex : reg02, $options: 'i' }},
+                { post: ObjectID(postId)}
+            ]
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search03/:postid/:value/:valuetwo', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valueTwo;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            apmaterno: new RegExp(valueTwo, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search04/:postid/:value/:valuetwo', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            empresa: new RegExp(valueTwo, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search05/:postid/:value/:valuetwo', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            tipoinvitado: new RegExp(valueTwo, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search21/:postid/:value/:valuetwo', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined) {
+        query = {
+            appaterno: new RegExp(value, 'i'),
+            apmaterno: new RegExp(valueTwo, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search22/:postid/:value/:valuetwo', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined) {
+        query = {
+            appaterno: new RegExp(value, 'i'),
+            empresa: new RegExp(valueTwo, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search23/:postid/:value/:valuetwo', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined) {
+        query = {
+            appaterno: new RegExp(value, 'i'),
+            tipoinvitado: new RegExp(valueTwo, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search28/:postid/:value/:valuetwo', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined) {
+        query = {
+            apmaterno: new RegExp(value, 'i'),
+            empresa: new RegExp(valueTwo, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search29/:postid/:value/:valuetwo', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined) {
+        query = {
+            apmaterno: new RegExp(value, 'i'),
+            tipoinvitado: new RegExp(valueTwo, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search31/:postid/:value/:valuetwo', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined) {
+        query = {
+            empresa: new RegExp(value, 'i'),
+            tipoinvitado: new RegExp(valueTwo, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+
+// Three
+
+asistenteRoutes.get('/search06/:postid/:value/:valuetwo/:valuethree', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            appaterno: new RegExp(valueTwo, 'i'),
+            apmaterno: new RegExp(valueThree, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search07/:postid/:value/:valuetwo/:valuethree', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            appaterno: new RegExp(valueTwo, 'i'),
+            empresa: new RegExp(valueThree, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search08/:postid/:value/:valuetwo/:valuethree', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            appaterno: new RegExp(valueTwo, 'i'),
+            tipoinvitado: new RegExp(valueThree, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search09/:postid/:value/:valuetwo/:valuethree', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            apmaterno: new RegExp(valueTwo, 'i'),
+            empresa: new RegExp(valueThree, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search10/:postid/:value/:valuetwo/:valuethree', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            apmaterno: new RegExp(valueTwo, 'i'),
+            tipoinvitado: new RegExp(valueThree, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search11/:postid/:value/:valuetwo/:valuethree', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            empresa: new RegExp(valueTwo, 'i'),
+            tipoinvitado: new RegExp(valueThree, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search24/:postid/:value/:valuetwo/:valuethree', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
+        query = {
+            appaterno: new RegExp(value, 'i'),
+            apmaterno: new RegExp(valueTwo, 'i'),
+            empresa: new RegExp(valueThree, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search25/:postid/:value/:valuetwo/:valuethree', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
+        query = {
+            appaterno: new RegExp(value, 'i'),
+            apmaterno: new RegExp(valueTwo, 'i'),
+            tipoinvitado: new RegExp(valueThree, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search26/:postid/:value/:valuetwo/:valuethree', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
+        query = {
+            appaterno: new RegExp(value, 'i'),
+            empresa: new RegExp(valueTwo, 'i'),
+            tipoinvitado: new RegExp(valueThree, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search30/:postid/:value/:valuetwo/:valuethree', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
+        query = {
+            apmaterno: new RegExp(value, 'i'),
+            empresa: new RegExp(valueTwo, 'i'),
+            tipoinvitado: new RegExp(valueThree, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+// Four
+
+asistenteRoutes.get('/search12/:postid/:value/:valuetwo/:valuethree/:valuefour', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    const valueFour = req.params.valuefour;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined && valueFour !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            appaterno: new RegExp(valueTwo, 'i'),
+            apmaterno: new RegExp(valueThree, 'i'),
+            empresa: new RegExp(valueFour, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search13/:postid/:value/:valuetwo/:valuethree/:valuefour', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    const valueFour = req.params.valuefour;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined && valueFour !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            appaterno: new RegExp(valueTwo, 'i'),
+            apmaterno: new RegExp(valueThree, 'i'),
+            tipoinvitado: new RegExp(valueFour, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search14/:postid/:value/:valuetwo/:valuethree/:valuefour', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    const valueFour = req.params.valuefour;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined && valueFour !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            appaterno: new RegExp(valueTwo, 'i'),
+            empresa: new RegExp(valueThree, 'i'),
+            tipoinvitado: new RegExp(valueFour, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search15/:postid/:value/:valuetwo/:valuethree/:valuefour', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    const valueFour = req.params.valuefour;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined && valueFour !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            apmaterno: new RegExp(valueTwo, 'i'),
+            empresa: new RegExp(valueThree, 'i'),
+            tipoinvitado: new RegExp(valueFour, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+asistenteRoutes.get('/search27/:postid/:value/:valuetwo/:valuethree/:valuefour', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    const valueFour = req.params.valuefour;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined && valueFour !== undefined) {
+        query = {
+            appaterno: new RegExp(value, 'i'),
+            apmaterno: new RegExp(valueTwo, 'i'),
+            empresa: new RegExp(valueThree, 'i'),
+            tipoinvitado: new RegExp(valueFour, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+// Five
+
+asistenteRoutes.get('/search16/:postid/:value/:valuetwo/:valuethree/:valuefour/:valuefive', async (req: any, res: Response) => {
+
+    var postId = req.params.postid;
+    const value = req.params.value;
+    const valueTwo = req.params.valuetwo;
+    const valueThree = req.params.valuethree;
+    const valueFour = req.params.valuefour;
+    const valueFive = req.params.valuefive;
+    postId =  ObjectID(postId);
+
+    var query = {};
+    if (value !== undefined && valueTwo !== undefined && valueThree !== undefined && valueFour !== undefined && valueFive !== undefined) {
+        query = {
+            name: new RegExp(value, 'i'),
+            appaterno: new RegExp(valueTwo, 'i'),
+            apmaterno: new RegExp(valueThree, 'i'),
+            empresa: new RegExp(valueFour, 'i'),
+            tipoinvitado: new RegExp(valueFour, 'i'),
+            post: ObjectID(postId)
+        };                    
+    }
+
+    const asistentes = await Asistente.find(query)
+    .sort({ _id: -1})
+    .exec();
+
+    res.json({
+        ok: true,
+        asistentes
+    }); 
+});
+
+
+// Others
 
 asistenteRoutes.get('/evaluate/:postid/:codigo', async (req: any, res: Response) => {
 

@@ -133,5 +133,29 @@ salaRoutes.get('/tablesa/:post/:sala', async (req: any, res: Response) => {
 
 });
 
+salaRoutes.get('/indicadorFour/:postid', async (req: any, res: Response) => {
+
+    const postId = req.params.postid;
+    var asistentesonsalas = 0;
+
+    SalaAsistente
+    .find({'post': ObjectID(postId)})
+    .countDocuments()
+    .exec( function(err, result){
+        if( err ) throw err;
+        if(!result){
+            return res.json({
+                ok: false,
+                mensaje: 'No hay registros'
+            });
+        }
+        asistentesonsalas = result;
+            res.json({
+                ok: true,
+                asistentesonsalas
+            });
+    });
+});
+
 
 export default salaRoutes;

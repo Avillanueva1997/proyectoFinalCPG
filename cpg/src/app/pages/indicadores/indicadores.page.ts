@@ -33,6 +33,7 @@ export class IndicadoresPage implements OnInit {
     this.getIndicadoresOne();
     this.getIndicadoresTwo();
     this.getIndicadoresThree();
+    this.getIndicadoresFour();
   }
 
 

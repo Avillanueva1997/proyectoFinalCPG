@@ -39,8 +39,142 @@ export class AsistenteService {
     return this.http.get(`${URL}/asistente/?postid=${postid}`);
   }
 
-  getAsistentesBySearch(postid: string, value: string) {
-    return this.http.get(`${URL}/asistente/search/${postid}/${value}`);
+  // One
+
+  getAsistentesByName(postid: string, value: string) {
+    return this.http.get(`${URL}/asistente/search01/${postid}/${value}`);
+  }
+
+  getAsistentesByAppaterno(postid: string, value: string) {
+    return this.http.get(`${URL}/asistente/search17/${postid}/${value}`);
+  }
+
+  getAsistentesByApmaterno(postid: string, value: string) {
+    return this.http.get(`${URL}/asistente/search18/${postid}/${value}`);
+  }
+
+  getAsistentesByEmpresa(postid: string, value: string) {
+    return this.http.get(`${URL}/asistente/search19/${postid}/${value}`);
+  }
+
+  getAsistentesByTipoinvitado(postid: string, value: string) {
+    return this.http.get(`${URL}/asistente/search20/${postid}/${value}`);
+  }
+
+  // Two
+
+  getAsistentesByNameAppaterno(postid: string, valueOne: string, valueTwo: string) {
+    return this.http.get(`${URL}/asistente/search02/${postid}/${valueOne}/${valueTwo}`);
+  }
+
+  getAsistentesByNameApmaterno(postid: string, valueOne: string, valueTwo: string) {
+    return this.http.get(`${URL}/asistente/search03/${postid}/${valueOne}/${valueTwo}`);
+  }
+
+  getAsistentesByNameEmpresa(postid: string, valueOne: string, valueTwo: string) {
+    return this.http.get(`${URL}/asistente/search04/${postid}/${valueOne}/${valueTwo}`);
+  }
+
+  getAsistentesByNameTipoinvitado(postid: string, valueOne: string, valueTwo: string) {
+    return this.http.get(`${URL}/asistente/search05/${postid}/${valueOne}/${valueTwo}`);
+  }
+
+  getAsistentesByAppaternoApmaterno(postid: string, valueOne: string, valueTwo: string) {
+    return this.http.get(`${URL}/asistente/search21/${postid}/${valueOne}/${valueTwo}`);
+  }
+
+  getAsistentesByAppaternoEmpresa(postid: string, valueOne: string, valueTwo: string) {
+    return this.http.get(`${URL}/asistente/search22/${postid}/${valueOne}/${valueTwo}`);
+  }
+
+  getAsistentesByAppaternoTipoinvitado(postid: string, valueOne: string, valueTwo: string) {
+    return this.http.get(`${URL}/asistente/search23/${postid}/${valueOne}/${valueTwo}`);
+  }
+
+  getAsistentesByApmaternoEmpresa(postid: string, valueOne: string, valueTwo: string) {
+    return this.http.get(`${URL}/asistente/search28/${postid}/${valueOne}/${valueTwo}`);
+  }
+
+  getAsistentesByApmaternoTipoinvitado(postid: string, valueOne: string, valueTwo: string) {
+    return this.http.get(`${URL}/asistente/search29/${postid}/${valueOne}/${valueTwo}`);
+  }
+
+  getAsistentesByEmpresaTipoinvitado(postid: string, valueOne: string, valueTwo: string) {
+    return this.http.get(`${URL}/asistente/search31/${postid}/${valueOne}/${valueTwo}`);
+  }
+
+  // three
+
+  getAsistentesByNameAppaternoApmaterno(postid: string, valueOne: string, valueTwo: string, valueThree: string) {
+    return this.http.get(`${URL}/asistente/search06/${postid}/${valueOne}/${valueTwo}/${valueThree}`);
+  }
+
+  getAsistentesByNameAppaternoEmpresa(postid: string, valueOne: string, valueTwo: string, valueThree: string) {
+    return this.http.get(`${URL}/asistente/search07/${postid}/${valueOne}/${valueTwo}/${valueThree}`);
+  }
+
+  getAsistentesByNameAppaternoTipoinvitado(postid: string, valueOne: string, valueTwo: string, valueThree: string) {
+    return this.http.get(`${URL}/asistente/search08/${postid}/${valueOne}/${valueTwo}/${valueThree}`);
+  }
+
+  getAsistentesByNameApmaternoEmpresa(postid: string, valueOne: string, valueTwo: string, valueThree: string) {
+    return this.http.get(`${URL}/asistente/search09/${postid}/${valueOne}/${valueTwo}/${valueThree}`);
+  }
+
+  getAsistentesByNameApmaternoTipoinvitado(postid: string, valueOne: string, valueTwo: string, valueThree: string) {
+    return this.http.get(`${URL}/asistente/search10/${postid}/${valueOne}/${valueTwo}/${valueThree}`);
+  }
+
+  getAsistentesByNameEmpresaTipoinvitado(postid: string, valueOne: string, valueTwo: string, valueThree: string) {
+    return this.http.get(`${URL}/asistente/search11/${postid}/${valueOne}/${valueTwo}/${valueThree}`);
+  }
+
+  getAsistentesByAppaternoApmaternoEmpresa(postid: string, valueOne: string, valueTwo: string, valueThree: string) {
+    return this.http.get(`${URL}/asistente/search24/${postid}/${valueOne}/${valueTwo}/${valueThree}`);
+  }
+
+  getAsistentesByAppaternoApmaternoTipoinvitado(postid: string, valueOne: string, valueTwo: string, valueThree: string) {
+    return this.http.get(`${URL}/asistente/search25/${postid}/${valueOne}/${valueTwo}/${valueThree}`);
+  }
+
+  getAsistentesByAppaternoEmpresaTipoinvitado(postid: string, valueOne: string, valueTwo: string, valueThree: string) {
+    return this.http.get(`${URL}/asistente/search26/${postid}/${valueOne}/${valueTwo}/${valueThree}`);
+  }
+
+  getAsistentesByApmaternoEmpresaTipoinvitado(postid: string, valueOne: string, valueTwo: string, valueThree: string) {
+    return this.http.get(`${URL}/asistente/search30/${postid}/${valueOne}/${valueTwo}/${valueThree}`);
+  }
+
+  // four
+
+  getAsistentesByNameAppaternoApmaternoEmpresa(postid: string, valueOne: string, valueTwo: string, valueThree: string, valueFour: string) {
+    return this.http.get(`${URL}/asistente/search12/${postid}/${valueOne}/${valueTwo}/${valueThree}/${valueFour}`);
+  }
+
+  // tslint:disable-next-line: max-line-length
+  getAsistentesByNameAppaternoApmaternoTipoinvitado(postid: string, valueOne: string, valueTwo: string, valueThree: string, valueFour: string) {
+    return this.http.get(`${URL}/asistente/search13/${postid}/${valueOne}/${valueTwo}/${valueThree}/${valueFour}`);
+  }
+
+  // tslint:disable-next-line: max-line-length
+  getAsistentesByNameAppaternoEmpresaTipoinvitado(postid: string, valueOne: string, valueTwo: string, valueThree: string, valueFour: string) {
+    return this.http.get(`${URL}/asistente/search14/${postid}/${valueOne}/${valueTwo}/${valueThree}/${valueFour}`);
+  }
+
+  // tslint:disable-next-line: max-line-length
+  getAsistentesByNameApmaternoEmpresaTipoinvitado(postid: string, valueOne: string, valueTwo: string, valueThree: string, valueFour: string) {
+    return this.http.get(`${URL}/asistente/search15/${postid}/${valueOne}/${valueTwo}/${valueThree}/${valueFour}`);
+  }
+
+  getAsistentesByAppaternoApmaternoEmpresaTipoinvitado(postid: string, valueOne: string, valueTwo: string, valueThree: string, valueFour: string) {
+    return this.http.get(`${URL}/asistente/search27/${postid}/${valueOne}/${valueTwo}/${valueThree}/${valueFour}`);
+  }
+
+  // five
+
+  // tslint:disable-next-line: max-line-length
+  getAsistentesByNameAppaternoApmaternoEmpresaTipoinvitado(postid: string, valueOne: string, valueTwo: string, valueThree: string, valueFour: string, valueFive: string) {
+    return this.http.get(`${URL}/asistente/search16/${postid}/${valueOne}/${valueTwo}/${valueThree}/${valueFour}/${valueFive}`);
   }
 
   evaluateCodeQr(postid: string, codigo: string){

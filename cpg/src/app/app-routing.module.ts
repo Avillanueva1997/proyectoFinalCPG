@@ -26,7 +26,8 @@ const routes: Routes = [
   { path: 'vasistente', loadChildren: './pages/vasistente/vasistente.module#VasistentePageModule' },
   { path: 'vsala', loadChildren: './pages/vsala/vsala.module#VsalaPageModule' },
   { path: 'scansala', loadChildren: './pages/scansala/scansala.module#ScansalaPageModule' },
-  { path: 'indicadores', loadChildren: './pages/indicadores/indicadores.module#IndicadoresPageModule' }
+  { path: 'indicadores', loadChildren: './pages/indicadores/indicadores.module#IndicadoresPageModule' },
+  { path: 'exportar', loadChildren: './pages/exportar/exportar.module#ExportarPageModule' }
 ];
 @NgModule({
   imports: [

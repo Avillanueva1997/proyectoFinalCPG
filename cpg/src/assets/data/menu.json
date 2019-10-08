@@ -21,7 +21,8 @@
     },
     {
         "icon": "download",
-        "name": "Exportar"
+        "name": "Exportar",
+        "redirectTo": "/exportar"
     }
   ]
   

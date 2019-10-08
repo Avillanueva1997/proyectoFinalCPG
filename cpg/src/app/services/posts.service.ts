@@ -60,4 +60,8 @@ export class PostsService {
       console.log('Error en carga del file', err);
     });
   }
+
+  getDataExcel(postid: string) {
+    return this.http.get(`${URL}/posts/export/${postid}`);
+  }
 }
