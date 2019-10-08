@@ -344,7 +344,7 @@ export class AsistentesPage{
     }
   }
 
-  onSearchTwo(event) {
+  onSearchTwo(event: any) {
 
     if(this.refresh){
       this.searchName = this.searchAppaterno = this.searchApmaterno = this.searchEmpresa = this.searchTipoinvitado = false;
@@ -512,7 +512,7 @@ export class AsistentesPage{
     this.refresh = false;
   }
 
-  onSearchThree(event) {
+  onSearchThree(event: any) {
 
     if(this.refresh){
       this.searchName = this.searchAppaterno = this.searchApmaterno = this.searchEmpresa = this.searchTipoinvitado = false;
@@ -689,7 +689,7 @@ export class AsistentesPage{
     }
   }
 
-  onSearchFour(event) {
+  onSearchFour(event: any) {
 
     if(this.refresh){
       this.searchName = this.searchAppaterno = this.searchApmaterno = this.searchEmpresa = this.searchTipoinvitado = false;
@@ -881,7 +881,7 @@ export class AsistentesPage{
     }
   }
 
-  onSearchFive(event) {
+  onSearchFive(event: any) {
 
     if(this.refresh){
       this.searchName = this.searchAppaterno = this.searchApmaterno = this.searchEmpresa = this.searchTipoinvitado = false;
