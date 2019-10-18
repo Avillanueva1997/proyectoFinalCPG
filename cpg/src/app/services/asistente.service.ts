@@ -238,19 +238,23 @@ export class AsistenteService {
     });
   }
 
-  getIndicadoresOne(postid: string){
+  getIndicadoresOne(postid: string) {
     return this.http.get(`${URL}/asistente/indicadorOne/${postid}`);
   }
 
-  getIndicadoresTwo(postid: string){
+  getIndicadoresTwo(postid: string) {
     return this.http.get(`${URL}/asistente/indicadorTwo/${postid}`);
   }
 
-  getIndicadoresThree(postid: string){
+  getIndicadoresThree(postid: string) {
     return this.http.get(`${URL}/asistente/indicadorThree/${postid}`);
   }
 
-  getCodigo(){
-    return this.http.get(`${URL}/asistente/codigo`);
+  getCodigo(nombre: string) {
+    return this.http.get(`${URL}/asistente/codigo/${nombre}`);
+  }
+
+  deleteAsistente(codigo: any) {
+    return this.http.get(`${URL}/asistente/delete/${codigo}`);
   }
 }

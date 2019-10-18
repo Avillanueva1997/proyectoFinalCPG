@@ -4,6 +4,7 @@ import { Post } from '../models/post.model';
 import { FileUpload } from '../interfaces/file-upload';
 import FileSystem from '../classes/file-system';
 import { SalaAsistente } from '../models/salaasistente.model';
+import { Asistente } from '../models/asistente.model';
 
 const postRoutes = Router();
 const fileSystem = new FileSystem();
@@ -104,10 +105,27 @@ postRoutes.get('/export/:postid', async (req: any, res: Response) => {
     var postId = req.params.postid;
     postId =  ObjectID(postId);
 
-    const dataEvento = await SalaAsistente.find({'post': ObjectID(postId)})
+    const dataEvento = await Asistente.aggregate([{
+        $lookup:  {
+            from: "salaasistentes",
+            localField: "_id",
+            foreignField : "asistente",
+            as: "asistente_sala"
+        }},
+        {
+            $lookup:  {
+                from: "salas",
+                localField: "salaasistentes.sala",
+                foreignField : "salas._id",
+                as: "sala_info"
+            }
+        }
+    ]);
+    
+    /*SalaAsistente.find({'post': ObjectID(postId)})
     .sort({ _id: -1})
     .populate('sala asistente post')
-    .exec();
+    .exec();*/
 
     res.json({
         ok: true,

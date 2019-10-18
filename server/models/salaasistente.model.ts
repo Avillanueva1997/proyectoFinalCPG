@@ -12,7 +12,6 @@ const salaasistenteSchema = new Schema({
     },
     asistente: {
         type: Schema.Types.ObjectId,
-        unique: true,
         ref: 'Asistente',
         required: [true, 'Debe existir una referencia a un asistente']
     },

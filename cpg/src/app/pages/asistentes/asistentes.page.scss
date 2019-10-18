@@ -15,9 +15,13 @@ $cWhite: #fff;
     font-family: Segoe-UI;
 }
 
-.wid50{
-    width: 325px;
+@media (max-width: 768px){
+    .wid50{
+        width: 340px;
+    }
 }
+
+
 
 
 @mixin shadowsborderes{
@@ -112,6 +116,17 @@ td, th {
     --color: #2ad0a8!important; 
 }
 
+table{
+    td{
+        // border-bottom: 1px solid rgba($cBlack,0.05);
+        ion-button{
+            ion-icon{
+                font-size: 16px;
+            }
+        }
+    }
+}
+
 /*
 Max width before this PARTICULAR table gets nasty
 This query will take effect for any screen smaller than 760px
@@ -173,8 +188,9 @@ only screen and (max-width: 760px),
     td:nth-of-type(5):before { content: "Empresa:"; color: $cGreen; --color: #2ad0a8; }
     td:nth-of-type(6):before { content: "Tipo de Invitado:"; color: $cGreen; --color: #2ad0a8; }
     td:nth-of-type(7):before { content: "Asistencia:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(8):before { content: "Editar:"; color: $cGreen; --color: #2ad0a8; }
-    td:nth-of-type(9):before { content: "Ver:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(8):before { content: "Ver:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(9):before { content: "Editar:"; color: $cGreen; --color: #2ad0a8; }
+    td:nth-of-type(10):before { content: "Eliminar:"; color: $cGreen; --color: #2ad0a8; }
 }
 
 /* Smartphones (portrait and landscape) ----------- */

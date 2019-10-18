@@ -25,7 +25,7 @@
                 <ion-text>{{asistente.empresa}}</ion-text>
             </ion-item>
         </ion-col>
-        <ion-col size="6">
+        <ion-col size="6" class="image-qr">
             <ion-item class="remove_inner_bottom">
                 <ngx-qrcode [qrc-value]="asistente.codigo"></ngx-qrcode>
             </ion-item>
@@ -33,10 +33,10 @@
       </ion-row>
       <ion-row>
           <ion-col size="6">
-            <ion-button (click)="onGeneratePdf()" color="cgreen" expand="full" shape="round">Imprimir</ion-button>
+            <ion-button (click)="onGeneratePdf()" color="cgreen" expand="full" shape="round" class="clgreen">Imprimir</ion-button>
           </ion-col>
           <ion-col size="6">
-            <ion-button (click)="salirConArgumentos()" color="cgreen" expand="full" shape="round">Cerrar</ion-button>
+            <ion-button (click)="salirConArgumentos()" color="cgreen" expand="full" shape="round" class="clgreen">Cerrar</ion-button>
           </ion-col>
         </ion-row>
   </ion-content>

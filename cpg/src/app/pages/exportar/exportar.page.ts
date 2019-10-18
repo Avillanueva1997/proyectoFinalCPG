@@ -26,7 +26,7 @@ export class ExportarPage implements OnInit {
     esal: 3000
     }];
 
-  salaasistente: any = {};
+  dataEvento: any = {};
   dataGlobal: any = {};
 
   constructor(private postService: PostsService, private storage: Storage, private excelService: ExcelServiceService) { }
@@ -40,19 +40,35 @@ export class ExportarPage implements OnInit {
       response => {
         // this.exportAsXLSX();
         console.log(response);
-        this.salaasistente = response['dataEvento'];
+        this.dataEvento = response['dataEvento'];
         const tempData = [];
-        for (const item of this.salaasistente) {
-          const dateAsistencia = new Date(item.asistente.fasistencia);
-          const diaDateAsistencia = dateAsistencia.getDate();
-          const mesDateAsistencia = dateAsistencia.getMonth();
-          const añoDateAsistencia = dateAsistencia.getFullYear();
-          const hoursDateAsistencia = dateAsistencia.getHours();
-          const minuteDateAsistenca = dateAsistencia.getMinutes();
-          const secondsDateAsistenca = dateAsistencia.getSeconds();
-          const stringDateOne = diaDateAsistencia + '/' + mesDateAsistencia + '/' + añoDateAsistencia;
-          const stringHourOne = hoursDateAsistencia + ':' + minuteDateAsistenca + ':' + secondsDateAsistenca;
-          const dateSala = new Date(item.created);
+        for (const item of this.dataEvento) {
+
+          var dateAsistencia,
+          diaDateAsistencia,
+          mesDateAsistencia,
+          añoDateAsistencia,
+          hoursDateAsistencia,
+          minuteDateAsistenca,
+          secondsDateAsistenca,
+          stringDateOne,
+          stringHourOne;
+
+          if (item.fasistencia) {
+            dateAsistencia = new Date(item.fasistencia);
+            diaDateAsistencia = dateAsistencia.getDate();
+            mesDateAsistencia = dateAsistencia.getMonth();
+            añoDateAsistencia = dateAsistencia.getFullYear();
+            hoursDateAsistencia = dateAsistencia.getHours();
+            minuteDateAsistenca = dateAsistencia.getMinutes();
+            secondsDateAsistenca = dateAsistencia.getSeconds();
+            stringDateOne = diaDateAsistencia + '/' + mesDateAsistencia + '/' + añoDateAsistencia;
+            stringHourOne = hoursDateAsistencia + ':' + minuteDateAsistenca + ':' + secondsDateAsistenca;
+          } else {
+            stringDateOne = '';
+            stringHourOne = '';
+          }
+          /*const dateSala = new Date(item.created);
           const diaDateSala = dateSala.getDate();
           const mesDateSala = dateSala.getMonth();
           const añoDateSala = dateSala.getFullYear();
@@ -60,19 +76,58 @@ export class ExportarPage implements OnInit {
           const minuteDatSala = dateSala.getMinutes();
           const secondsDateSala = dateSala.getSeconds();
           const stringDateSecond = diaDateSala + '/' + mesDateSala + '/' + añoDateSala;
-          const stringHourSecond = hoursDateSala + ':' + minuteDatSala + ':' + secondsDateSala ;
+          const stringHourSecond = hoursDateSala + ':' + minuteDatSala + ':' + secondsDateSala ;*/
           const data = {
-                        Evento: item.post.mensaje,
-                        Nombre_Invitado: item.asistente.name,
-                        Apellido: item.asistente.appaterno,
-                        Empresa: item.asistente.empresa,
-                        Tipo_Invitado: item.asistente.tipoinvitado,
-                        Fecha_Evento: stringDateOne,
-                        Hora_Evento: stringHourOne,
-                        Sala: item.sala.name,
-                        Hora_Sala: stringDateSecond,
-                        Fecha_Sala: stringHourSecond,
+                        Codigo: item.codigo,
+                        Fuente: item.fuente,
+                        Nombre: item.name,
+                        Apellido_Paterno: item.appaterno,
+                        Apellido_Materno: item.apmaterno,
+                        Empresa: item.empresa,
+                        Cargo: item.cargo,
+                        Tipo_Invitado: item.tipoinvitado,
+                        Email: item.email,
+                        Telefono: item.telefono,
+                        Ciudad: item.ciudad,
+                        Pais: item.pais,
+                        Lead_Source: item.leadsource,
+                        Lead_Source_Details: item.leadsourced,
+                        Product_Interest: item.productinterest,
+                        Lead_Owner: item.leadowner,
+                        Fecha_Asistencia: stringDateOne,
+                        Hora_Asistencia: stringHourOne
                       };
+          if (item.sala_info.length !== 0) {
+            const cantSalas = item.sala_info.length;
+            for (let index = 0; index < cantSalas; index++) {
+              const numberXls = index + 1;
+              const nameHeader = 'Nombre_Sala_' + numberXls;
+              const nameHeaderFA = 'Fecha_Asistencia_' + numberXls;
+              const nameHeaderHA = 'Hora_Asistencia_' + numberXls;
+              data[nameHeader] = item.sala_info[index].name;
+              if (item.asistente_sala.length !== 0) {
+                const cantAsistenteSala = item.asistente_sala.length;
+                for (let y = 0; y < cantAsistenteSala; y++) {
+                  if (item.sala_info[index]._id ===  item.asistente_sala[y].sala) {
+                    const dateSala = new Date(item.asistente_sala[y].created);
+                    const diaDateSala = dateSala.getDate();
+                    const mesDateSala = dateSala.getMonth();
+                    const añoDateSala = dateSala.getFullYear();
+                    const hoursDateSala = dateSala.getHours();
+                    const minuteDatSala = dateSala.getMinutes();
+                    const secondsDateSala = dateSala.getSeconds();
+                    const stringDateSecond = diaDateSala + '/' + mesDateSala + '/' + añoDateSala;
+                    const stringHourSecond = hoursDateSala + ':' + minuteDatSala + ':' + secondsDateSala ;
+                    data[nameHeaderFA] = stringDateSecond;
+                    data[nameHeaderHA] = stringHourSecond;
+                  }
+                }
+              } else {
+                data[nameHeaderFA] = '';
+                data[nameHeaderHA] = '';
+              }
+            }
+          }
           tempData.push(data);
         }
 

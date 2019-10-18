@@ -3,7 +3,7 @@ import { Storage } from '@ionic/storage';
 import { AsistenteService } from '../../services/asistente.service';
 import { TouchSequence } from 'selenium-webdriver';
 import { Asistente } from '../../interfaces/interfaces';
-import { ModalController, Platform } from '@ionic/angular';
+import { ModalController, Platform, AlertController } from '@ionic/angular';
 import { ModalEditAsistentePage } from '../modal-edit-asistente/modal-edit-asistente.page';
 import { ModalVisualizarAsistentePage } from '../modal-visualizar-asistente/modal-visualizar-asistente.page';
 
@@ -35,7 +35,8 @@ export class AsistentesPage{
   constructor(private storage: Storage,
               private asistenteService: AsistenteService,
               private modalCtrl: ModalController,
-              private platform: Platform) {
+              private platform: Platform,
+              private alertController: AlertController) {
   }
 
   ionViewWillEnter() {
@@ -1052,6 +1053,36 @@ export class AsistentesPage{
     console.log(this.searchEmpresa);
     console.log(this.searchTipoinvitado);
     this.cargarAsistentes(this.post);
+  }
+
+  async onDelete(asistente: any) {
+    const alert = await this.alertController.create({
+      header: '¿Deseas eliminar este asistente?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Eliminar',
+          handler: () => {
+            const codigo = asistente.codigo;
+            this.asistenteService.deleteAsistente(codigo).subscribe(
+              response => {
+                if(response['ok']){
+                  this.recargar(asistente.post);
+                }
+              }
+            );
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

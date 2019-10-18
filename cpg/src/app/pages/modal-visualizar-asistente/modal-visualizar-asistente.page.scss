@@ -1,5 +1,85 @@
+$cBlue: #438DED;
+$cGreen: #2ad0a8;
+$cBlack: #000;
+$cWhite: #fff;
+
+
+@font-face{
+  font-family: Segoe-UI;
+  src: url("/assets/fonts/segoe-ui-light-2.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin shadowsborderes{
+  -webkit-box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+  -moz-box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+  box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+  --box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+}
+
+*{
+    font-family: Segoe-UI;
+}
+
+ion-header{
+  background:$cBlue!important;
+  --background:$cBlue!important;
+  ion-toolbar{
+      background:$cBlue!important;
+      --background:$cBlue!important;
+  }
+  ion-buttons{
+    color: $cWhite;
+  }
+  ion-title{
+    color: $cWhite;
+    font-size: 18px;
+  }
+}
+
+
+.clgreen{
+  text-transform: capitalize;
+  border-radius: 50px!important;
+  --border-radius: 50px!important;
+  @include shadowsborderes;
+  background: $cGreen;
+  --background: $cGreen;
+  &:hover{
+      background: $cGreen;
+      --background: $cGreen;
+  }
+}
+
+.clblue{
+  text-transform: capitalize;
+  border-radius: 50px!important;
+  --border-radius: 50px!important;
+  @include shadowsborderes;
+  background: $cBlue;
+  --background: $cBlue;
+  -webkit-box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
+  -moz-box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
+  box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
+  --box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
+  &:hover{
+      background: $cBlue;
+      --background: $cBlue;
+  }
+}
+
 .remove_inner_bottom{
     --inner-border-width: 0; // this removes the inner border width
     --border-width: 0;
   }
   
+  .image-qr{
+    margin-top: -100px;
+  }
+
+  @media (max-width: 768px){
+    .image-qr{
+      margin-top: 0!important;
+    }
+  }

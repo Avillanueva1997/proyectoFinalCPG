@@ -4,7 +4,7 @@ import { SalaService } from '../../services/sala.service';
 import { Sala } from 'src/app/interfaces/interfaces';
 import { TouchSequence } from 'selenium-webdriver';
 import { ModalEditSalaPage } from '../modal-edit-sala/modal-edit-sala.page';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-salas',
@@ -22,7 +22,8 @@ export class SalasPage {
   constructor(private storage: Storage,
               private salaService: SalaService,
               private modalCtrl: ModalController,
-              private navCtrl: NavController) { }
+              private navCtrl: NavController,
+              private alertController: AlertController) { }
 
   ionViewWillEnter() {
     this.cargarPost();
@@ -63,7 +64,7 @@ export class SalasPage {
     this.recargar(sala.post);
   }
 
-  onDelete(sala: any) {
+  /*onDelete(sala: any) {
     const codigo = sala.codigo;
     this.salaService.deleteSala(codigo).subscribe(
       response => {
@@ -73,6 +74,36 @@ export class SalasPage {
         }
       }
     );
+  }*/
+
+  async onDelete(sala: any) {
+    const alert = await this.alertController.create({
+      header: '¿Deseas eliminar esta sala?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Eliminar',
+          handler: () => {
+            const codigo = sala.codigo;
+            this.salaService.deleteSala(codigo).subscribe(
+              response => {
+                if(response['ok']){
+                  this.recargar(sala.post);
+                }
+              }
+            );
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   onWatch(sala: any) {

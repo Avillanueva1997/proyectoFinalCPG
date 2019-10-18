@@ -108,6 +108,14 @@ asistenteRoutes.get('/', async (req: any, res: Response) => {
 
 });
 
+function diacriticSensitiveRegex(string = '') {
+    return string.replace(/a/g, '[a,á,à,ä]')
+       .replace(/e/g, '[e,é,ë]')
+       .replace(/i/g, '[i,í,ï]')
+       .replace(/o/g, '[o,ó,ö,ò]')
+       .replace(/u/g, '[u,ü,ú,ù]');
+}
+
 // one
 
 asistenteRoutes.get('/search01/:postid/:value', async (req: any, res: Response) => {
@@ -118,41 +126,10 @@ asistenteRoutes.get('/search01/:postid/:value', async (req: any, res: Response) 
 
     var query = {};
     if (value !== undefined) {
-        let reg01 = ".*" + value +".*";
         query = {
-            name: { $regex : reg01, $options: 'i' },
+            name: { $regex : diacriticSensitiveRegex(value), $options: 'i' },
             post: ObjectID(postId)
-        };
-        /*query = { $or : [ 
-                            {"name": new RegExp(value, 'i')},
-                            {"appaterno": new RegExp(value, 'i')},
-                            {"apmaterno": new RegExp(value, 'i')},
-                            {"empresa": new RegExp(value, 'i')},
-                            {"tipoinvitado": new RegExp(value, 'i')}
-                        ],
-                    "post": ObjectID(postId)
-                };*/
-
-                /*query = [{
-                    $addFields:{
-                        name:{
-                                $concat:
-                                [
-                                    "$name",
-                                    " ",
-                                    "$appaterno",
-                                    " ",
-                                    "$apmaterno",
-                                    " ",
-                                    "$empresa",
-                                    " ",
-                                    "$tipoinvitado"
-                                ]
-                            }
-                        },
-                    "post": ObjectID(postId)
-                    }];*/
-                    
+        };                    
     }
 
     const asistentes = await Asistente.find(query)
@@ -163,41 +140,6 @@ asistenteRoutes.get('/search01/:postid/:value', async (req: any, res: Response) 
         ok: true,
         asistentes
     }); 
-
-    
-
-/*{$expr:{$eq:["value", {$concat:["$name",
-' ',
-"$appaterno",
-' ',
-"$apmaterno",
-' ',
-"$empresa",
-' ',
-"$tipoinvitado"]}]}}*/
-
-    /*const asistentes = await Asistente.aggregate([
-        { "$addFields": 
-            { "complete": 
-                { "$concat": 
-                    ["$name",
-                    " ",
-                    "$appaterno",
-                    " ",
-                    "$apmaterno",
-                    " ",
-                    "$empresa",
-                    " ",
-                    "$tipoinvitado"
-                    ]
-                } 
-            }},
-            { "$match": { $and: [{post: postId, complete: new RegExp(value, 'i')}]}}])
-            .sort({ _id: -1}).exec();
-            res.json({
-                ok: true,
-                asistentes
-            });*/
 });
 
 asistenteRoutes.get('/search17/:postid/:value', async (req: any, res: Response) => {
@@ -208,9 +150,9 @@ asistenteRoutes.get('/search17/:postid/:value', async (req: any, res: Response) 
 
     var query = {};
     if (value !== undefined) {
-        let reg01 = ".*" + value +".*";
+        //let reg01 = ".*" + value +".*";
         query = {
-            appaterno: { $regex : reg01, $options: 'i' },
+            appaterno: { $regex : diacriticSensitiveRegex(value), $options: 'i' },
             post: ObjectID(postId)
         };
     }
@@ -233,9 +175,8 @@ asistenteRoutes.get('/search18/:postid/:value', async (req: any, res: Response) 
 
     var query = {};
     if (value !== undefined) {
-        let reg01 = ".*" + value +".*";
         query = {
-            apmaterno: { $regex : reg01, $options: 'i' },
+            apmaterno: { $regex : diacriticSensitiveRegex(value), $options: 'i' },
             post: ObjectID(postId)
         };
     }
@@ -258,9 +199,9 @@ asistenteRoutes.get('/search19/:postid/:value', async (req: any, res: Response) 
 
     var query = {};
     if (value !== undefined) {
-        let reg01 = ".*" + value +".*";
+        //let reg01 = ".*" + value +".*";
         query = {
-            empresa: { $regex : reg01, $options: 'i' },
+            empresa: { $regex : diacriticSensitiveRegex(value), $options: 'i' },
             post: ObjectID(postId)
         };
     }
@@ -283,9 +224,9 @@ asistenteRoutes.get('/search20/:postid/:value', async (req: any, res: Response) 
 
     var query = {};
     if (value !== undefined) {
-        let reg01 = ".*" + value +".*";
+        //let reg01 = ".*" + value +".*";
         query = {
-            tipoinvitado: { $regex : reg01, $options: 'i' },
+            tipoinvitado: { $regex : diacriticSensitiveRegex(value), $options: 'i' },
             post: ObjectID(postId)
         };
     }
@@ -312,12 +253,10 @@ asistenteRoutes.get('/search02/:postid/:value/:valuetwo', async (req: any, res: 
 
     var query = {};
     if (value !== undefined && valueTwo !== undefined) {
-        const reg01 = ".*" + value +".*";
-        const reg02 = ".*" + valueTwo +".*";
         query = {
             $and: [
-                { name: { $regex : reg01, $options: 'i'} }, 
-                { appaterno: { $regex : reg02, $options: 'i' }},
+                { name: { $regex : diacriticSensitiveRegex(value), $options: 'i'} }, 
+                { appaterno: { $regex : diacriticSensitiveRegex(valueTwo), $options: 'i' }},
                 { post: ObjectID(postId)}
             ]
         };                    
@@ -343,9 +282,11 @@ asistenteRoutes.get('/search03/:postid/:value/:valuetwo', async (req: any, res: 
     var query = {};
     if (value !== undefined && valueTwo !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            apmaterno: new RegExp(valueTwo, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                { name: { $regex : diacriticSensitiveRegex(value), $options: 'i'} },
+                { apmaterno: { $regex : diacriticSensitiveRegex(valueTwo), $options: 'i'} },
+                { post: ObjectID(postId) }                
+            ]
         };                    
     }
 
@@ -369,9 +310,11 @@ asistenteRoutes.get('/search04/:postid/:value/:valuetwo', async (req: any, res: 
     var query = {};
     if (value !== undefined && valueTwo !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            empresa: new RegExp(valueTwo, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {name: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -395,9 +338,11 @@ asistenteRoutes.get('/search05/:postid/:value/:valuetwo', async (req: any, res: 
     var query = {};
     if (value !== undefined && valueTwo !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            tipoinvitado: new RegExp(valueTwo, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {name: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -421,9 +366,11 @@ asistenteRoutes.get('/search21/:postid/:value/:valuetwo', async (req: any, res: 
     var query = {};
     if (value !== undefined && valueTwo !== undefined) {
         query = {
-            appaterno: new RegExp(value, 'i'),
-            apmaterno: new RegExp(valueTwo, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {appaterno: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {apmaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -447,9 +394,11 @@ asistenteRoutes.get('/search22/:postid/:value/:valuetwo', async (req: any, res: 
     var query = {};
     if (value !== undefined && valueTwo !== undefined) {
         query = {
-            appaterno: new RegExp(value, 'i'),
-            empresa: new RegExp(valueTwo, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {appaterno: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -473,9 +422,11 @@ asistenteRoutes.get('/search23/:postid/:value/:valuetwo', async (req: any, res: 
     var query = {};
     if (value !== undefined && valueTwo !== undefined) {
         query = {
-            appaterno: new RegExp(value, 'i'),
-            tipoinvitado: new RegExp(valueTwo, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {appaterno: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]
         };                    
     }
 
@@ -499,9 +450,11 @@ asistenteRoutes.get('/search28/:postid/:value/:valuetwo', async (req: any, res: 
     var query = {};
     if (value !== undefined && valueTwo !== undefined) {
         query = {
-            apmaterno: new RegExp(value, 'i'),
-            empresa: new RegExp(valueTwo, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {apmaterno: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -525,9 +478,11 @@ asistenteRoutes.get('/search29/:postid/:value/:valuetwo', async (req: any, res: 
     var query = {};
     if (value !== undefined && valueTwo !== undefined) {
         query = {
-            apmaterno: new RegExp(value, 'i'),
-            tipoinvitado: new RegExp(valueTwo, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {apmaterno: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -551,9 +506,11 @@ asistenteRoutes.get('/search31/:postid/:value/:valuetwo', async (req: any, res: 
     var query = {};
     if (value !== undefined && valueTwo !== undefined) {
         query = {
-            empresa: new RegExp(value, 'i'),
-            tipoinvitado: new RegExp(valueTwo, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {empresa: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -581,10 +538,12 @@ asistenteRoutes.get('/search06/:postid/:value/:valuetwo/:valuethree', async (req
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            appaterno: new RegExp(valueTwo, 'i'),
-            apmaterno: new RegExp(valueThree, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {name: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {appaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {apmaterno: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -609,10 +568,12 @@ asistenteRoutes.get('/search07/:postid/:value/:valuetwo/:valuethree', async (req
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            appaterno: new RegExp(valueTwo, 'i'),
-            empresa: new RegExp(valueThree, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {name: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {appaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -637,10 +598,12 @@ asistenteRoutes.get('/search08/:postid/:value/:valuetwo/:valuethree', async (req
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            appaterno: new RegExp(valueTwo, 'i'),
-            tipoinvitado: new RegExp(valueThree, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {name: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {appaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -665,10 +628,12 @@ asistenteRoutes.get('/search09/:postid/:value/:valuetwo/:valuethree', async (req
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            apmaterno: new RegExp(valueTwo, 'i'),
-            empresa: new RegExp(valueThree, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {name: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {apmaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -693,10 +658,12 @@ asistenteRoutes.get('/search10/:postid/:value/:valuetwo/:valuethree', async (req
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            apmaterno: new RegExp(valueTwo, 'i'),
-            tipoinvitado: new RegExp(valueThree, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {name: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {apmaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]
         };                    
     }
 
@@ -721,10 +688,12 @@ asistenteRoutes.get('/search11/:postid/:value/:valuetwo/:valuethree', async (req
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            empresa: new RegExp(valueTwo, 'i'),
-            tipoinvitado: new RegExp(valueThree, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {name: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]
         };                    
     }
 
@@ -749,10 +718,12 @@ asistenteRoutes.get('/search24/:postid/:value/:valuetwo/:valuethree', async (req
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
         query = {
-            appaterno: new RegExp(value, 'i'),
-            apmaterno: new RegExp(valueTwo, 'i'),
-            empresa: new RegExp(valueThree, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {appaterno: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {apmaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -777,10 +748,12 @@ asistenteRoutes.get('/search25/:postid/:value/:valuetwo/:valuethree', async (req
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
         query = {
-            appaterno: new RegExp(value, 'i'),
-            apmaterno: new RegExp(valueTwo, 'i'),
-            tipoinvitado: new RegExp(valueThree, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {appaterno: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {apmaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -805,10 +778,12 @@ asistenteRoutes.get('/search26/:postid/:value/:valuetwo/:valuethree', async (req
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
         query = {
-            appaterno: new RegExp(value, 'i'),
-            empresa: new RegExp(valueTwo, 'i'),
-            tipoinvitado: new RegExp(valueThree, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {appaterno: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -833,10 +808,12 @@ asistenteRoutes.get('/search30/:postid/:value/:valuetwo/:valuethree', async (req
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined) {
         query = {
-            apmaterno: new RegExp(value, 'i'),
-            empresa: new RegExp(valueTwo, 'i'),
-            tipoinvitado: new RegExp(valueThree, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {apmaterno: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -864,11 +841,13 @@ asistenteRoutes.get('/search12/:postid/:value/:valuetwo/:valuethree/:valuefour',
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined && valueFour !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            appaterno: new RegExp(valueTwo, 'i'),
-            apmaterno: new RegExp(valueThree, 'i'),
-            empresa: new RegExp(valueFour, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {name: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {appaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {apmaterno: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueFour), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -894,11 +873,13 @@ asistenteRoutes.get('/search13/:postid/:value/:valuetwo/:valuethree/:valuefour',
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined && valueFour !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            appaterno: new RegExp(valueTwo, 'i'),
-            apmaterno: new RegExp(valueThree, 'i'),
-            tipoinvitado: new RegExp(valueFour, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {name: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {appaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {apmaterno: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {namtipoinvitadoe: { $regex: diacriticSensitiveRegex(valueFour), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]
         };                    
     }
 
@@ -924,11 +905,13 @@ asistenteRoutes.get('/search14/:postid/:value/:valuetwo/:valuethree/:valuefour',
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined && valueFour !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            appaterno: new RegExp(valueTwo, 'i'),
-            empresa: new RegExp(valueThree, 'i'),
-            tipoinvitado: new RegExp(valueFour, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {name: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {appaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueFour), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]
         };                    
     }
 
@@ -954,11 +937,13 @@ asistenteRoutes.get('/search15/:postid/:value/:valuetwo/:valuethree/:valuefour',
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined && valueFour !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            apmaterno: new RegExp(valueTwo, 'i'),
-            empresa: new RegExp(valueThree, 'i'),
-            tipoinvitado: new RegExp(valueFour, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {name: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {apmaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueFour), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -984,11 +969,13 @@ asistenteRoutes.get('/search27/:postid/:value/:valuetwo/:valuethree/:valuefour',
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined && valueFour !== undefined) {
         query = {
-            appaterno: new RegExp(value, 'i'),
-            apmaterno: new RegExp(valueTwo, 'i'),
-            empresa: new RegExp(valueThree, 'i'),
-            tipoinvitado: new RegExp(valueFour, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {appaterno: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {apmaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueFour), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]            
         };                    
     }
 
@@ -1017,12 +1004,14 @@ asistenteRoutes.get('/search16/:postid/:value/:valuetwo/:valuethree/:valuefour/:
     var query = {};
     if (value !== undefined && valueTwo !== undefined && valueThree !== undefined && valueFour !== undefined && valueFive !== undefined) {
         query = {
-            name: new RegExp(value, 'i'),
-            appaterno: new RegExp(valueTwo, 'i'),
-            apmaterno: new RegExp(valueThree, 'i'),
-            empresa: new RegExp(valueFour, 'i'),
-            tipoinvitado: new RegExp(valueFour, 'i'),
-            post: ObjectID(postId)
+            $and: [
+                {name: { $regex: diacriticSensitiveRegex(value), $options: 'i'}},
+                {appaterno: { $regex: diacriticSensitiveRegex(valueTwo), $options: 'i'}},
+                {apmaterno: { $regex: diacriticSensitiveRegex(valueThree), $options: 'i'}},
+                {empresa: { $regex: diacriticSensitiveRegex(valueFour), $options: 'i'}},
+                {tipoinvitado: { $regex: diacriticSensitiveRegex(valueFive), $options: 'i'}},
+                {post: ObjectID(postId)}
+            ]
         };                    
     }
 
@@ -1135,12 +1124,14 @@ asistenteRoutes.get('/indicadorThree/:postid', async (req: any, res: Response) =
     });
 });
 
-asistenteRoutes.get('/codigo', async (req: any, res: Response) => {
+asistenteRoutes.get('/codigo/:nombre', async (req: any, res: Response) => {
 
-    var codigoC = 'CPG001';
+    const nombre = req.params.nombre;
+    var codigoC = nombre + '001';
+    var re = new RegExp(`^${nombre}`); 
 
     Asistente
-    .find({ codigo: /^CPG/})
+    .find({ codigo: re})
     .sort({ codigo: -1 })
     .limit(1)
     .exec( function(err, result: any){
@@ -1157,7 +1148,7 @@ asistenteRoutes.get('/codigo', async (req: any, res: Response) => {
         lastCode = Number(lastCode) + 1;
         lastCode = lastCode.toString();
         lastCode = lastCode.padStart(3, '0');
-        lastCode = 'CPG' + lastCode;
+        lastCode = nombre + lastCode;
         
         res.json({
             ok: true,
@@ -1202,6 +1193,8 @@ asistenteRoutes.post('/upload/:postid', [ verificaToken ],  async (req: any, res
     const sheets = wb.SheetNames;
     const date = new Date();
 
+    var asistentes: any = [];
+
     for (let index = 0; index < sheets.length; index++) {
         var ws = wb.Sheets[sheets[index]];
         var data = xlsx.utils.sheet_to_json(ws);
@@ -1214,12 +1207,37 @@ asistenteRoutes.post('/upload/:postid', [ verificaToken ],  async (req: any, res
             record.created = date;
             record.fasistio = date;
             record.tipocarga = '02';
-            record.tipoinvitado = 'Nuevo';
-            Asistente.insertMany(record, function(err:any, res:any) {
+            if(!record.tipoinvitado) { 
+                record.tipoinvitado = 'Nuevo';
+            }
+            asistentes.push(record);
+        });
+    }
+
+    var flag = "";
+
+    for (let x = 0; x < asistentes.length; x++) {
+        for (let y = 0; y < asistentes.length; y++) {
+            if (x != y) {
+                if (asistentes[x].codigo == asistentes[y].codigo) {
+                  flag = "X";
+                }
+              }            
+        }        
+    }
+
+    if(flag == "X") { 
+        return res.json({
+            ok: false,
+            message: 'Existen Duplicados!'
+        });
+    } else {
+        for (let index = 0; index < asistentes.length; index++) {
+            Asistente.insertMany(asistentes[index], function(err:any, res:any) {
                 if(err) throw err;
             });
             cant++;
-        });
+        }
     }
 
     res.json({
@@ -1228,6 +1246,27 @@ asistenteRoutes.post('/upload/:postid', [ verificaToken ],  async (req: any, res
         cant: cant
     });
 
+});
+
+asistenteRoutes.get('/delete/:codigo', async (req: any, res: Response) => {
+
+    const codigo = req.params.codigo;
+
+    Asistente.deleteOne( {'codigo': codigo}).exec(function(err, asistente){
+        if( err ) throw err;
+        if(!asistente){
+            return res.json({
+                ok: false,
+                mensaje: 'No existe una sala con ese código'
+            });
+        }
+
+        res.json({
+            ok: true,
+            asistente
+        });
+
+    });
 });
 
 export default asistenteRoutes;

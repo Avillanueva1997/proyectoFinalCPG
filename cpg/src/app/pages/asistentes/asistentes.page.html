@@ -70,8 +70,9 @@
             <th>Empresa</th>
             <th>Tipo de Invitado</th>
             <th>Asistencia</th>
+            <th>Visualizar</th>
             <th>Editar</th>
-            <th class="radiusthright">Ver</th>
+            <th class="radiusthright">Eliminar</th>
           </tr>
           </thead>
           <tbody>
@@ -84,8 +85,9 @@
             <td>{{asistente.tipoinvitado}}</td>
             <td *ngIf="asistente.asistio"><ion-toggle color="cgreen" name="asisitio" [(ngModel)]="asistente.asistio" disabled="true"></ion-toggle></td>
             <td *ngIf="!asistente.asistio"><ion-toggle color="cgreen" name="asisitio" [(ngModel)]="asistente.asistio" (ionChange)="onToggleChange($event, asistente.codigo)"></ion-toggle></td>
-            <td><ion-button (click)="onEdit(asistente)"><ion-icon slot="icon-only" name="create"></ion-icon></ion-button></td>
             <td><ion-button (click)="onWatch(asistente)"><ion-icon slot="icon-only" name="eye"></ion-icon></ion-button></td>
+            <td><ion-button (click)="onEdit(asistente)"><ion-icon slot="icon-only" name="create"></ion-icon></ion-button></td>
+            <td><ion-button (click)="onDelete(asistente)"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-button></td>
           </tr>
           </tbody>
         </table>

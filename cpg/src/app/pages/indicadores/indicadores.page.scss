@@ -1,0 +1,97 @@
+$cBlue: #438DED;
+$cGreen: #2ad0a8;
+$cBlack: #000;
+$cWhite: #fff;
+
+
+@font-face{
+    font-family: Segoe-UI;
+    src: url("/assets/fonts/segoe-ui-light-2.ttf");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+*{
+    font-family: Segoe-UI!important;
+}
+
+@mixin shadowsborderes{
+  -webkit-box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+  -moz-box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+  box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+  --box-shadow: 0px 2px 1px 0px rgba(3,221,43,0.15);
+}
+
+ion-button{
+  text-transform: capitalize;
+  border-radius: 50px!important;
+  --border-radius: 50px!important;
+  @include shadowsborderes;
+  background: $cGreen;
+  --background: $cGreen;
+  display: block;
+  width: 100%;
+  &:hover{
+      background: $cGreen;
+      --background: $cGreen;
+  }
+}
+
+.clblue{
+    text-transform: capitalize;
+    border-radius: 50px!important;
+    --border-radius: 50px!important;
+    @include shadowsborderes;
+    background: $cBlue;
+    --background: $cBlue;
+    -webkit-box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
+    -moz-box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
+    box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
+    --box-shadow: 0px 2px 1px 0px rgba($cBlue,0.15);
+    &:hover{
+        background: $cBlue;
+        --background: $cBlue;
+    }
+  }
+
+ion-header{
+    background:$cBlue!important;
+    --background:$cBlue!important;
+  ion-toolbar{
+    background:$cBlue!important;
+    --background:$cBlue!important;
+  }
+  ion-buttons{
+    color: $cWhite;
+  }
+  ion-title{
+    color: $cWhite;
+    font-size: 18px;
+    padding: 0;
+  }
+}
+
+ion-content{
+    ion-card{
+        width: 48%;
+        display: inline-block;
+        border: 1px solid rgba($cBlack, .25);
+        box-shadow: none!important;
+        --box-shadow: none!important;
+    }
+}
+
+.remove_inner_bottom{
+  --inner-border-width: 0; // this removes the inner border width
+  --border-width: 0;
+}
+
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px){
+    ion-content{
+        ion-card{
+            width: 94%!important;
+        }
+    }
+}

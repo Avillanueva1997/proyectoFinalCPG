@@ -32,7 +32,7 @@ export class MasistentesPage implements OnInit {
     const files = inputEl.files;
     const response = await this.asistenteService.uploadFile(files, this.post);
     if(response === false){
-      this.uiService.alertaInformativa('Error al importar el excel');
+      this.uiService.alertaInformativa('Se encontró duplicidad!');
     } else {
       this.uiService.alertaInformativa('Se importaron ' + response + ' asistentes.');
     }

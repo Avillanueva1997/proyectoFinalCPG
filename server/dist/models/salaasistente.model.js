@@ -12,7 +12,6 @@ const salaasistenteSchema = new mongoose_1.Schema({
     },
     asistente: {
         type: mongoose_1.Schema.Types.ObjectId,
-        unique: true,
         ref: 'Asistente',
         required: [true, 'Debe existir una referencia a un asistente']
     },
