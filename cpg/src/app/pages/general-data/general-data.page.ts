@@ -27,6 +27,17 @@ export class GeneralDataPage implements OnInit {
     this.cargarPost();
   }
 
+
+  async getDataEvento() {
+    this.eventService.getDataEvento(this.post).subscribe(
+      response => {
+        if (response['ok']) {
+          this.event = response['dataEvento'];
+        }
+      }
+    );
+  }
+
   async dataEvent(fEvent: NgForm) {
     this.event.post = this.post;
     if (fEvent.invalid) {
@@ -45,6 +56,7 @@ export class GeneralDataPage implements OnInit {
 
   async cargarPost() {
     this.post = await this.storage.get('post');
+    this.getDataEvento();
   }
 
 }

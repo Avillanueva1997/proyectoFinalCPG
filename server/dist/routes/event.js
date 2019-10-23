@@ -17,6 +17,7 @@ const file_system_1 = __importDefault(require("../classes/file-system"));
 const event_model_1 = require("../models/event.model");
 const eventRoutes = express_1.Router();
 const fileSystem = new file_system_1.default();
+var ObjectID = require('mongodb').ObjectID;
 eventRoutes.post('/', [autentication_1.verificaToken], (req, res) => {
     const body = req.body;
     event_model_1.Event.create(body).then((eventDB) => __awaiter(this, void 0, void 0, function* () {
@@ -29,4 +30,15 @@ eventRoutes.post('/', [autentication_1.verificaToken], (req, res) => {
         res.json(err);
     });
 });
+eventRoutes.get('/data/:postid', (req, res) => __awaiter(this, void 0, void 0, function* () {
+    const postId = req.params.postid;
+    const dataEvento = yield event_model_1.Event.findOne({ 'post': ObjectID(postId) })
+        .sort({ _id: -1 })
+        .populate('post')
+        .exec();
+    res.json({
+        ok: true,
+        dataEvento
+    });
+}));
 exports.default = eventRoutes;

@@ -32,4 +32,8 @@ export class EventService {
       );
     });
   }
+
+  getDataEvento(postid: string) {
+    return this.http.get(`${URL}/event/data/${postid}`);
+  }
 }
