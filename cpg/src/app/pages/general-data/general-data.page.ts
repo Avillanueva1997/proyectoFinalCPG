@@ -4,6 +4,7 @@ import { EventService } from '../../services/event.service';
 import { NavController } from '@ionic/angular';
 import { UiServiceService } from 'src/app/services/ui-service.service';
 import { Storage } from '@ionic/storage';
+import { Event } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-general-data',
@@ -16,7 +17,13 @@ export class GeneralDataPage implements OnInit {
 
   event: any = {};
 
+  date = new Date();
+
   post: any;
+
+  dataDefault: any = {
+
+  };
 
   constructor(private eventService: EventService,
               private navCtrl: NavController,
@@ -31,7 +38,7 @@ export class GeneralDataPage implements OnInit {
   async getDataEvento() {
     this.eventService.getDataEvento(this.post).subscribe(
       response => {
-        if (response['ok']) {
+        if (response['ok'] && response['dataEvento'] != null) {
           this.event = response['dataEvento'];
         }
       }

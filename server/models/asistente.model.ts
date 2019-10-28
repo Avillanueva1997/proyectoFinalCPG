@@ -73,6 +73,9 @@ const asistenteSchema = new Schema({
     tipocarga: {
         type: String,
         default: '01'
+    },
+    comentario: {
+        type: String
     }
 });
 
@@ -105,6 +108,7 @@ interface IAsistente extends Document {
     asistio: Boolean;
     fasistencia: Date;
     tipocarga: String;
+    comentario: String;
 }
 
 

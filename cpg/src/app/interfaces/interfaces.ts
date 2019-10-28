@@ -29,7 +29,7 @@ export interface Componente {
 
 export interface Event {
   created: Date;
-  description: string;
+  description?: string;
   place: string;
   organizador: string;
   cargo: string;

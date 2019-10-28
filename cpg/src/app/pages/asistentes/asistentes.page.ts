@@ -41,7 +41,7 @@ export class AsistentesPage{
 
   ionViewWillEnter() {
     this.cargarPost();
-    if (this.platform.is('mobile')) {
+    if (this.platform.is('cordova')) {
       this.mobile = true;
     } else {
       this.mobile = false;

@@ -73,6 +73,9 @@ const asistenteSchema = new mongoose_1.Schema({
     tipocarga: {
         type: String,
         default: '01'
+    },
+    comentario: {
+        type: String
     }
 });
 //Esto es como un trigger que se dispara antes de guardarlo en la BD
