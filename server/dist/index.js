@@ -34,7 +34,7 @@ server.app.use('/sala', sala_1.default);
 //Conectar BD
 // mongoose.connect( 'mongodb://root:CeciParedes2020@localhost:27017/cpg', 
 // mongoose_1.default.connect('mongodb://localhost:27017/cpg', 
-mongoose.connect( 'mongodb://ceci:ceci2020@157.230.171.225:27017/cpg', 
+mongoose_1.default.connect( 'mongodb://ceci:ceci2020@157.230.171.225:27017/cpg', 
 { useNewUrlParser: true, useCreateIndex: true }, (err) => {
     if (err)
         throw err;
