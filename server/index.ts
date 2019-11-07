@@ -38,8 +38,8 @@ server.app.use('/sala', salaRoutes);
 
 //Conectar BD
 // mongoose.connect( 'mongodb://root:CeciParedes2020@localhost:27017/cpg', 
-// mongoose.connect( 'mongodb://localhost:27017/cpg', 
-mongoose.connect( 'mongodb://ceci:ceci2020@157.230.171.225:27017/cpg', 
+mongoose.connect( 'mongodb://localhost:27017/cpg', 
+// mongoose.connect( 'mongodb://ceci:ceci2020@157.230.171.225:27017/cpg', 
 { useNewUrlParser: true, useCreateIndex: true }, (err) => {
     if(err) throw err;
     console.log('BD on fire!');

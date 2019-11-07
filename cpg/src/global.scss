@@ -33,6 +33,15 @@
     --ion-color-cgreen-shade: #25b794;
     --ion-color-cgreen-tint: #3fd5b1;
   }
+
+  /*:root {
+    --ion-color-cgreen: #2a32d0;
+    --ion-color-cgreen-rgb: 21,65,147;
+    --ion-color-cgreen-contrast: white;
+    --ion-color-cgreen-contrast-rgb: 0,0,0;
+    --ion-color-cgreen-shade: #2a32d0;
+    --ion-color-cgreen-tint: #2a32d0;
+  }*/
   
   .ion-color-cgreen {
     --ion-color-base: var(--ion-color-cgreen);
