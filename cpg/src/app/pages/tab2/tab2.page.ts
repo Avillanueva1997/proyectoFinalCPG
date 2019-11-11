@@ -28,6 +28,8 @@ export class Tab2Page implements OnInit {
 
   cargandoGeo = false;
 
+  cant = 0;
+
   constructor(private postService: PostsService,
               private router: Router,
               private geolocation: Geolocation,
@@ -38,7 +40,7 @@ export class Tab2Page implements OnInit {
 
 
   ngOnInit() {
-    if (this.platform.is('mobile')) {
+    if (this.platform.is('cordova')) {
       this.cellphone = true;
     } else {
       this.cellphone = false;
@@ -46,17 +48,22 @@ export class Tab2Page implements OnInit {
   }
 
   async crearPost() {
-    const creado = await this.postService.createPost( this.post);
 
-    this.post = {
-      mensaje: '',
-      coords: null,
-      position: false
-    };
+    if (!this.cellphone && this.cant === 0) {
+      this.uiService.alertaInformativa('Suba la imagen del evento!');
+    } else {
+      const creado = await this.postService.createPost( this.post);
 
-    this.tempImages = [];
+      this.post = {
+        mensaje: '',
+        coords: null,
+        position: false
+      };
 
-    this.router.navigateByUrl('/main/tabs/tab1');
+      this.tempImages = [];
+
+      this.router.navigateByUrl('/main/tabs/tab1');
+    }
   }
 
   getGeo() {
@@ -114,12 +121,17 @@ export class Tab2Page implements OnInit {
   async getFile() {
     const inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#file');
     const files = inputEl.files;
-    /*const response = await this.asistenteService.uploadFile(files, this.post);
-    if(response === false){
-      this.uiService.alertaInformativa('Error al importar el excel');
+    this.cant = files.length;
+    if(this.cant !== 0){
+      const response: any = await this.postService.uploadFile(files);
+      if(response === true){
+        this.uiService.alertaInformativa('La imagen se subio correctamente!');
+      } else {
+        this.uiService.alertaInformativa(response);
+      }
     } else {
-      this.uiService.alertaInformativa('Se importaron ' + response + ' asistentes.');
-    }*/
+      this.uiService.alertaInformativa('Suba la imagen del evento!');
+    }
   }
 
 }

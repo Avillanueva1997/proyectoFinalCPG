@@ -59,8 +59,8 @@ postRoutes.get('/', async (req: any, res: Response) => {
 postRoutes.post('/upload', [ verificaToken ],  async (req: any, res: Response) => {
 
     if(!req.files){
-        return res.status(400).json({
-            ok: true,
+        return res.json({
+            ok: false,
             message: 'No se pudo subir el file'
         });
     }
@@ -68,18 +68,18 @@ postRoutes.post('/upload', [ verificaToken ],  async (req: any, res: Response) =
     const file:FileUpload = req.files.image;
 
     if(!file){
-        return res.status(400).json({
-            ok: true,
+        return res.json({
+            ok: false,
             message: 'No se subio ningún archivo - image'
         });
     }
 
-    /*if( !file.mimetype.includes('image')){
-        return res.status(400).json({
-            ok: true,
+    if( !file.mimetype.includes('image')){
+        return res.json({
+            ok: false,
             message: 'Lo que subió no es una imagen'
         });
-    }*/
+    }
 
     await fileSystem.guardarImagenTemporal(file, req.usuario._id);
 
@@ -132,6 +132,89 @@ postRoutes.get('/export/:postid', async (req: any, res: Response) => {
         dataEvento
     });
 });
+
+/*asistenteRoutes.post('/upload/:postid', [ verificaToken ],  async (req: any, res: Response) => {
+
+    const postId = req.params.postid;
+    var cant = 0;
+
+    if(!req.files){
+        return res.status(400).json({
+            ok: true,
+            message: 'No se pudo subir el file'
+        });
+    }
+
+    const file:FileUpload = req.files.file;
+
+    if(!file){
+        return res.status(400).json({
+            ok: true,
+            message: 'No se subio ningún archivo - image'
+        });
+    }
+
+    const path = await fileSystem.guardarImagenTemporal(file, req.usuario._id);
+
+    const wb = xlsx.readFile(path);
+
+    const sheets = wb.SheetNames;
+    const date = new Date();
+
+    var asistentes: any = [];
+
+    for (let index = 0; index < sheets.length; index++) {
+        var ws = wb.Sheets[sheets[index]];
+        var data = xlsx.utils.sheet_to_json(ws);
+        data.map(function(record: any){
+            const code = record.codigo;
+            const cel = record.telefono || '';
+            record.codigo = code.toString();
+            record.telefono = cel.toString();
+            record.post = postId;
+            record.created = date;
+            record.fasistio = date;
+            record.tipocarga = '02';
+            if(!record.tipoinvitado) { 
+                record.tipoinvitado = 'Nuevo';
+            }
+            asistentes.push(record);
+        });
+    }
+
+    var flag = "";
+
+    for (let x = 0; x < asistentes.length; x++) {
+        for (let y = 0; y < asistentes.length; y++) {
+            if (x != y) {
+                if (asistentes[x].codigo == asistentes[y].codigo) {
+                  flag = "X";
+                }
+              }            
+        }        
+    }
+
+    if(flag == "X") { 
+        return res.json({
+            ok: false,
+            message: 'Existen Duplicados!'
+        });
+    } else {
+        for (let index = 0; index < asistentes.length; index++) {
+            Asistente.insertMany(asistentes[index], function(err:any, res:any) {
+                if(err) throw err;
+            });
+            cant++;
+        }
+    }
+
+    res.json({
+        ok: true,
+        file: file,
+        cant: cant
+    });
+
+});*/
 
 
 

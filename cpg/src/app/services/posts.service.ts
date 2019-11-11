@@ -64,4 +64,25 @@ export class PostsService {
   getDataExcel(postid: string) {
     return this.http.get(`${URL}/posts/export/${postid}`);
   }
+
+  uploadFile(files: any) {
+    const headers = new HttpHeaders({
+      'x-token': this.userService.token
+    });
+    const fileCount: number = files.length;
+    const formData = new FormData();
+    if (fileCount > 0) {
+      formData.append('image', files.item(0));
+      return new Promise(resolve => {
+        this.http.post(`${URL}/posts/upload`, formData, {headers}).subscribe(
+          response => {
+             if(response['ok']) {
+              resolve(true);
+            } else {
+              resolve(response['message']);
+            }
+          });
+      });
+    }
+  }
 }
