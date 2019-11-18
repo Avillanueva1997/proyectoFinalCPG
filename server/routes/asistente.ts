@@ -1162,6 +1162,7 @@ asistenteRoutes.post('/upload/:postid', [ verificaToken ],  async (req: any, res
 
     const postId = req.params.postid;
     var cant = 0;
+    var duplicidad = 0;
 
     if(!req.files){
         return res.status(400).json({
@@ -1214,7 +1215,43 @@ asistenteRoutes.post('/upload/:postid', [ verificaToken ],  async (req: any, res
         });
     }
 
-    var flag = "";
+    // var codigoAsistente = '';
+
+    var nuevosAsistentes: any = [];
+
+    for (let indexSecond = 0; indexSecond < asistentes.length; indexSecond++) {
+
+        let codigoAsistente = asistentes[indexSecond].codigo;
+        //console.log(codigoAsistente);
+        
+        await Asistente.findOne({codigo: codigoAsistente}, ( err, asistenteDB ) => {
+            if( err ) throw err;
+
+            //console.log(codigoAsistente);
+    
+            if(!asistenteDB){
+                cant++;
+                nuevosAsistentes.push(asistentes[indexSecond]);
+                //console.log(codigoAsistente + 'no existe');
+            } else {
+                duplicidad++;
+                //delete asistentes[indexSecond];       
+                //console.log(codigoAsistente + 'existe');
+            }
+        });
+    }
+
+    for (let index = 0; index < nuevosAsistentes.length; index++) {
+        Asistente.insertMany(nuevosAsistentes[index], function(err:any, res:any) {
+            if(err) throw err;
+        });
+    }
+    //console.log(nuevosAsistentes);
+
+    //console.log(duplicidad);
+    //console.log(cant);
+
+    /*var flag = "";
 
     for (let x = 0; x < asistentes.length; x++) {
         for (let y = 0; y < asistentes.length; y++) {
@@ -1224,9 +1261,9 @@ asistenteRoutes.post('/upload/:postid', [ verificaToken ],  async (req: any, res
                 }
               }            
         }        
-    }
+    } */
 
-    if(flag == "X") { 
+    /*if(flag == "X") { 
         return res.json({
             ok: false,
             message: 'Existen Duplicados!'
@@ -1238,12 +1275,13 @@ asistenteRoutes.post('/upload/:postid', [ verificaToken ],  async (req: any, res
             });
             cant++;
         }
-    }
+    }*/
 
     res.json({
         ok: true,
         file: file,
-        cant: cant
+        cant: cant,
+        dupl: duplicidad
     });
 
 });

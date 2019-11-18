@@ -971,6 +971,7 @@ asistenteRoutes.get('/codigo/:nombre', (req, res) => __awaiter(this, void 0, voi
 asistenteRoutes.post('/upload/:postid', [autentication_1.verificaToken], (req, res) => __awaiter(this, void 0, void 0, function* () {
     const postId = req.params.postid;
     var cant = 0;
+    var duplicidad = 0;
     if (!req.files) {
         return res.status(400).json({
             ok: true,
@@ -1013,35 +1014,65 @@ asistenteRoutes.post('/upload/:postid', [autentication_1.verificaToken], (req, r
             asistentes.push(record);
         });
     }
-    var flag = "";
+    // var codigoAsistente = '';
+    var nuevosAsistentes = [];
+    for (let indexSecond = 0; indexSecond < asistentes.length; indexSecond++) {
+        let codigoAsistente = asistentes[indexSecond].codigo;
+        //console.log(codigoAsistente);
+        yield asistente_model_1.Asistente.findOne({ codigo: codigoAsistente }, (err, asistenteDB) => {
+            if (err)
+                throw err;
+            //console.log(codigoAsistente);
+            if (!asistenteDB) {
+                cant++;
+                nuevosAsistentes.push(asistentes[indexSecond]);
+                //console.log(codigoAsistente + 'no existe');
+            }
+            else {
+                duplicidad++;
+                //delete asistentes[indexSecond];       
+                //console.log(codigoAsistente + 'existe');
+            }
+        });
+    }
+    for (let index = 0; index < nuevosAsistentes.length; index++) {
+        asistente_model_1.Asistente.insertMany(nuevosAsistentes[index], function (err, res) {
+            if (err)
+                throw err;
+        });
+    }
+    //console.log(nuevosAsistentes);
+    //console.log(duplicidad);
+    //console.log(cant);
+    /*var flag = "";
+
     for (let x = 0; x < asistentes.length; x++) {
         for (let y = 0; y < asistentes.length; y++) {
             if (x != y) {
                 if (asistentes[x].codigo == asistentes[y].codigo) {
-                    flag = "X";
+                  flag = "X";
                 }
-            }
+              }
         }
-    }
-    if (flag == "X") {
+    } */
+    /*if(flag == "X") {
         return res.json({
             ok: false,
             message: 'Existen Duplicados!'
         });
-    }
-    else {
+    } else {
         for (let index = 0; index < asistentes.length; index++) {
-            asistente_model_1.Asistente.insertMany(asistentes[index], function (err, res) {
-                if (err)
-                    throw err;
+            Asistente.insertMany(asistentes[index], function(err:any, res:any) {
+                if(err) throw err;
             });
             cant++;
         }
-    }
+    }*/
     res.json({
         ok: true,
         file: file,
-        cant: cant
+        cant: cant,
+        dupl: duplicidad
     });
 }));
 asistenteRoutes.get('/delete/:codigo', (req, res) => __awaiter(this, void 0, void 0, function* () {

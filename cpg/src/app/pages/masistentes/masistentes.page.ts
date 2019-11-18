@@ -32,9 +32,11 @@ export class MasistentesPage implements OnInit {
     const files = inputEl.files;
     const response = await this.asistenteService.uploadFile(files, this.post);
     if(response === false){
-      this.uiService.alertaInformativa('Se encontró duplicidad!');
+      this.uiService.alertaInformativa('Error al importar los datos!');
     } else {
-      this.uiService.alertaInformativa('Se importaron ' + response + ' asistentes.');
+      const data: any = response;
+      const split = data.split('|');
+      this.uiService.alertaInformativa('Asistentes importados: ' + split[0] + '. Asistentes duplicados: ' + split[1]);
     }
   }
 

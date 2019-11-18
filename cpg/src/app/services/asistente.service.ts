@@ -193,7 +193,7 @@ export class AsistenteService {
         this.http.post(`${URL}/asistente/upload/${postid}`, formData, {headers}).subscribe(
           response => {
              if(response['ok']) {
-              resolve(response['cant']);
+              resolve(response['cant'] + '|' + response['dupl'] );
             } else {
               resolve(false);
             }
